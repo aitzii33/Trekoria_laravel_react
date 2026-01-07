@@ -7,7 +7,8 @@ import { useState } from 'react'
 import '../assets/CSS/Register.css'
 import error from './alert-error'
 
-function RegisterPage() {
+function RegisterPage() 
+{
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -67,16 +68,16 @@ function RegisterPage() {
                 <input type="date" className="form-control" placeholder="Introduce your birthday" required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="text" id="email" className="form-control" placeholder="Introduce your email" onChange={e => setEmail(e.target.value)} required/> 
+                <input type="text" id="email" className="form-control" placeholder="Introduce your email" onBlur={(e) => setEmail(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="text" id="username" className="form-control" placeholder="Introduce your username" onChange={e => setUsername(e.target.value)} required/> 
+                <input type="text" id="username" className="form-control" placeholder="Introduce your username" onBlur={(e) => setUsername(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="password" id="password" className="form-control" placeholder="Introduce your password" onChange={e => setPassword(e.target.value)} required/> 
+                <input type="password" id="password" className="form-control" placeholder="Introduce your password" onBlur={(e) => setPassword(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-3"> 
-                <input type="password" id="password2" className="form-control" placeholder="Repeat your password" onChange={e => setPassword2(e.target.value)} required/> 
+                <input type="password" id="password2" className="form-control" placeholder="Repeat your password" onBlur={(e) => setPassword2(e.target.value)} required/> 
               </div> 
 
               <button className="btn btn-primary w-100 mb-3" type="submit"> Register </button> 
