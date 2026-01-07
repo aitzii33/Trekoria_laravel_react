@@ -21,6 +21,23 @@ export default defineConfig({
             formVariants: true,
         }),
     ],
+    
+    server: {
+        host: '127.0.0.1',
+        port: 5173,
+        cors: true,
+        hmr: {
+            host: '127.0.0.1'
+        },
+        proxy: {
+            '/resources': {
+                target: 'http://127.0.0.1:8000',
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/resources/, '/resources')
+            }
+        }
+    },
+
     esbuild: {
         jsx: 'automatic',
     },
