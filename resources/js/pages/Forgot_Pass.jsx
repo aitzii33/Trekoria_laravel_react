@@ -1,5 +1,6 @@
 import '../assets/CSS/Contact.css'
 import { IfExistEmail  } from '../Funtions'
+import error from './alert-error'
 
 function ForgotPass()
 {
@@ -12,10 +13,10 @@ function ForgotPass()
         
         if(dataEmail === false)
         {
-            alert("This email isn't exist yet");
+            error("This email isn't exist yet");
         }
 
-        alert('The email have sended');
+        error('The email have sended');
     };
 
 

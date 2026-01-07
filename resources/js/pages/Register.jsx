@@ -5,8 +5,10 @@ import Footer from '../Components/Footer.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import '../assets/CSS/Register.css'
+import error from './alert-error'
 
-function RegisterPage() {
+function RegisterPage() 
+{
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -16,27 +18,22 @@ function RegisterPage() {
 
   const Verify = (e) => { 
     e.preventDefault(); 
-    console.log('Verify ejecutado');
-    console.log('email:', email);
-    console.log('username:', username);
-    console.log('password:', password, password2);
-
-    
+  
     const dataEmail = IfExistEmail(email); 
     const dataUser = ProveUserName(username); 
     const samePassResult = samePass(password, password2); 
  
     if(dataEmail === false) 
     {
-      alert("The email must contain @ and ."); 
+      error("The email must contain @ and ."); 
     } 
     else if(dataUser === false) 
     {
-      alert('That user already exists'); 
+      error('That user already exists'); 
     } 
     else if(samePassResult === false) 
     {
-      alert('Passwords do not match'); 
+      error('Passwords do not match'); 
     } 
     else 
     {
@@ -71,16 +68,16 @@ function RegisterPage() {
                 <input type="date" className="form-control" placeholder="Introduce your birthday" required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="text" id="email" className="form-control" placeholder="Introduce your email" onChange={e => setEmail(e.target.value)} required/> 
+                <input type="text" id="email" className="form-control" placeholder="Introduce your email" onBlur={(e) => setEmail(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="text" id="username" className="form-control" placeholder="Introduce your username" onChange={e => setUsername(e.target.value)} required/> 
+                <input type="text" id="username" className="form-control" placeholder="Introduce your username" onBlur={(e) => setUsername(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="password" id="password" className="form-control" placeholder="Introduce your password" onChange={e => setPassword(e.target.value)} required/> 
+                <input type="password" id="password" className="form-control" placeholder="Introduce your password" onBlur={(e) => setPassword(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-3"> 
-                <input type="password" id="password2" className="form-control" placeholder="Repeat your password" onChange={e => setPassword2(e.target.value)} required/> 
+                <input type="password" id="password2" className="form-control" placeholder="Repeat your password" onBlur={(e) => setPassword2(e.target.value)} required/> 
               </div> 
 
               <button className="btn btn-primary w-100 mb-3" type="submit"> Register </button> 

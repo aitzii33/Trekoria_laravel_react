@@ -4,25 +4,20 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
-Route::get('/', function () 
-{
-    return Inertia::render('LandingPage');
-});
+Route::get('/', [PageController::class, 'Landing'])->name('landing');
 
-Route::get('/ContactUs', function () 
-{
-    return Inertia::render('Contact');
-});
 
-Route::get('/Home', function () 
-{
-    return Inertia::render('Initial_Page');
-});
+Route::get('/ContactUs', [ContactController::class, 'form'])->name('contact.form');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
-Route::get('/LogIn', function () 
-{
-    return Inertia::render('LogIn');
-});
+
+Route::get('/Home', [PageController::class, 'Home'])->name('home');
+
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
+Route::post('/login', [AuthController::class, 'login'])->name('login.perform');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::get('/ForgotPass', function () 
 {
@@ -53,3 +48,5 @@ Route::get('/Activity', function ()
 {
     return Inertia::render('ActivityInfo');
 });
+
+
