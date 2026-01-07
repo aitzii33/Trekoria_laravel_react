@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Main header styling */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: transparent;
+
+  position: fixed;
+  top: 0;
+  left: 0;    
+  width: 100%;
+  z-index: 1000;
+  background-color: rgb(255, 255, 255);
+   border-bottom: 1px solid #c9d9e2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+ 
+}
+
+/* Logo */
+.header-logo {
+  margin-left: 100px; 
+  width: 140px;
+  height: 80px;
+}
+
+/* Spacer between logo and nav/button */
+.header-spacer {
+  flex-grow: 1;
+}
+
+/* Navigation next to button */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 30px;
+}
+
+.header-nav a {
+  color: black;
+  text-decoration: none;
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Access button wrapper */
+.header-access {
+  position: flex;
+  margin-right: 80px;
+  width: 60px;
+  height: 60px;
+}
+
+/* Dropdown menu */
+.header-dropdown {
+  position: relative;
+  right: 0;
+  margin-top: 0.5rem; 
+  padding: 0.5rem;
+  border: 1px solid #d1d3d6;
+  background-color: rgb(174, 212, 244);
+  list-style: none;
+}
+
+.header-dropdown li a {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  color: black;
+}
+
+.header-dropdown li a:hover {
+  background-color: #f8f9fa;
+}
+
+.main-content {
+  padding-top: 120px; 
+}
+/* Access button styling */
+.header-access button {
+  background-color: #84c0e0; 
+  color: white;              
+  border: none;             
+  padding: 0.5rem 1rem;     
+  border-radius: 5px;      
+  cursor: pointer;         
+  font-size: 1rem;          
+  transition: background-color 0.3s;
+  margin-right: 2rem;
+}
+
+/* Optional: hover effect */
+.header-access button:hover {
+  background-color: #7bbcc0; 
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-links {
+  display: flex;             /* make children in a row */
+  align-items: center;       /* vertically align image and links */
+  gap: 20px;                 /* optional: spacing between items */
+}
+
+.nav-ico {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.nav-ico:hover {
+  transform: scale(1.2);     /* slightly enlarge on hover */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+}
+
+.nav-link:hover {
+  color: #2796D1;
+  background: linear-gradient(90deg, rgba(39,150,209,0.10), rgba(39,150,209,0.02));
+  color: #155a78;
+  border-radius: 6px;
+  padding: 6px 10px;
+  box-shadow: 0 6px 12px rgba(39,150,209,0.08);
+  transform: translateY(-3px);
+  transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* Optional: sliding underline */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #2796D1;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}

@@ -1,0 +1,127 @@
+/* ---------- Body & Landing Section ---------- */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.landing-section {
+  display: flex;
+  align-items: flex-start;  
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+/* ---------- Left Text Section ---------- */
+.text-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  
+  justify-content: flex-start;
+  gap: 1rem;
+  flex: 1;
+  padding-top: 2rem;
+  text-align: left;
+}
+
+/* App name */
+.app-name {
+  color: #2796D1; 
+  font-weight: 600;
+  font-size: 3rem; 
+  margin-bottom: 0.5rem;
+  font-size: 60px;
+}
+
+/* Main title */
+.main-title {
+  color: #2d2d2d;
+  font-weight: 700;
+  font-size: 2rem; 
+  margin-bottom: 1rem;
+}
+
+/* Paragraph */
+.text-section p {
+  color: #2d2d2d;
+  font-size: 1.1rem; 
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+
+/* ---------- Right Collage Section ---------- */
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.collage-wrapper {
+  position: relative;
+  width: 500px;
+  height: 600px;
+}
+
+/* Shared collage images */
+.collage-img {
+  position: absolute;
+  width: 320px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+/* Image positions */
+.collage-img.img1 { top: 0; left: 0; z-index: 3; }
+.collage-img.img2 { top: 160px; left: 140px; z-index: 2; }
+.collage-img.img3 { top: 320px; left: 70px; z-index: 1; }
+
+/* Hover effect */
+.collage-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+}
+.gallery-section{
+  height: 400px;
+  background-color: #D1DCEC;
+}
+.gallery-section img {
+  height: 300px; 
+  object-fit: cover; 
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 992px) {
+  .landing-section {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .text-section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .app-name { font-size: 2.5rem; }
+  .main-title { font-size: 1.8rem; }
+  .text-section p { font-size: 1rem; }
+
+  .collage-wrapper {
+    width: 90%;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .collage-img {
+    position: relative;
+    width: 80%;
+    margin: 1rem auto;
+    transform: rotate(0deg) !important;
+  }
+}

@@ -1,0 +1,85 @@
+.hero-container {
+  position: relative;
+}
+
+.hero-image {
+  height: 50vh;
+  object-fit: cover;
+}
+
+.search-overlay {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;        /* make sure it's above everything */
+  width: 80%;
+  text-align: center;
+  color: white;
+}
+
+
+.hero-heading {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Popular Cities */
+.city-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.city-card:hover {
+  transform: scale(1.05);
+}
+.city-img {
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Continents */
+.continent-item:hover {
+  background-color: #0d6efd;
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* Countries */
+.country-item:hover {
+  background-color: #198754;
+  transition: 0.3s;
+}
+
+/* Cities */
+.country-city-panel .city-card {
+  transition: transform 0.2s;
+  cursor: default;
+}
+.country-city-panel .city-card:hover {
+  transform: scale(1.05);
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.country-city-panel {
+  flex: 1;
+  margin-left: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .d-flex {
+    flex-direction: column;
+  }
+  .continent-list {
+    margin-bottom: 20px;
+  }
+}

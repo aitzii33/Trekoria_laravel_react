@@ -1,0 +1,40 @@
+#container{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+body {
+  color: #000;
+  overflow-x: hidden;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.form-outline input {
+  padding: 10px 20px;
+  border: 1px solid lightgrey !important;
+  border-radius: 6px !important;
+  background-color: #fff !important;
+  color: #2c3e50;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.form-outline input:focus {
+  box-shadow: none !important;
+  border-color: #2796D1 !important;
+  outline: none;
+}
+
+::placeholder {
+  color: #bdbdbd;
+}
+
+.text-muted:hover {
+  text-decoration: underline;
+}
+
+.card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,28 @@
+{
+  "landing": {
+    "app_name": "TREKORIA",
+    "main_title": "Explore & Book Exciting Activities",
+    "lead": "Discover adventures, tours, and experiences in cities around the world. Find what you love and book instantly.",
+    "button": "Start Exploring",
+    "gallery": {
+      "img1": "New York City",
+      "img2": "Eiffel Tower, Paris",
+      "img3": "Tokyo cityscape",
+      "img4": "Paris city view"
+    },
+    "hero": {
+      "heading": "Find Your Perfect Place",
+      "subtitle": "Search from thousands of options",
+      "searchPlaceholder": "Search...",
+      "searchButton": "Search"
+    },
+    "popularCities": {
+      "title": "Popular Cities",
+      "seeMore": "See More"
+    },
+    "continentsSection": {
+      "title": "Explore Countries & Cities",
+      "citiesIn": "Cities in {{country}}:"
+    }
+  }
+}

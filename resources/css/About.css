@@ -1,0 +1,170 @@
+body{
+  background-color: white;
+}.about-gradient {
+  background: linear-gradient(
+    to bottom, /* top → bottom */
+    #FFFFFF,   /* White at the top */
+    hsl(216, 38%, 71%),   /* Light Blue in the middle */
+    #2796D1    /* Deep Blue at the bottom */
+  );
+  width: 100%;
+}
+.aboutus-secktion h2 {
+  font-weight: 700;
+}
+.about-gradient h1{
+  font-weight: 500;
+  font-size: 60px;
+}
+
+.aboutus-secktion p {
+  line-height: 1.7;
+}
+.section-a{
+  background-color:#8ec7e6;
+  padding: 24px;
+  border-radius: 20px;
+  /* default mobile: stacked cards */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px; /* increased gap between cards */
+}
+
+/* Enhanced card styling with visible differences between each card */
+.section-a > * {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,250,255,0.9));
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(16,40,66,0.06);
+  border: 1px solid rgba(16,40,66,0.06);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms, border-color 220ms;
+  color: #0f2a44;
+  overflow: hidden;
+  min-height: 120px;
+  width: 100%;
+}
+
+/* Decorative top accent stripe so each card can use a variable accent */
+.section-a > *::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 6px;
+  width: 44%;
+  background: var(--accent, #6d93c5);
+  border-top-left-radius: 14px;
+  border-bottom-right-radius: 8px;
+  opacity: 0.98;
+}
+
+/* Subtle floating chip in corner for contrast */
+.section-a > *::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(16,40,66,0.05);
+}
+
+/* Lift on hover/focus */
+.section-a > *:hover,
+.section-a > *:focus {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 22px 46px rgba(16,40,66,0.12);
+  border-color: rgba(16,40,66,0.12);
+  z-index: 2;
+}
+
+/* Title and text helpers */
+.section-a .card-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: #0b2640;
+}
+.section-a .card-text {
+  line-height: 1.6;
+  color: #27455f;
+  font-size: 0.98rem;
+}
+
+/* Give each card a distinct accent and subtle background tint using nth-child */
+.section-a > *:nth-child(1) {
+  --accent: #2796D1; /* deep blue */
+  background-image: linear-gradient(180deg, rgba(39,150,209,0.03), rgba(255,255,255,0.98));
+}
+.section-a > *:nth-child(2) {
+  --accent: #98afd1; /* light blue */
+  background-image: linear-gradient(180deg, rgba(152,175,209,0.03), rgba(255,255,255,0.98));
+  box-shadow: 0 10px 26px rgba(25,74,132,0.05);
+}
+.section-a > *:nth-child(3) {
+  --accent: #b9c6d8; /* soft gray-blue */
+  background-image: linear-gradient(180deg, rgba(185,198,216,0.03), rgba(255,255,255,0.98));
+  border-style: dashed;
+  border-width: 1px;
+}
+.section-a > *:nth-child(4) {
+  --accent: #f6c16e; /* warm accent for variety */
+  background-image: linear-gradient(180deg, rgba(246,193,110,0.03), rgba(255,255,255,0.98));
+  transform-origin: center;
+}
+.section-a > *:nth-child(5) {
+  --accent: #7bcf9f; /* greenish accent */
+  background-image: linear-gradient(180deg, rgba(123,207,159,0.03), rgba(255,255,255,0.98));
+}
+
+/* Fallback for any additional cards: cycle accents */
+.section-a > *:nth-child(6n+1) { --accent: #2796D1; }
+.section-a > *:nth-child(6n+2) { --accent: #98afd1; }
+.section-a > *:nth-child(6n+3) { --accent: #b9c6d8; }
+.section-a > *:nth-child(6n+4) { --accent: #f6c16e; }
+.section-a > *:nth-child(6n+5) { --accent: #7bcf9f; }
+.section-a > *:nth-child(6n+0) { --accent: #b39fd6; }
+
+/* Responsive grid: stacked on small, multi-column on larger screens */
+@media (min-width: 540px) {
+  .section-a {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
+}
+@media (min-width: 1100px) {
+  .section-a {
+    gap: 22px;
+  }
+  .section-a > * {
+    padding: 24px;
+    min-height: 140px;
+  }
+}
+
+.stats-section .stat-box h2 {
+  font-size: 2.5rem;
+  color: #6d93c5;
+  margin-bottom: 10px;
+}
+
+.stats-section .stat-box p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.team-img img {
+  object-position: center;
+}
+.team-img img {
+  width: 150px;  
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 50%; 
+}
+.team-sektion h2{
+  font-weight: 700;
+}

@@ -1,0 +1,28 @@
+{
+  "landing": {
+    "app_name": "TREKORIA",
+    "main_title": "Explora y Reserva Actividades Emocionantes",
+    "lead": "Descubre aventuras, tours y experiencias en ciudades de todo el mundo. Encuentra lo que amas y reserva al instante.",
+    "button": "Comenzar a Explorar",
+    "gallery": {
+      "img1": "Ciudad de Nueva York",
+      "img2": "Torre Eiffel, París",
+      "img3": "Paisaje urbano de Tokio",
+      "img4": "Vista de la ciudad de París"
+    },
+    "hero": {
+    "heading": "Encuentra Tu Lugar Perfecto",
+    "subtitle": "Busca entre miles de opciones",
+    "searchPlaceholder": "Buscar...",
+    "searchButton": "Buscar"
+    },
+    "popularCities": {
+        "title": "Ciudades Populares",
+        "seeMore": "Ver Más"
+    },
+    "continentsSection": {
+        "title": "Explora Países y Ciudades",
+        "citiesIn": "Ciudades en {{country}}:"
+    }
+    }
+}

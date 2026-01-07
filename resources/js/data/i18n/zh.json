@@ -1,0 +1,29 @@
+{
+  "landing": {
+    "app_name": "TREKORIA",
+    "main_title": "探索并预订刺激活动",
+    "lead": "在世界各地的城市发现冒险、旅游和体验。找到你喜欢的并立即预订。",
+    "button": "开始探索",
+    "gallery": {
+      "img1": "纽约市",
+      "img2": "巴黎埃菲尔铁塔",
+      "img3": "东京城市景观",
+      "img4": "巴黎城市景观"
+    },
+    "hero": {
+      "heading": "找到你的理想之地",
+      "subtitle": "从数千个选项中搜索",
+      "searchPlaceholder": "搜索...",
+      "searchButton": "搜索"
+    },
+    "popularCities": {
+      "title": "热门城市",
+      "seeMore": "查看更多"
+    },
+    "continentsSection": {
+      "title": "探索国家和城市",
+      "citiesIn": "{{country}} 的城市："
+    }
+  }
+}
+
