@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('_time_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->smallInteger('id_activity')->unsigned(); 
+            $table->string('day_week');
+            $table->string('hour');
             $table->timestamps();
+
+            $table->foreignId('id_activity')->constrained()->onDelete('cascade');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('_time_schedules');
     }
 };
