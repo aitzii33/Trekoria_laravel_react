@@ -10,25 +10,18 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    public $incrementing = true;  
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    protected $fillable = ['name', 'last_name', 'email', 'birth_day', 'type_user'];
+
+    public function typeUser()
+    {
+        return $this->belongsTo(TypeUser::class, 'type_user', 'id_typeUser');
+    }
+
+
     protected $hidden = [
         'password',
         'two_factor_secret',
@@ -36,11 +29,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+
     protected function casts(): array
     {
         return [
