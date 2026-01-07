@@ -5,6 +5,7 @@ import { ProveUserPassword  } from '../Funtions'
 import Header from '../Components/Header.jsx'
 import Footer from '../Components/Footer.jsx'
 import { Container } from 'reactstrap'
+import error from './alert-error'
 
 function Login() 
 {
@@ -31,7 +32,7 @@ function Login()
 
         if(data === false)
         {
-            alert('The user name or the password is incorrect');
+            error('The user name or the password is incorrect');
         }
         else 
         {

@@ -19,10 +19,10 @@ function Footer()
     };
 
     const routeAboutUs = () =>
-  {
-    const path = '/About';
-    navigate(path);
-  }
+    {
+        const path = '/About';
+        navigate(path);
+    }
     const routeLanding = () => 
     {
         const path = '/InitialPage';

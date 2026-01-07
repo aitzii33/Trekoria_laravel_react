@@ -1,19 +1,22 @@
 import '../assets/CSS/Contact.css'
 import { ProveEmail,  ProveMessage  } from '../Funtions'
 import Header from '../Components/Header'
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import Footer from '../Components/Footer';
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'
+import Footer from '../Components/Footer'
+import error from './alert-error'
 
 function ContactUs()
 {
 // validate email value (called from onBlur or submit)
-const validateEmail = (value) => {
+const validateEmail = (value) => 
+{
     if (!value) return false;
-    const dataEmail = ProveEmail(value);
+        const dataEmail = ProveEmail(value);
 
-    if (dataEmail === false) {
-        alert("The email must contain '@' and '.'");
+    if (dataEmail === false) 
+    {
+        error("The email must contain '@' and '.'");
         return false;
     }
 
@@ -21,12 +24,14 @@ const validateEmail = (value) => {
 };
 
 // validate message value (called from onBlur or submit)
-const validateMessage = (value) => {
+const validateMessage = (value) => 
+{
     if (!value) return false;
-    const dataMessage = ProveMessage(value);
+        const dataMessage = ProveMessage(value);
 
-    if (dataMessage === false) {
-        alert("The message must be between 20 and 120 characters");
+    if (dataMessage === false) 
+    {
+        error("The message must be between 20 and 120 characters");
         return false;
     }
 

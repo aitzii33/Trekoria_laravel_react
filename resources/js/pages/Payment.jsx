@@ -49,10 +49,7 @@ function RegisterPage()
         notification.textContent = message;
         notification.classList.add('show');
 
-        setTimeout(() => 
-        {
-            notification.classList.remove('show');
-        }, 3000);
+        setTimeout(() => {notification.classList.remove('show');}, 3000);
     }
 
     function updateReviewDetails() 
@@ -127,13 +124,6 @@ function RegisterPage()
     {
         showStep(0);
     });
-    //#endregion
-
-    //#region Verify data
-    const Verify = (e) => 
-    {
-        e.preventDefault();
-    };
     //#endregion
 
 
