@@ -1,9 +1,3 @@
-export function ProveUserName(username)
-{
-    //check if that username exist
-}
-
-
 //To see the email they have enter have @ and .
 export function ProveEmail(email)
 {
@@ -21,6 +15,15 @@ export function samePass(pass1, pass2)
     }
 }
 
+//The password can't be more than 18 characters
+export function PasswordsCharacters(password)
+{
+    if(password.length > 18)
+    {
+        return false;
+    }
+}
+
 
 //The message have to be between 20 and 120 characters
 export function ProveMessage(message)
@@ -32,11 +35,21 @@ export function ProveMessage(message)
 }
 
 
+export function ProveUserName(username)
+{
+    //check if that username exist
+    $user = DB::table('user')->where('user_name', username);
+}
+
+
 //Check user name and password
 export function ProveUserPassword(password, username)
 {
     //The database data is needed for verification
-    if(!password && !username)
+    $user = DB::table('user')->where('user_name', username);
+    $pass = DB::table('user')->where('password', password);
+
+    if(password != pass || username != user)
     {
         return false;
     }
@@ -49,6 +62,6 @@ export function IfExistEmail(email)
     //Check if the email is in the database
     if(data == true)
     {
-        //
+        $email = DB::table('user')->where('email', email);
     }
 }

@@ -9,29 +9,40 @@ import { Container } from 'reactstrap'
 
 function Login() 
 {
-    const { status: serverStatus } = usePage().props
+    const { status: serverStatus } = usePage().props;
     const [status, setStatus] = useState('');
+    const [user_name, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const [form, setForm] = useState({ email: '', password: ''})
  
-    const handleChange = (e) => 
-    { 
-        setForm({...form, [e.target.name]: e.target.value});
-    }
- 
-    const handleLogin = (e) => 
+    const Verify = (e) => 
     { 
         e.preventDefault(); 
- 
-        if (!form.email || !form.password) 
+
+        if (!form.user_name || !form.password) 
         {
-            setStatus('Please enter email and password.');
+            setStatus('Please enter user name and password.');
             return;
         }
 
-        Inertia.post('/login', form);
-        setStatus('Logging in...');
-    }
+        const dataPassword = PasswordsCharacters(password);
+        const data = ProveUserPassword(password, user_name);
+     
+        if(data === false) 
+        {
+            error("The user name or the password isn't correct"); 
+        } 
+        else if(dataPassword === false)
+        {
+            error("The password can't have more than 18 characters");
+        }
+        else 
+        {
+            navigate('/Home'); 
+        } 
+      }; 
+ 
 
     return (
         <> 
@@ -43,13 +54,13 @@ function Login()
                             <img src={logo} alt="logo" style={{ width: "185px" }} />
                         </div> 
  
-                        <form onSubmit={handleLogin} > 
+                        <form onSubmit={Verify} > 
                             <div className="form-outline mb-4">
-                                <input type="email" className="form-control" name="email" value={form.email} onChange={handleChange} placeholder="Introduce your email" required/>
+                                <input type="text" className="form-control" name="user_name" value={form.email} onBlur={(e) => setUsername(e.target.value)}  placeholder="Introduce your email" required/>
                             </div>
  
                             <div className="form-outline mb-4">
-                                <input type="password" className="form-control" name="password" value={form.password} onChange={handleChange} placeholder="Introduce your password" required/>
+                                <input type="password" className="form-control" name="password" value={form.password} onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
                             </div>
 
                             <div className="text-center pt-1 mb-5 pb-1">

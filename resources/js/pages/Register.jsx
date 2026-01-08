@@ -22,6 +22,7 @@ function RegisterPage()
     const dataEmail = IfExistEmail(email); 
     const dataUser = ProveUserName(username); 
     const samePassResult = samePass(password, password2); 
+    const dataPassword = PasswordsCharacters(password);
  
     if(dataEmail === false) 
     {
@@ -35,6 +36,10 @@ function RegisterPage()
     {
       error('Passwords do not match'); 
     } 
+    else if(dataPassword === false)
+    {
+      error("The password can't have more than 18 characters");
+    }
     else 
     {
       navigate('/LogIn'); 
