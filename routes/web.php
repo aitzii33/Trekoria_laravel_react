@@ -23,21 +23,21 @@ Route::get('/ForgotPass', [ForgotController::class, 'form'])->name('forgot');
 Route::post('/SendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.perform');
 
 
-Route::get('/Register', [ForgotController::class, 'form'])->name('register');
-Route::post('/SendEmail', [ForgotController::class, 'sendEmail'])->name('register.perform');
+Route::get('/Register', [RegisterController::class, 'form'])->name('register');
+Route::post('/SendEmail', [RegisterController::class, 'sendEmail'])->name('register.perform');
 
 
-Route::get('/Profile', [LogInController::class, 'form'])->name('profile');
-Route::post('/Delete', [LogInController::class, 'SoftDelete'])->name('profile.delete');
-Route::post('/Modify', [LogInController::class, 'Modify'])->name('profile.modify');
+Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
+Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete');
+Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify');
 
 
-Route::get('/Cart', [ForgotController::class, 'form'])->name('cart');
-Route::post('/eliminateActivity', [ForgotController::class, 'eliminateActivity'])->name('cart.perform');
+Route::get('/Cart', [CartController::class, 'form'])->name('cart');
+Route::post('/eliminateActivity', [CartController::class, 'eliminateActivity'])->name('cart.perform');
 
 
-Route::get('/Pay', [ForgotController::class, 'form'])->name('pay');
-Route::post('/VerifyAuth', [ForgotController::class, 'dataVerify'])->name('pay.perform');
+Route::get('/Pay', [PayController::class, 'form'])->name('pay');
+Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');

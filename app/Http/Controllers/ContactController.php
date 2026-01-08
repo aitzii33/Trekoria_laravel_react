@@ -19,7 +19,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        //mail
+        Mail::to('agonzalezgo25dw@ikzubirimanteo.com')->send(new ReciveContact( $request->name, $request->email, $request->message));
 
         return redirect()->back()->with('status', 'The email has been sent');
     }
