@@ -17,4 +17,10 @@ class PayController extends Controller
         
         //prove the street, dni, credit card (cvv/exp.date)
     }
+
+    public function __construct()
+	{
+	    $this->middleware('auth');
+	}
+
 }

@@ -27,13 +27,8 @@ function Login()
         }
 
         const dataPassword = PasswordsCharacters(password);
-        const data = ProveUserPassword(password, user_name);
      
-        if(data === false) 
-        {
-            error("The user name or the password isn't correct"); 
-        } 
-        else if(dataPassword === false)
+        if(dataPassword === false)
         {
             error("The password can't have more than 18 characters");
         }

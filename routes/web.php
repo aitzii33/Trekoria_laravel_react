@@ -39,5 +39,6 @@ Route::post('/eliminateActivity', [ForgotController::class, 'eliminateActivity']
 Route::get('/Pay', [ForgotController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [ForgotController::class, 'dataVerify'])->name('pay.perform');
 
-
+Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
+Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
 

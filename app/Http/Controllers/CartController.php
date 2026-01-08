@@ -17,4 +17,10 @@ class CartController extends Controller
         
         //eliminate a activity for the pay
     }
+
+    public function __construct()
+	{
+	    $this->middleware('auth');
+	}
+
 }
