@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class LogInController extends Controller
 {
-    public function showLogin()
+    public function form()
     {
         return Inertia::render('Login', ['status' => session('status')]);
     }
@@ -14,7 +14,7 @@ class LogInController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'user_name' => 'required|text',
             'password' => 'required|string'
         ]);
 
