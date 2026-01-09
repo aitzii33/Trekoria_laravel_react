@@ -11,6 +11,7 @@ import Button from '../Components/Button'
 import { useNavigate } from "react-router-dom"
 import Header from '../Components/Header_Landing'
 import { useTranslation } from "react-i18next";
+import { router, usePage } from '@inertiajs/react' 
 
 
 
@@ -21,7 +22,7 @@ export default function Landing()
   
   const routeChange = () => 
   {
-    navigate('/Home');
+    router.visit(route('home'));
   };
 
 

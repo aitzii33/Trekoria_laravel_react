@@ -5,6 +5,7 @@ import userImg from '../assets/img/DefaultUserImage.png'
 import home from '../assets/img/home.png'
 import '../assets/CSS/Header.css'
 import { useNavigate } from "react-router-dom"
+import { router, usePage } from '@inertiajs/react' 
 import { useState } from "react"
 import '../assets/CSS/Header.css';
 import LanguageSelector from '../Components/LanguageSelector';
@@ -19,41 +20,42 @@ function Head({ isLoggedIn, currentLanguage, setLanguage})
     {
         if (!isLoggedIn) 
         {
-            navigate("/login");
+            router.visit(route('login'));
         } 
         else 
         {
             setShowDropdown(prev => !prev);
         }
-    };
+    }
 
     const routeInitial = () => 
     {
-        navigate('/Home');
-    };
-
-    const routeAboutUs = () =>
-    {
-        navigate('/About');
+        router.visit(route('home'));  
     }
 
-    const routeContact = () => 
+    const routeAboutUs = () => 
     {
-        navigate('/ContactUs');
-    };
+        router.visit(route('about'));  
+    }
+
+    const routeContact = () =>
+    {
+        router.visit(route('contact'));  
+    }
 
     const routeProfile = () => 
     {
-        navigate('/Profile');
-    };
+        router.visit(route('profile'));
+    }
 
     const routeLogOut = () => 
     {
-        //Close the sesion
-    };
-    const routeLanding =() =>
+        router.post(route('logout')); 
+    }
+
+    const routeLanding = () => 
     {
-        navigate('/');
+        router.visit(route('landing'));
     }
     //#endregion
 
