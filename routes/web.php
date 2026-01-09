@@ -24,7 +24,9 @@ Route::post('/SendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.
 
 
 Route::get('/Register', [RegisterController::class, 'form'])->name('register');
-Route::post('/SendEmail', [RegisterController::class, 'sendEmail'])->name('register.perform');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
+
 
 
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
@@ -38,6 +40,11 @@ Route::post('/eliminateActivity', [CartController::class, 'eliminateActivity'])-
 
 Route::get('/Pay', [PayController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
+
+
+Route::get('/Activity', [PayController::class, 'form'])->name('Activity');
+Route::post('/ActivityVerify', [PayController::class, 'verifyAuth'])->name('Activity.perform');
+
 
 Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');

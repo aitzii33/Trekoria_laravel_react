@@ -3,6 +3,7 @@ import userImg from '../assets/img/DefaultUserImage.png';
 import home from '../assets/img/home.png';
 import '../assets/CSS/Header.css';
 import { useNavigate } from "react-router-dom"
+import { router, usePage } from '@inertiajs/react' 
 import LanguageSelector from '../Components/LanguageSelector';
 
 
@@ -12,20 +13,17 @@ export default function Head({currentLanguage, setLanguage})
   
   const routeInitial = () => 
   {
-    const path = 'Home';
-    navigate(path);
+    router.visit(route('home'));
   };
 
   const routeAboutUs = () =>
   {
-    const path = '/About';
-    navigate(path);
+    router.visit(route('about'));
   }
 
   const routeContact = () => 
   {
-    const path = '/ContactUs';
-    navigate(path);
+    router.visit(route('contact'));
   };
 
 

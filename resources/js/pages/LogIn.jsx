@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { usePage } from '@inertiajs/inertia-react'
 import Header from '../Components/Header.jsx'
 import Footer from '../Components/Footer.jsx'
+import { router, usePage } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
 
 
@@ -34,7 +35,7 @@ function Login()
         }
         else 
         {
-            navigate('/Home'); 
+            router.visit(route('home')); 
         } 
       }; 
  

@@ -10,6 +10,7 @@ import Footer from "../Components/Footer"
 import BoatImg from "../assets/img/Boat.avif"
 import Donostia from "../assets/img/Donostia1.jpeg"
 import { useNavigate } from "react-router-dom"
+import { router, usePage } from '@inertiajs/react' 
 
 function Activities() 
 {
@@ -18,7 +19,7 @@ function Activities()
 
     const routeActivityClick = () => 
     {
-        navigate('/ActivityClick');
+        router.visit(route('Activity'));
     };
 
     const handleSubmit = (e) => 

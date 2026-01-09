@@ -13,12 +13,43 @@ class RegisterController extends Controller
 
     public function sendEmail(Request $request)
     {
-        //all the date is required
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'surname' => 'required|string|max:255',
+        'birthday' => 'required|date',
+        'email' => 'required|email|unique:users',
+        'username' => 'required|string|unique:users',
+        'password' => 'required|min:8|confirmed',  
+        ]);
 
-        //verify if the user already exist
+        if (User::where('email', $request->email)->orWhere('username', $request->username)->exists()) 
+        {
+            return redirect()->back()->with('error', 'The user exist yet');
+        }
 
-        //if the password have written 2 times and is the same
-        
-        //send the email
+        $pendingData = $request->only(['name', 'surname', 'birthday', 'email', 'username', 'password']);
+        $pendingData['token'] = Str::uuid(); 
+        $pendingData['pending_until'] = now()->addHour();
+
+        User::create($pendingData);  
+
+        Mail::to($request->email)->send(new RegisterConfirmation($pendingData));
+
+        return redirect()->back()->with('status', '¡Email enviado! Confirma para activar.');
     }
+
+    public function confirm($token)
+    {
+        $user = User::where('pending_token', $token)->where('pending_until', '>', now())->firstOrFail();
+
+        $user->update([
+            'password' => Hash::make($user->password),
+            'pending_token' => null,
+            'pending_until' => null,
+            'email_verified_at' => now(),
+        ]);
+
+        return inertia('RegisterSuccess');
+    }
+
 }
