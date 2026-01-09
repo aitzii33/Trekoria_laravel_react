@@ -1,44 +1,16 @@
-import { wayfinder } from '@laravel/vite-plugin-wayfinder';
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import laravel from 'laravel-vite-plugin';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            ssr: 'resources/js/ssr.tsx',
+            input: ['resources/js/app.jsx'],
             refresh: true,
         }),
-        react({
-            babel: {
-                plugins: ['babel-plugin-react-compiler'],
-            },
-        }),
-        tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        }),
+        react(),
     ],
-    
     server: {
-        host: '127.0.0.1',
-        port: 5173,
-        cors: true,
-        hmr: {
-            host: '127.0.0.1'
-        },
-        proxy: {
-            '/resources': {
-                target: 'http://127.0.0.1:8000',
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/resources/, '/resources')
-            }
-        }
+        host: 'localhost',
     },
-
-    esbuild: {
-        jsx: 'automatic',
-    },
-});
+})
