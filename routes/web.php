@@ -1,8 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\LogInController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/Home', [PageController::class, 'Home'])->name('home');
@@ -28,7 +37,6 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
-
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
 Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete');
 Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify');
@@ -42,8 +50,8 @@ Route::get('/Pay', [PayController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
-Route::get('/Activity', [PayController::class, 'form'])->name('Activity');
-Route::post('/ActivityVerify', [PayController::class, 'verifyAuth'])->name('Activity.perform');
+Route::get('/Activity', [ActivityController::class, 'form'])->name('Activity');
+Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.perform');
 
 
 Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
