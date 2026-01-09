@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\RegisterConfirmation;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
