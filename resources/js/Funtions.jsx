@@ -33,35 +33,3 @@ export function ProveMessage(message)
         return false;
     }
 }
-
-
-export function ProveUserName(username)
-{
-    //check if that username exist
-    $user = DB::table('user')->where('user_name', username);
-}
-
-
-//Check user name and password
-export function ProveUserPassword(password, username)
-{
-    //The database data is needed for verification
-    $user = DB::table('user')->where('user_name', username);
-    $pass = DB::table('user')->where('password', password);
-
-    if(password != pass || username != user)
-    {
-        return false;
-    }
-}
-
-export function IfExistEmail(email)
-{
-    const data = ProveEmail(email);
-
-    //Check if the email is in the database
-    if(data == true)
-    {
-        $email = DB::table('user')->where('email', email);
-    }
-}

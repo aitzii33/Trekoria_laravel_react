@@ -1,11 +1,11 @@
 import logo from '../assets/img/logo.png'
 import "../assets/CSS/LogIn.css"
 import { useState } from 'react'
-import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-react'
 import Header from '../Components/Header.jsx'
 import Footer from '../Components/Footer.jsx'
 import { Container } from 'reactstrap'
+
 
 function Login() 
 {
@@ -27,13 +27,8 @@ function Login()
         }
 
         const dataPassword = PasswordsCharacters(password);
-        const data = ProveUserPassword(password, user_name);
      
-        if(data === false) 
-        {
-            error("The user name or the password isn't correct"); 
-        } 
-        else if(dataPassword === false)
+        if(dataPassword === false)
         {
             error("The password can't have more than 18 characters");
         }
@@ -62,6 +57,8 @@ function Login()
                             <div className="form-outline mb-4">
                                 <input type="password" className="form-control" name="password" value={form.password} onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
                             </div>
+
+                            <input type="checkbox" id='remember' value='Remember me'></input>
 
                             <div className="text-center pt-1 mb-5 pb-1">
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>

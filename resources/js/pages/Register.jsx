@@ -12,7 +12,6 @@ function RegisterPage()
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -20,17 +19,12 @@ function RegisterPage()
     e.preventDefault(); 
   
     const dataEmail = IfExistEmail(email); 
-    const dataUser = ProveUserName(username); 
     const samePassResult = samePass(password, password2); 
     const dataPassword = PasswordsCharacters(password);
  
     if(dataEmail === false) 
     {
       error("The email must contain @ and ."); 
-    } 
-    else if(dataUser === false) 
-    {
-      error('That user already exists'); 
     } 
     else if(samePassResult === false) 
     {
@@ -76,7 +70,7 @@ function RegisterPage()
                 <input type="text" id="email" className="form-control" placeholder="Introduce your email" onBlur={(e) => setEmail(e.target.value)} required/> 
               </div> 
               <div className="form-outline mb-2"> 
-                <input type="text" id="username" className="form-control" placeholder="Introduce your username" onBlur={(e) => setUsername(e.target.value)} required/> 
+                <input type="text" id="username" className="form-control" placeholder="Introduce your username" required/> 
               </div> 
               <div className="form-outline mb-2"> 
                 <input type="password" id="password" className="form-control" placeholder="Introduce your password" onBlur={(e) => setPassword(e.target.value)} required/> 

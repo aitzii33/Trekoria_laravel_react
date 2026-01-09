@@ -14,6 +14,23 @@ function ContactUs()
     const [status, setStatus] = useState('')
 
 
+    const { flash } = usePage().props 
+    const form = useForm({ name: '', email: '', message: '' });
+
+
+    useEffect(() => {
+        if (flash?.status) {
+        const timer = setTimeout(() => {}, 5000)  
+        return () => clearTimeout(timer)
+        }
+    }, [flash?.status])
+
+    const submit = (e) => {
+        e.preventDefault()
+        form.post('/contact')  
+    }
+
+
     const validateEmail = (value) => 
     {
         if (!value) 

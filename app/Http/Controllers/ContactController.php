@@ -19,9 +19,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        Mail::raw($request->message, function ($message) use ($request) {
-            $message->to('soporte@tuapp.com')->subject('Nuevo mensaje de contacto de '.$request->name)->from($request->email, $request->name);
-        });
+        Mail::to('agonzalezgo25dw@ikzubirimanteo.com')->send(new ReciveContact( $request->name, $request->email, $request->message));
 
         return redirect()->back()->with('status', 'The email has been sent');
     }

@@ -15,4 +15,14 @@ class PageController extends Controller
     {
         return Inertia::render('Initial_Page');
     }
+
+    public function Activities()
+    {
+        return Inertia::render('Activities');
+    }
+
+    public function About()
+    {
+        return Inertia::render('AboutUs');
+    }
 }

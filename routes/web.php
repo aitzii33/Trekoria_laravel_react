@@ -5,48 +5,40 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
+Route::get('/Home', [PageController::class, 'Home'])->name('home');
+Route::get('/Activities', [PageController::class, 'Activities'])->name('activities');
+Route::get('/About', [PageController::class, 'About'])->name('about');
 
 
-Route::get('/ContactUs', [ContactController::class, 'form'])->name('contact.form');
+Route::get('/ContactUs', [ContactController::class, 'form'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 
-Route::get('/Home', [PageController::class, 'Home'])->name('home');
+Route::get('/LogIn', [LogInController::class, 'form'])->name('login');
+Route::post('/logIn', [LogInController::class, 'login'])->name('login.perform');
+Route::post('/LogOut', [LogInController::class, 'logout'])->name('logout');
 
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
-Route::post('/login', [AuthController::class, 'login'])->name('login.perform');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/ForgotPass', [ForgotController::class, 'form'])->name('forgot');
+Route::post('/SendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.perform');
 
 
-Route::get('/ForgotPass', function () 
-{
-    return Inertia::render('Forgot_Pass');
-});
+Route::get('/Register', [RegisterController::class, 'form'])->name('register');
+Route::post('/SendEmail', [RegisterController::class, 'sendEmail'])->name('register.perform');
 
-Route::get('/Register', function () 
-{
-    return Inertia::render('Register');
-});
 
-Route::get('/About', function () 
-{
-    return Inertia::render('AboutUs');
-});
+Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
+Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete');
+Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify');
 
-Route::get('/Profile', function () 
-{
-    return Inertia::render('MyProfile');
-});
 
-Route::get('/Activities', function () 
-{
-    return Inertia::render('Activities');
-});
+Route::get('/Cart', [CartController::class, 'form'])->name('cart');
+Route::post('/eliminateActivity', [CartController::class, 'eliminateActivity'])->name('cart.perform');
 
-Route::get('/Activity', function () 
-{
-    return Inertia::render('ActivityInfo');
-});
 
+Route::get('/Pay', [PayController::class, 'form'])->name('pay');
+Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
+
+Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
+Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
 
