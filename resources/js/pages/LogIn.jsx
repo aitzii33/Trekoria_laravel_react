@@ -38,7 +38,6 @@ function Login()
             router.visit(route('home')); 
         } 
       }; 
- 
 
     return (
         <> 
@@ -51,6 +50,8 @@ function Login()
                         </div> 
  
                         <form onSubmit={Verify} > 
+                            {props.flash.warning && <div className="alert alert-warning">{props.flash.warning}</div>}
+
                             <div className="form-outline mb-4">
                                 <input type="text" className="form-control" name="user_name" value={form.email} onBlur={(e) => setUsername(e.target.value)}  placeholder="Introduce your email" required/>
                             </div>

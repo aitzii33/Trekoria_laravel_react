@@ -9,7 +9,9 @@ class CartController extends Controller
 {
     public function form()
     {
-        return Inertia::render('ActivityInfo');
+        return Inertia::render('Cart', [
+            'activities' => Activity::all(), 
+        ]);
     }
 
     public function eliminateActivity(Request $request)
