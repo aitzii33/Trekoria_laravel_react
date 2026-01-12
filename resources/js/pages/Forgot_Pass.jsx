@@ -1,22 +1,14 @@
 import '../assets/CSS/Contact.css'
-import { IfExistEmail  } from '../Funtions'
-import error from './alert-error'
 
 function ForgotPass()
 {
+    const [email, setEmail] = useState('');
+
     const Verify = (e) => 
     {
         e.preventDefault();
 
-        const email = document.getElementById('email').value;
-        const dataEmail = IfExistEmail(email);
-        
-        if(dataEmail === false)
-        {
-            error("This email isn't exist yet");
-        }
-
-        error('The email have sended');
+        Inertia.post('/forgot.perform', { email });
     };
 
 
@@ -27,7 +19,7 @@ function ForgotPass()
 
                 <div className="mb-3">
                     <label className="form-label">Email address</label>
-                    <input type="text" id="email" name="email" className="form-control"/>
+                    <input type="text" id="email" name="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
 
                 <button id="submit-form" type="submit" className="btn btn-primary w-100"> Send </button>

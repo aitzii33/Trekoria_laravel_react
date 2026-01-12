@@ -14,8 +14,19 @@ class ForgotController extends Controller
 
     public function sendEmail()
     {
-        //if the email already exist in the db
-        
-        //send the email
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'The user does not exist with that email.']);
+        }
+
+        $token = Password::createToken($user);
+
+        Mail::to($user->email)->send(new ResetPasswordMail($user, $token));
+        return back()->with('status', 'Correo de recuperación enviado.');
     }
 }
