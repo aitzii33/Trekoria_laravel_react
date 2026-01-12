@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Activities;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    public function form()
+    public function form($id = null)
     {
+        $activities = Activities::all();
+        $selectedActivity = $id ? Activities::find($id) : null; 
+
         return Inertia::render('ActivityInfo', [
-            'activities' => Activity::all(), 
+            'activities' => $activities,
+            'selectedActivity' => $selectedActivity,
         ]);
     }
 

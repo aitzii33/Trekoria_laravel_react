@@ -1,8 +1,5 @@
-import logo from '../assets/img/logo.png'
-
 function RegisterPage() 
 {
-    //#region JSCode
     const form = document.getElementById('checkout-form');
     const steps = form.querySelectorAll('.form-step');
     const headers = document.querySelectorAll('.step-item');
