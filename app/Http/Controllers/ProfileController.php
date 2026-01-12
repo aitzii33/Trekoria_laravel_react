@@ -6,6 +6,8 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class ProfileController extends Controller
 {
@@ -29,6 +31,28 @@ class ProfileController extends Controller
 
     public function Modify(Request $request)
     {
-        //modifications of the username and password
+        $user = $request->user();
+
+        if ($user->trashed()) 
+        {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
+            'current_password' => ['required', 'current_password'],
+            'password' => ['nullable', 'confirmed', Password::defaults()]
+        ]);
+
+        $user->username = $validated['username'];
+
+        if (!empty($validated['password'])) 
+        {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully.');
     }
 }
