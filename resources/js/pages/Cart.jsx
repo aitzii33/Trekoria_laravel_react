@@ -1,3 +1,13 @@
+import { router } from '@inertiajs/react';
+
+const eliminate = (id) =>
+{
+    router.delete(route('activities.destroy', id), 
+    {
+        data: { activity: id }
+    });
+};
+
 
 function Cart()
 {
@@ -23,7 +33,7 @@ function Cart()
                                     <ul className="list-inline mb-0 font-size-16">
                                         <li className="list-inline-item">
                                             <a href="#" className="text-muted px-1">
-                                                <i className="mdi mdi-trash-can-outline" /> {/*For eliminate*/}
+                                                <i className="mdi mdi-trash-can-outline" onClick={() => eliminate(activity.id)}/> {/*For eliminate*/}
                                             </a>
                                         </li>
                                     </ul>

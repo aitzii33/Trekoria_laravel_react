@@ -14,9 +14,16 @@ class CartController extends Controller
 
     public function eliminateActivity(Request $request)
     {
-        //all the date is required
-        
-        //eliminate a activity for the pay
+        $activities = session('activities', []);
+
+        $activities = array_values(array_filter(
+            $activities,
+            fn ($a) => $a['id'] != $activity
+        ));
+
+        session(['activities' => $activities]);
+
+        return back();
     }
 
     public function __construct()
