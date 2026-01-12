@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/Home', [PageController::class, 'Home'])->name('home');
@@ -30,6 +31,10 @@ Route::post('/LogOut', [LogInController::class, 'logout'])->name('logout');
 
 Route::get('/ForgotPass', [ForgotController::class, 'form'])->name('forgot');
 Route::post('/SendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.perform');
+
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 Route::get('/Register', [RegisterController::class, 'form'])->name('register');
@@ -57,4 +62,3 @@ Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name(
 
 Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
-

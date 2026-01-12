@@ -20,6 +20,11 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'message' => 'required|string',
+        ],
+        [
+            'name.required' => 'Plase, enter your name',
+            'email.required' => 'The email is obligatori',
+            'message.required' => 'Wirte a message between 20 and 120 characters',
         ]);
 
         Mail::to('agonzalezgo25dw@ikzubirimanteo.com')->send(new ReciveContact( $request->name, $request->email, $request->message));

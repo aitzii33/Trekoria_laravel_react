@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerPolicies();
+        //$this->registerPolicies();
 
         //for the authoritazion??
         Gate::define('access-admin', function ($user) 

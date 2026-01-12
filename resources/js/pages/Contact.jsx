@@ -9,26 +9,22 @@ import { usePage } from '@inertiajs/inertia-react'
 
 function ContactUs()
 {
-    const { status: serverStatus } = usePage().props
-
-    const [status, setStatus] = useState('')
-
-
-    const { flash } = usePage().props 
+    const { status: serverStatus } = usePage().props;
+    const [status, setStatus] = useState('');
+    const { flash } = usePage().props ;
     const form = useForm({ name: '', email: '', message: '' });
 
 
-    useEffect(() => {
-        if (flash?.status) {
-        const timer = setTimeout(() => {}, 5000)  
-        return () => clearTimeout(timer)
-        }
-    }, [flash?.status])
+    const handleSubmit = (e) => 
+    {
+        e.preventDefault();
+        Inertia.post('/contact/send', form); 
+    };
 
-    const submit = (e) => {
-        e.preventDefault()
-        form.post('/contact')  
-    }
+    const handleChange = (e) => 
+    {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
 
 
     const validateEmail = (value) => 
@@ -65,11 +61,6 @@ function ContactUs()
     const sendEmail = (e) => 
     {
         e.preventDefault();
-
-        const form = e.target;
-        const emailValue = form.email.value;
-        const messageValue = form.message.value;
-        const nameValue = form.name.value;
 
         const emailValid = validateEmail(emailValue);
         const messageValid = validateMessage(messageValue);
@@ -109,22 +100,24 @@ function ContactUs()
                 </div>
             </section>
 
-            <form id="contact-form" onSubmit={sendEmail} className="p-4 border rounded shadow-sm bg-white">
+            <form id="contact-form" onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
+                {flash.status && <p style={{ color: 'green' }}>{flash.status}</p>}
+
                 <h2 className="text-center mb-4">Contact us</h2>
 
                 <div className="mb-3">
                     <label className="form-label">Name</label>
-                    <input type="text" id="name" name="name" className="form-control" required/>
+                    <input type="text" id="name" name="name" className="form-control" value={form.name} onChange={handleChange} required/>
                 </div>
 
                 <div className="mb-3">
                     <label className="form-label">Email address</label>
-                    <input type="email" id="email" name="email" className="form-control" onBlur={(e) => validateEmail(e.target.value)} required/>
+                    <input type="email" id="email" name="email" className="form-control" value={form.email} onChange={handleChange} onBlur={(e) => validateEmail(e.target.value)} required/>
                 </div>
 
                 <div className="mb-3">
                     <label className="form-label">Message</label>
-                    <textarea className="form-control" id="message" name="message" rows="4" onBlur={(e) => validateMessage(e.target.value)} required></textarea>
+                    <textarea className="form-control" id="message" name="message" rows="4" value={form.message} onChange={handleChange} onBlur={(e) => validateMessage(e.target.value)} required></textarea>
                 </div>
 
                 <button id="submit-form" type="submit" className="btn btn-primary w-100">Send</button>
