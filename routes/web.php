@@ -38,8 +38,10 @@ Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])-
 
 
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
-Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete');
+Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
 Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify');
+Route::post('/profile/{id}/restore', [ProfileRestoreController::class, 'restore']);
+
 
 
 Route::get('/Cart', [CartController::class, 'form'])->name('cart');

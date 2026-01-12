@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -15,11 +17,18 @@ class ProfileController extends Controller
 
     public function SoftDelete(Request $request)
     {
-        //delete the profile but it can be recover 
+        Auth::user()->delete(); // soft delete
+        return redirect('/')->with('success', 'Profile deleted');
+    }
+
+    public function Restored($id)
+    {
+        User::withTrashed()->findOrFail($id)->restore();
+        return redirect()->back()->with('success', 'Profile restored');
     }
 
     public function Modify(Request $request)
     {
-        //modificationsof the username and password
+        //modifications of the username and password
     }
 }

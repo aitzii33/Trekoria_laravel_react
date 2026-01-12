@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->date('birth_day')->nullable();
             $table->smallInteger('type_user')->unsigned();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
 
