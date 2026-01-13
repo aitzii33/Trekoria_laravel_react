@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('id_place')->unsigned();
+            $table->foreignId('place_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
             $table->string('continent');
             $table->string('imagen')->nullable();
             $table->timestamps();
-
-            $table->foreignId('id_place')->constrained()->onDelete('cascade'); //what the name of the column id
         });
     }
 

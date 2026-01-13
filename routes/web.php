@@ -15,17 +15,17 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
-Route::get('/Home', [PageController::class, 'Home'])->name('home');
-Route::get('/Activities', [PageController::class, 'Activities'])->name('activities');
-Route::get('/About', [PageController::class, 'About'])->name('about');
+Route::get('/home', [PageController::class, 'Home'])->name('home');
+Route::get('/activities', [PageController::class, 'Activities'])->name('activities');
+Route::get('/about', [PageController::class, 'About'])->name('about');
 
 
-Route::get('/ContactUs', [ContactController::class, 'form'])->name('contact');
-Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/contact', [ContactController::class, 'form'])->name('contact');
+Route::post('/contactsend', [ContactController::class, 'send'])->name('contact.send');
 
 
-Route::get('/LogIn', [LogInController::class, 'form'])->name('login');
-Route::post('/logIn', [LogInController::class, 'login'])->name('login.perform');
+Route::get('/login', [LogInController::class, 'form'])->name('login');
+Route::post('/loginprove', [LogInController::class, 'login'])->name('login.perform');
 Route::post('/LogOut', [LogInController::class, 'logout'])->name('logout');
 
 
