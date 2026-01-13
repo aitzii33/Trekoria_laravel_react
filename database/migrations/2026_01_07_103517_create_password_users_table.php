@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('password_users', function (Blueprint $table) {
             $table->id();
-            $table->smallIncrements('id_user');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('user');
             $table->string('password');
             $table->timestamps();

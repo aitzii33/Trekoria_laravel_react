@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('_time_schedules', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('id_activity')->unsigned(); 
+            $table->foreignId('id_activity')->constrained()->cascadeOnDelete();
             $table->string('day_week');
             $table->string('hour');
             $table->timestamps();
-
-            $table->foreignId('id_activity')->constrained()->onDelete('cascade');
         });
     }
 

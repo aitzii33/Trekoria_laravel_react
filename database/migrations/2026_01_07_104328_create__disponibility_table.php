@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('_disponibility', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('id_time')->unsigned(); 
+            $table->foreignId('id_time')->constrained()->cascadeOnDelete();
             $table->integer('total_people');
             $table->integer('reserve_people');
             $table->timestamps();
-
-            $table->foreignId('id_time')->constrained()->onDelete('cascade');
         });
     }
 
