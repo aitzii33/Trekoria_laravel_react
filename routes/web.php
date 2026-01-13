@@ -47,11 +47,6 @@ Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.
 Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
 
-
-Route::get('/Cart', [CartController::class, 'form'])->name('cart');
-Route::delete('/activities/{activity}', [CartController::class, 'eliminateActivity'])->name('activities.destroy');
-
-
 Route::get('/Pay', [PayController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
@@ -60,5 +55,14 @@ Route::get('/Activity/{id?}', [ActivityController::class, 'form'])->name('Activi
 Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.perform');
 
 
-Route::get('dashboard', 'App\Http\Controllers\CartController@dashboard')->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'addActivity'])->name('cart.add');
+    Route::post('/cart/{id}/update', [CartController::class, 'updateQuantity'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
+    Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+});
+
+
+
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');

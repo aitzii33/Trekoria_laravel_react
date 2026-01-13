@@ -33,6 +33,7 @@ function Activities({ activities }) {
                         <Col md={7} className="hero-image">
                             <img src="/images/Donostia1.jpeg" alt="city" />
                         </Col>
+                        
                         <Col md={5} className="hero-search d-flex flex-column justify-content-center">
                             <h2 className="mb-3">When you like to go?</h2>
                             <Form onSubmit={handleSubmit} className="date-form">

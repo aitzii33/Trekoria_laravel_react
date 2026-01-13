@@ -1,0 +1,198 @@
+body {
+  background-color: #dceaf8;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+header,
+footer {
+  background-color: #c8dbf0;
+}
+
+.btn-reserve {
+  display: block;
+  max-width: 200px;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+  border: 1px solid #777;
+  background-color: #ffffff;
+  color: #000;
+  margin: 1rem auto;
+}
+
+.activity-info {
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.activity-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.activity-info .description {
+  font-size: 1rem;
+  color: #333;
+}
+
+.activity-actions .price {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+#carouselExampleAutoplaying {
+  margin: 1.5rem auto 1rem;
+  max-width: 1200px;
+  border-radius: 16px;
+  overflow: hidden;
+  max-height: 900px;
+}
+
+#carouselExampleAutoplaying img {
+  object-fit: cover; 
+  width: 100%;
+}
+
+.col-auto {
+  margin-bottom: 0.75rem;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container input,
+.dropdown .btn.dropdown-toggle {
+  width: 100%;
+  max-width: 320px;
+}
+
+.react-datepicker__input-container input {
+  border-radius: 14px;
+  border: 1px solid #777;
+  padding: 0.5rem 0.75rem;
+}
+
+.dropdown .btn.dropdown-toggle {
+  text-align: left;
+  border-radius: 0;
+  border: 1px solid #777;
+  background-color: #ffffff;
+  color: #000;
+}
+
+.dropdown:first-of-type .btn.dropdown-toggle {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dropdown:last-of-type .btn.dropdown-toggle {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-width: 0;
+}
+
+.col-md-4,
+.col:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5rem 1rem;
+}
+
+.col-md-4 > .col-auto:first-child {
+  background-color: #c8dbf0;
+  padding: 1rem;
+  border-radius: 14px;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .btn-reserve {
+    margin: 1rem 0 1rem auto;
+    width: 200px;
+  }
+
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container input,
+  .dropdown .btn.dropdown-toggle {
+    width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  .activity-info {
+    flex-direction: column;
+  }
+
+
+  .col-md-4, .col:nth-child(2) {
+    align-items: flex-start;
+  }
+}
+
+.activity-info {
+  background-color: #c8dbf0;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.activity-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  align-items: flex-start;
+}
+
+.activity-form .col-auto {
+  margin: 0;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container input,
+.activity-form .dropdown .btn.dropdown-toggle {
+  width: 100%;
+}
+
+.activity-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.btn-reserve {
+  max-width: 200px;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+  border: 1px solid #777;
+  background-color: #ffffff;
+  color: #000;
+}
+
+@media (min-width: 1000px) {
+  .activity-info {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
