@@ -11,7 +11,7 @@ import Button from '../Components/Button'
 import { useNavigate } from "react-router-dom"
 import Header from '../Components/Header_Landing'
 import { useTranslation } from "react-i18next";
-import { router, usePage } from '@inertiajs/react' 
+import { router } from '@inertiajs/react' 
 
 
 
