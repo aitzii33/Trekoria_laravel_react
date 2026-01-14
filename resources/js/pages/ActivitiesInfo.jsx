@@ -55,36 +55,46 @@ function ActivitiesInfo({ activity }) {
                 <Col md={4} className="d-flex flex-column gap-3">
                     <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="dd-MM-yyyy" highlightDates={[new Date()]} placeholderText="Select a date" className="form-control" name="date"/>
 
-                    <div className="dropdown">
-                        <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown">
-                            {selectedHour || "HOURS"}
-                        </button>
-                        <ul className="dropdown-menu">
-                            {activity.hours && activity.hours.length > 0 ? (
-                                activity.hours.map((hour, idx) => (
-                                    <li key={idx}>
-                                        <a className="dropdown-item" href="#" onClick={(e) => { 
-                                            e.preventDefault(); 
-                                            setSelectedHour(hour); 
-                                        }}>
-                                            {hour}
-                                        </a>
-                                    </li>
-                                ))
-                            ) : (
-                                <li><span className="dropdown-item text-muted">No hours available</span></li>
-                            )}
-                        </ul>
-                    </div>
+                    <Dropdown onSelect={(eventKey, event) => setSelectedHour(eventKey)}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Hours
+                        </Dropdown.Toggle>
 
-                    <div className="dropdown">
-                        <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown"> PEOPLE </button>
-                        <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" href="#">1</a></li>
-                            <li><a className="dropdown-item" href="#">2</a></li>
-                            <li><a className="dropdown-item" href="#">3</a></li>
-                        </ul>
-                    </div>
+                        <Dropdown.Menu>
+                            {activity.hours && activity.hours.length > 0 ? 
+                            (
+                                activity.hours.map((hour, idx) => 
+                                (
+                                    <Dropdown.Item key={idx} eventKey={hour}>
+                                    {hour}
+                                    </Dropdown.Item>
+                                ))
+                            ) : 
+                            (
+                                <Dropdown.Item disabled>No hours available</Dropdown.Item>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>
+
+
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            People
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">1</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">2</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">3</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">4</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">5</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">6</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">7</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">8</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">9</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">10</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
             </Row>
 

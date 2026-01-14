@@ -1,5 +1,5 @@
-body{
-  margin-top:20px;
+body {
+  margin-top: 40px;
   background-color: #f1f3f7;
 }
 
@@ -9,7 +9,7 @@ body{
 }
 
 .font-size-18 {
-  font-size: 18px!important;
+  font-size: 18px !important;
 }
 
 .text-truncate {
@@ -19,11 +19,27 @@ body{
 }
 
 a {
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
 
 .w-xl {
-  min-width: 160px;
+  min-width: 80px !important; 
+  max-width: 100px !important;
+}
+
+.form-select-sm {
+  font-size: 0.8rem !important; 
+  padding: 2px 8px !important;
+  height: auto !important;
+}
+
+
+.activity-img {
+  width: 160px !important;      
+  height: auto !important;    
+  display: flex;   
+  margin-left: -20px;
+  margin: 1;  
 }
 
 .card {
@@ -38,4 +54,43 @@ a {
   background-clip: border-box;
   border: 1px solid #eff0f2;
   border-radius: 1rem;
+}
+
+@media (max-width: 768px) {
+  .avatar-lg {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .font-size-18 {
+    font-size: 16px !important;
+  }
+
+  .w-xl {
+    min-width: 120px;
+  }
+
+  .card {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-lg {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  .font-size-18 {
+    font-size: 14px !important;
+  }
+
+  .w-xl {
+    min-width: 100px;
+  }
+
+  .card {
+    margin-bottom: 12px;
+    padding: 10px;
+  }
 }

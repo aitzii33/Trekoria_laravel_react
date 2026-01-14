@@ -1,237 +1,220 @@
-function RegisterPage() 
+import '../../css/Payment.css' 
+import { useForm, useRef } from '@inertiajs/react';
+import { useState } from 'react';
+
+export default function OrderPage() 
 {
-    const form = document.getElementById('checkout-form');
-    const steps = form.querySelectorAll('.form-step');
-    const headers = document.querySelectorAll('.step-item');
-    const progressBar = document.querySelector('.progress-indicator');
-    const notification = document.getElementById('notification');
-    
-    const summaryShippingInfo = document.getElementById('summary-shipping-info');
-    const summaryPaymentInfo = document.getElementById('summary-payment-info');
+    const { data, setData, post, processing, errors } = useForm({ full_name: '', dni: '', address: '', city: '', zip_code: '', card_number: '', card_name: '', expiry: '', cvv: '' });
 
-    let currentStep = 0;
+    const formRef = useRef(null);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [notification, setNotification] = useState('');
 
-    function showStep(stepIndex) 
+    const steps = ['Shipping', 'Payment', 'Review'];
+
+    const nextStep = () => 
     {
-        steps.forEach((step, index) => 
+        if (currentStep === 0) 
         {
-            step.classList.remove('active');
-
-            if (index === stepIndex) 
+            if (!data.full_name || !data.address) 
             {
-                step.classList.add('active');
-            }
-        });
-
-        headers.forEach((header, index) => 
-        {
-            header.classList.remove('active', 'completed');
-
-            if (index < stepIndex) 
-            {
-                header.classList.add('completed');
-            } 
-            else if (index === stepIndex) 
-            {
-                header.classList.add('active');
-            }
-        });
-
-        const progress = (stepIndex / (steps.length - 1)) * 100;
-        progressBar.style.width = '${progress}%';
-    }
-
-    function showNotification(message) 
-    {
-        notification.textContent = message;
-        notification.classList.add('show');
-
-        setTimeout(() => {notification.classList.remove('show');}, 3000);
-    }
-
-    function updateReviewDetails() 
-    {
-        const fullName = document.getElementById('fullName').value;
-        const address = document.getElementById('address').value;
-        const city = document.getElementById('city').value;
-        const zipCode = document.getElementById('zipCode').value;
-
-        const cardNumber = document.getElementById('cardNumber').value;
-        
-        const reviewShipping = document.getElementById('review-shipping');
-        reviewShipping.innerHTML = ' ${fullName}<br> ${address}<br> ${city}, ${zipCode}';
-        summaryShippingInfo.textContent = '${fullName}, ${address}, ${city}, ${zipCode}';
-
-        const reviewPayment = document.getElementById('review-payment');
-        const lastFourDigits = cardNumber.slice(-4);
-        reviewPayment.textContent = 'Card ending in **** ${lastFourDigits';
-        summaryPaymentInfo.textContent = 'Card ending in **** ${lastFourDigits}';
-    }
-
-    form.addEventListener('click', (e) => 
-    {
-        if (e.target.matches('.next-btn')) 
-        {
-            if (currentStep === 0) 
-            {
-                const fullName = document.getElementById('fullName').value;
-                const address = document.getElementById('address').value;
-
-                if (!fullName || !address) 
-                {
-                    showNotification('Please fill out all shipping fields.');
-                    return;
-                }
-            }
-            
-            if (currentStep < steps.length - 1) 
-            {
-                currentStep++;
-
-                if (currentStep === 2) 
-                {
-                    updateReviewDetails();
-                }
-
-                showStep(currentStep);
+                showNotification('Please fill out all required shipping fields.');
+                return;
             }
         }
-        else if (e.target.matches('.prev-btn')) 
+        if (currentStep < 2) 
         {
-            if (currentStep > 0) 
-            {
-                currentStep--;
-                showStep(currentStep);
-            }
+            setCurrentStep(currentStep + 1);
         }
-    });
+    };
 
-    form.addEventListener('submit', (e) => 
+    const prevStep = () => 
+    {
+        if (currentStep > 0) 
+        {
+            setCurrentStep(currentStep - 1);
+        }
+    };
+
+    const showNotification = (message) => 
+    {
+        setNotification(message);
+        setTimeout(() => setNotification(''), 3000);
+    };
+
+    const handleSubmit = (e) => 
     {
         e.preventDefault();
-        showNotification('Purchase Complete!');
-
-        setTimeout(() => 
+        
+        if (currentStep === 2) 
         {
-            location.reload();
-        }, 2000);
-    });
-
-    document.addEventListener('DOMContentLoaded', () => 
-    {
-        showStep(0);
-    });
-    //#endregion
-
+            post(route('checkout.store'), 
+            {
+                onSuccess: () => 
+                {
+                    showNotification('Purchase completed successfully!');
+                    setTimeout(() => 
+                    {
+                        window.location.href = '/Home';
+                    }, 2000);
+                },
+                onError: (errors) => 
+                {
+                    showNotification('Please check the form for errors.');
+                }
+            });
+        }
+    };
 
     return (
-        <>
-            <div class="form-panel">
-                <h1 class="h3 fw-bold mb-4">Complete your purchase</h1>
-                
-                <div class="step-progress-bar">
-                    <div class="progress-indicator" style="width: 0%;"></div>
+        <div className="checkout-page-wrapper">
+            <div className="checkout-container">
+                <div className="form-panel">
+                    <h1 className="h3 fw-bold mb-4">Complete your purchase</h1>
+                    
+                    <div className="step-progress-bar">
+                        <div className="progress-indicator" style={{ width: `${(currentStep / 2) * 100}%` }}/>
+                    </div>
+
+                    <div className="step-header">
+                        {steps.map((step, index) => (
+                            <div key={index} className={`step-item ${index <= currentStep ? 'active completed' : ''} ${index === currentStep ? 'active' : ''}`}>
+                                <div className="step-number">{index + 1}</div>
+                                <div className="step-title d-none d-md-block">{step}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <form id="checkout-form" ref={formRef} onSubmit={handleSubmit}>
+                        <div className={`form-step ${currentStep === 0 ? 'active' : ''}`}>
+                            <h2 className="h5 fw-bold mb-4">Shipping Information</h2>
+                            <div className="mb-3">
+                                <label htmlFor="fullName" className="form-label">Full Name</label>
+                                <input type="text" className={`form-control ${errors.full_name ? 'is-invalid' : ''}`} id="fullName" value={data.full_name} onChange={(e) => setData('full_name', e.target.value)}/>
+                                {errors.full_name && <div className="invalid-feedback">{errors.full_name}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="dni" className="form-label">DNI</label>
+                                <input type="text" className={`form-control ${errors.dni ? 'is-invalid' : ''}`} id="dni" value={data.dni} onChange={(e) => setData('dni', e.target.value)}/>
+                                {errors.dni && <div className="invalid-feedback">{errors.dni}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="address" className="form-label">Address</label>
+                                <input type="text" className={`form-control ${errors.address ? 'is-invalid' : ''}`} id="address" value={data.address} onChange={(e) => setData('address', e.target.value)}/>
+                                {errors.address && <div className="invalid-feedback">{errors.address}</div>}
+                            </div>
+                            <div className="row g-3">
+                                <div className="col-md-7">
+                                    <label htmlFor="city" className="form-label">City</label>
+                                    <input type="text" className={`form-control ${errors.city ? 'is-invalid' : ''}`} id="city" value={data.city} onChange={(e) => setData('city', e.target.value)}/>
+                                    {errors.city && <div className="invalid-feedback">{errors.city}</div>}
+                                </div>
+                                <div className="col-md-5">
+                                    <label htmlFor="zipCode" className="form-label">Zip Code</label>
+                                    <input type="text" className={`form-control ${errors.zip_code ? 'is-invalid' : ''}`} id="zipCode" value={data.zip_code} onChange={(e) => setData('zip_code', e.target.value)}/>
+                                    {errors.zip_code && <div className="invalid-feedback">{errors.zip_code}</div>}
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-end mt-4">
+                                <button type="button" className="next-btn btn btn-light" onClick={nextStep} disabled={processing}>
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={`form-step ${currentStep === 1 ? 'active' : ''}`}>
+                            <h2 className="h5 fw-bold mb-4">Payment Details</h2>
+                            <div className="mb-3">
+                                <label htmlFor="cardNumber" className="form-label">Card number</label>
+                                <input type="text" className={`form-control ${errors.card_number ? 'is-invalid' : ''}`} id="cardNumber" value={data.card_number} onChange={(e) => setData('card_number', e.target.value.replace(/\s/g, ''))} placeholder="xxxx xxxx xxxx xxxx" maxLength="19"/>
+                                {errors.card_number && <div className="invalid-feedback">{errors.card_number}</div>}
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="cardName" className="form-label">Card name</label>
+                                <input type="text" className={`form-control ${errors.card_name ? 'is-invalid' : ''}`} id="cardName" value={data.card_name} onChange={(e) => setData('card_name', e.target.value)}/>
+                                {errors.card_name && <div className="invalid-feedback">{errors.card_name}</div>}
+                            </div>
+                            <div className="row g-3">
+                                <div className="col-6">
+                                    <label htmlFor="expiry" className="form-label">Expiry date</label>
+                                    <input type="text" className={`form-control ${errors.expiry ? 'is-invalid' : ''}`} id="expiry" value={data.expiry} onChange={(e) => setData('expiry', e.target.value)} placeholder="MM/YY" maxLength="5" />
+                                    {errors.expiry && <div className="invalid-feedback">{errors.expiry}</div>}
+                                </div>
+                                <div className="col-6">
+                                    <label htmlFor="cvv" className="form-label">CVV</label>
+                                    <input type="text" className={`form-control ${errors.cvv ? 'is-invalid' : ''}`} id="cvv" value={data.cvv} onChange={(e) => setData('cvv', e.target.value.replace(/\D/g, ''))} placeholder="xxx" maxLength="4" />
+                                    {errors.cvv && <div className="invalid-feedback">{errors.cvv}</div>}
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-between mt-4">
+                                <button type="button" className="prev-btn btn btn-light" onClick={prevStep} disabled={processing}>
+                                    Previous
+                                </button>
+                                <button type="button" className="next-btn btn btn-light" onClick={nextStep} disabled={processing}>
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={`form-step ${currentStep === 2 ? 'active' : ''}`}>
+                            <h2 className="h5 fw-bold mb-4">Order Review</h2>
+                            <div id="review-shipping" className="mb-4 p-3 bg-light rounded">
+                                <strong>Shipping:</strong><br />
+                                {data.full_name}<br />
+                                {data.dni}<br />
+                                {data.address}<br />
+                                {data.city}, {data.zip_code}
+                            </div>
+
+                            <div id="review-payment" className="mb-4 p-3 bg-light rounded">
+                                <strong>Payment:</strong><br />
+                                Card ending in **** {data.card_number.slice(-4) || '0000'}<br />
+                                Expires {data.expiry}
+                            </div>
+
+                            <div className="d-flex justify-content-between mt-4">
+                                <button type="button" className="prev-btn btn btn-light" onClick={prevStep} disabled={processing}>
+                                    Previous
+                                </button>
+
+                                <button type="submit" className="btn btn-success" disabled={processing}>
+                                    {processing ? 'Processing...' : 'Complete Purchase'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {notification && (
+                            <div className="notification-message show">
+                                {notification}
+                            </div>
+                        )}
+                    </form>
                 </div>
 
-                #region header
-                    <div class="step-header">
-                        <div class="step-item active" id="step1-header">
-                            <div class="step-number">1</div>
-                            <div class="step-title d-none d-md-block">Shipping</div>
+                <div className="summary-panel">
+                    <h5 className="fw-bold mb-4">Order Summary</h5>
+                    <div id="summary-content">
+                        <div className="summary-item">
+                            <h6>Shipping Information</h6>
+                            <p id="summary-shipping-info">
+                                {data.full_name || 'Not entered yet'}
+                            </p>
                         </div>
-                        <div class="step-item" id="step2-header">
-                            <div class="step-number">2</div>
-                            <div class="step-title d-none d-md-block">Payment</div>
+
+                        <div className="summary-item mt-3">
+                            <h6>Payment Details</h6>
+                            <p id="summary-payment-info">
+                                Card ending in **** {data.card_number.slice(-4) || '0000'}
+                            </p>
                         </div>
-                        <div class="step-item" id="step3-header">
-                            <div class="step-number">3</div>
-                            <div class="step-title d-none d-md-block">Review</div>
+
+                        <div className="summary-total d-flex justify-content-between">
+                            <span>Total</span>
+                            <span>data.price</span> 
                         </div>
                     </div>
-                #endregion
-
-                <form id="checkout-form">
-                    #region Shipping part
-                        <div class="form-step active" id="step1">
-                            <h2 class="h5 fw-bold mb-4">Shipping Information</h2>
-                            <div class="mb-3">
-                                <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fullName" name="fullName"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" name="address"/>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-7">
-                                    <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city"/>
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="zipCode" class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="zipCode" name="zipCode"/>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-end mt-4">
-                                <button type="button" class="next-btn btn btn-primary">Next</button>
-                            </div>
-                        </div>
-                    #endregion
-
-
-                    #region Payment part
-                        <div class="form-step" id="step2">
-                            <h2 class="h5 fw-bold mb-4">Payment Details</h2>
-                            <div class="mb-3">
-                                <label for="cardNumber" class="form-label">Card number</label>
-                                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="xxxx xxxx xxxx xxxx"/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="cardName" class="form-label">Card name</label>
-                                <input type="text" class="form-control" id="cardName" name="cardName"/>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-6">
-                                    <label for="expiry" class="form-label">Expiry date</label>
-                                    <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YY"/>
-                                </div>
-                                <div class="col-6">
-                                    <label for="cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="xxx"/>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="button" class="prev-btn btn btn-light">Previous</button>
-                                <button type="button" class="next-btn btn btn-primary">Next</button>
-                            </div>
-                        </div>
-                    #endregion
-
-                    #region Review part
-                        <div class="summary-panel d-none d-lg-block">
-                            <h5 class="fw-bold mb-4">Order Summary</h5>
-                            <div id="summary-content">
-                                <div class="summary-item">
-                                    <h6>Shipping Information</h6>
-                                    <p id="summary-shipping-info">Not entered yet.</p>
-                                </div>
-                                <div class="summary-item mt-3">
-                                    <h6>Payment Details</h6>
-                                    <p id="summary-payment-info">Not entered yet.</p>
-                                </div>
-                                <div class="summary-total d-flex justify-content-between">
-                                    <span>Total</span>
-                                    <span></span> 
-                                </div>
-                            </div>
-                        </div>
-                    #endregion
-
-                    <div id="notification" class="notification-message"></div>
-                </form>
+                </div>
             </div>
-        </>
+        </div>
     );
 }
-
-export default RegisterPage;

@@ -21,6 +21,16 @@ class User extends Authenticatable
         return $this->belongsTo(TypeUser::class, 'type_user', 'id_typeUser');
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+    
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
 
     protected $hidden = [
         'password',
