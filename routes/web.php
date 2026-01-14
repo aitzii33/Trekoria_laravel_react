@@ -55,6 +55,10 @@ Route::get('/Activity/{id?}', [ActivityController::class, 'form'])->name('Activi
 Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.perform');
 
 
+Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'addActivity'])->name('cart.add');
