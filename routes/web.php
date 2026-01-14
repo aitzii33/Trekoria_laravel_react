@@ -64,5 +64,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::middleware(['auth', 'can:admin'])->group(function () 
+{
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
 
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
