@@ -1,4 +1,4 @@
-import '../assets/CSS/Contact.css'
+import '../assets/css/Contact.css'
 
 function ForgotPass()
 {

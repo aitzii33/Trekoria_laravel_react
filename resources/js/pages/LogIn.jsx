@@ -1,7 +1,6 @@
 import logo from '../assets/img/logo.png'
 import "../assets/CSS/LogIn.css"
 import { useState } from 'react'
-import { usePage } from '@inertiajs/inertia-react'
 import Header from '../Components/Header.jsx'
 import Footer from '../Components/Footer.jsx'
 import { router, usePage } from '@inertiajs/react' 

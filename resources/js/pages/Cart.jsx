@@ -1,11 +1,8 @@
-import { router, usePage, useForm } from '@inertiajs/react';
-import { useState } from 'react';
-import Header from '../Components/Header';
-import BoatImg from "../assets/img/Boat.avif";
-import '../assets/CSS/Cart.css';
-
-import { router } from '@inertiajs/react';
-import { useState } from 'react';
+import { router, usePage } from '@inertiajs/react'
+import { useState } from 'react'
+import Header from '../Components/Header'
+import BoatImg from "../assets/img/Boat.avif"
+import '../assets/CSS/Cart.css'
 
 
 function Cart() {

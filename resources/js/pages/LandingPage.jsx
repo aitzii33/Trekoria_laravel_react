@@ -1,4 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "react-datepicker/dist/react-datepicker.css"
+import '../assets/css/InitialPage.css'
+
 import img1 from '../assets/img/LandingImg1.png'
 import img2 from '../assets/img/LandingImg2.jpg'
 import img3 from '../assets/img/LandingImg3.jpg'
@@ -6,18 +9,15 @@ import img4 from '../assets/img/NewYork.jpg'
 import girlImg from '../assets/img/Girl.avif'
 import BaloonImg from '../assets/img/Baloon.jpg'
 import BoatImg from '../assets/img/Boat.avif'
-import '../assets/CSS/InitialPage.css'
-import Button from '../Components/Button'
-import { useNavigate } from "react-router-dom"
-import Header from '../Components/Header_Landing'
-import { useTranslation } from "react-i18next";
-import { router } from '@inertiajs/react' 
 
+import Button from '../Components/Button'
+import Header from '../Components/Header_Landing'
+import { useTranslation } from "react-i18next"
+import { router } from '@inertiajs/react'
 
 
 export default function Landing() 
 {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   
   const routeChange = () => 

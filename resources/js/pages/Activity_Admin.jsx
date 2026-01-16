@@ -1,18 +1,10 @@
-import Footer from "../Components/Footer"
-import Header from "../Components/Header_Admin"
 
-
-function Museum()
+function admin_Activity()
 {
     return(
-        <div>
-            <Header/>
-
-            <div>
-
-            </div>
-
-            <Footer/>
-        </div>
+        <>
+        </>
     );
 }
+
+export default admin_Activity;

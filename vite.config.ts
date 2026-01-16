@@ -13,4 +13,9 @@ export default defineConfig({
     server: {
         host: 'localhost',
     },
+    build: {
+        rollupOptions: {
+            external: ['reactstrap']
+        }
+    },
 })
