@@ -6,29 +6,18 @@ import img_youtube from '../img/youtubeLogo.png'
 
 import '../../css/Footer.css'
 
-import { useNavigate } from "react-router-dom"
-
 
 function Footer() 
-{
-    const navigate = useNavigate();
-  
+{  
     const routeContactUs = () => 
     {
-        const path = '/ContactUs';
-        navigate(path);
+        router.visit(route('contact'));
     };
 
     const routeAboutUs = () =>
     {
-        const path = '/About';
-        navigate(path);
+        router.visit(route('about'));
     }
-    const routeLanding = () => 
-    {
-        const path = '/InitialPage';
-        navigate(path);
-    };
 
 
     return (
@@ -76,7 +65,7 @@ function Footer()
                             </div>
                         </div>
 
-                        <div className="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                        <div className="col-md-5 col-lg-4 ml-lg-0 d-flex justify-content-center justify-content-md-end gap-2">
                             <img className="img rounded-circle icono" src={img_insta} alt="instagram"/>
                             <img className="img rounded-circle icono" src={img_tiktok} alt="tiktok"/>
                             <img className="img rounded-circle icono" src={img_twitter} alt="twitter"/>

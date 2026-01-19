@@ -52,7 +52,7 @@ Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perf
 
 
 Route::get('/Activity/{id?}', [ActivityController::class, 'form'])->name('Activity');
-Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.perform');
+Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.details');
 
 
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');

@@ -3,7 +3,6 @@ import home from '../img/home.png'
 
 import '../../css/Header.css'
 
-import { useNavigate } from "react-router-dom"
 import { router } from '@inertiajs/react' 
 
 import LanguageSelector from '../components/LanguageSelector'
@@ -11,9 +10,7 @@ import LanguageSelector from '../components/LanguageSelector'
 
 
 export default function Head({currentLanguage, setLanguage}) 
-{
-  const navigate = useNavigate();
-  
+{  
   const routeInitial = () => 
   {
     router.visit(route('home'));
@@ -47,13 +44,14 @@ export default function Head({currentLanguage, setLanguage})
 
         {/* Navigation */}
         <div className="nav-links"></div>
+
         {/* Navigation */}
         <div className="nav-links">
             <img src={home} alt="Home" style={{ width: "20px", height: "20px" }} className="me-4 nav-ico" onClick={routeInitial}/>
             <a onClick={routeAboutUs} className="nav-link me-4">About Us</a>
             <a onClick={routeContact} className="nav-link me-4">Contact</a>
-  
         </div>
+        
         {/* Language Selector */}
           <div className="me-4">
               <LanguageSelector currentLanguage={currentLanguage} setLanguage={setLanguage} />

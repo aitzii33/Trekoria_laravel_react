@@ -65,34 +65,17 @@ export default function Landing()
       <section className="gallery-section py-5">
         <div className="container">
           <div className="row g-4">
-
             <div className="col-lg-3 col-md-6">
-              <img
-                src={img1}
-                className="w-100 rounded shadow"
-                alt="New York City"
-              />
+              <img src={img1} className="w-100 rounded shadow" alt="New York City"/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img
-                src={img2}
-                className="w-100 rounded shadow"
-                alt="Eiffel Tower, Paris"
-              />
+              <img src={img2} className="w-100 rounded shadow" alt="Eiffel Tower, Paris"/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img
-                src={img3}
-                className="w-100 rounded shadow"
-                alt="Tokyo cityscape"
-              />
+              <img src={img3} className="w-100 rounded shadow" alt="Tokyo cityscape"/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img
-                src={img4}
-                className="w-100 rounded shadow"
-                alt="Paris city view"
-              />
+              <img src={img4} className="w-100 rounded shadow" alt="Paris city view" />
             </div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 
 import logo from '../img/logo.png'
-import lupa from '../img/lupa.png'
 import userImg from '../img/DefaultUserImage.png'
 import home from '../img/home.png'
 
@@ -9,14 +8,15 @@ import '../../css/Header.css'
 
 import LanguageSelector from '../components/LanguageSelector'
 
-import { useNavigate } from "react-router-dom"
-import { router } from '@inertiajs/react' 
+import { router,usePage } from '@inertiajs/react' 
 import { useState } from "react"
+import { Form, Button, InputGroup } from "react-bootstrap"
+
+
 
 function Head({ isLoggedIn, currentLanguage, setLanguage}) 
 {
     //#region navigation part
-    const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
 
     const AccessButton = () => 
@@ -33,12 +33,12 @@ function Head({ isLoggedIn, currentLanguage, setLanguage})
 
     const routeInitial = () => 
     {
-        router.visit(route('home'));  
+        router.visit(route('/home'));  
     }
 
     const routeAboutUs = () => 
     {
-        router.visit(route('about'));  
+        return Inertia::render('/about', 'About');
     }
 
     const routeContact = () =>
@@ -62,6 +62,17 @@ function Head({ isLoggedIn, currentLanguage, setLanguage})
     }
     //#endregion
 
+    const { url } = usePage();
+    const showSearchForm = ["/Activity", "/Activity.details"].includes(url);
+
+
+    const handleSearch = (e) => 
+    {
+        e.preventDefault();
+        const query = e.target.search.value;
+        console.log("Search:", query);
+        router.visit(route('Activities'));
+    };
 
 
     return (
@@ -74,16 +85,20 @@ function Head({ isLoggedIn, currentLanguage, setLanguage})
 
                 {/* Spacer */}
                 <div className="header-spacer"></div>
-
-                <div className="search-input">
-                    <input type='text' placeholder='Where do you like to go?' id='id_place' style={{ width:'350px'}} />
-                    <img src={lupa} alt="search" style={{ height:'60px', width: '60px' }}/>
-                </div>
+                {showSearchForm && (
+                    <Form onSubmit={handleSearch}>
+                        <InputGroup>
+                            <Form.Control type="text" name="search" placeholder={("Where do you like to go?")} style={{ width: "500px",}}/>
+                            <Button variant="primary" type="submit">{("Search")}</Button>
+                        </InputGroup>
+                    </Form>
+                )}
 
                 <div className="header-spacer"></div>
 
                 <div className="nav-links">
                     <img src={home} alt="Home" style={{ width: "20px", height: "20px" }} className="me-4 nav-ico" onClick={routeInitial}/>
+                    <Link href="/about">Ir a About</Link>
                     <a onClick={routeAboutUs} className="nav-link me-4">About Us</a>
                     <a onClick={routeContact} className="nav-link me-4">Contact</a>
                 </div>
