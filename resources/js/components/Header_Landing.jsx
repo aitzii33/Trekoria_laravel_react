@@ -1,10 +1,13 @@
-import logo from '../assets/logo.svg';
-import userImg from '../assets/img/DefaultUserImage.png';
-import home from '../assets/img/home.png';
-import '../assets/CSS/Header.css';
+import logo from '../img/logo.png'
+import home from '../img/home.png'
+
+import '../../css/Header.css'
+
 import { useNavigate } from "react-router-dom"
-import { router, usePage } from '@inertiajs/react' 
-import LanguageSelector from '../Components/LanguageSelector';
+import { router } from '@inertiajs/react' 
+
+import LanguageSelector from '../components/LanguageSelector'
+
 
 
 export default function Head({currentLanguage, setLanguage}) 

@@ -1,14 +1,17 @@
 
-import logo from '../assets/logo.svg'
-import lupa from '../assets/img/lupa.png'
-import userImg from '../assets/img/DefaultUserImage.png'
-import home from '../assets/img/home.png'
-import '../assets/CSS/Header.css'
+import logo from '../img/logo.png'
+import lupa from '../img/lupa.png'
+import userImg from '../img/DefaultUserImage.png'
+import home from '../img/home.png'
+
+import '../../css/Header.css'
+import '../../css/Header.css'
+
+import LanguageSelector from '../components/LanguageSelector'
+
 import { useNavigate } from "react-router-dom"
-import { router, usePage } from '@inertiajs/react' 
+import { router } from '@inertiajs/react' 
 import { useState } from "react"
-import '../assets/CSS/Header.css';
-import LanguageSelector from '../Components/LanguageSelector';
 
 function Head({ isLoggedIn, currentLanguage, setLanguage}) 
 {

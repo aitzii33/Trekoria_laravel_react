@@ -1,10 +1,11 @@
-//imagenes
-import img_insta from '../assets/img/instagramLogo.jpeg'
-import img_tiktok from '../assets/img/TiktokLogo.png'
-import img_twitter from '../assets/img/twitterLogo.png'
-import img_youtube from '../assets/img/youtubeLogo.png'
+//images
+import img_insta from '../img/instagramLogo.jpeg'
+import img_tiktok from '../img/TiktokLogo.png'
+import img_twitter from '../img/twitterLogo.png'
+import img_youtube from '../img/youtubeLogo.png'
 
-import '../assets/CSS/Footer.css'
+import '../../css/Footer.css'
+
 import { useNavigate } from "react-router-dom"
 
 

@@ -1,12 +1,18 @@
-import '../assets/css/Contact.css'
-import { ProveEmail, ProveMessage } from '../Funtions'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
-import error from '../components/alert-error'
-import { useState } from 'react'
-import { router, usePage, useForm } from '@inertiajs/react'
+import '../../css/Contact.css'
 
-function ContactUs() {
+import { ProveEmail, ProveMessage } from '../Funtions'
+import { useState } from 'react'
+import { usePage, useForm } from '@inertiajs/react'
+
+import error from '../components/alert-error'
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+
+
+function ContactUs() 
+{
     const { flash, status: serverStatus } = usePage().props;
     const [status, setStatus] = useState('');
 

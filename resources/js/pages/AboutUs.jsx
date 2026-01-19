@@ -1,9 +1,14 @@
-import Header from '../components/Header';
-import '../assets/css/About.css';
-import team1 from '../assets/img/team1.png';
-import team2 from '../assets/img/team2.png';
-import Footer from '../Components/Footer';
-export default function AboutUs(){
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+import '../../css/About.css'
+
+import team1 from '../img/team1.png'
+import team2 from '../img/team2.png'
+
+
+export default function AboutUs()
+{
     return(
       <>
       
