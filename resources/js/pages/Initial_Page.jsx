@@ -1,26 +1,25 @@
-import { useState } from "react";
-import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap"
+import { useTranslation } from "react-i18next"
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../css/Home.css";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../../css/Home.css"
 
 // Images
-import LandingImg1 from "../img/LandingImg1.png";
-import LandingImg2 from "../img/LandingImg2.jpg";
-import LandingImg3 from "../img/LandingImg3.jpg";
-import lupa from "../img/lupa.png";
-import Baloon from "../img/Baloon.jpg";
-import TokyoImg from "../img/Tokyo.webp";
-import Baloon2 from "../img/Baloon2.webp";
+import LandingImg1 from "../img/LandingImg1.png"
+import LandingImg2 from "../img/LandingImg2.jpg"
+import LandingImg3 from "../img/LandingImg3.jpg"
+import lupa from "../img/lupa.png"
+import Baloon from "../img/Baloon.jpg"
+import TokyoImg from "../img/Tokyo.webp"
+import Baloon2 from "../img/Baloon2.webp"
 
 // Data
-import countriesData from "../data/contries.json";
-import countryToContinent from "../data/Continent.json";
+import countriesData from "../data/contries.json"
+import countryToContinent from "../data/Continent.json"
 
 // Popular cities with images
 const popularCities = [
@@ -32,7 +31,6 @@ const popularCities = [
 
 function InitialPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [showContinents, setShowContinents] = useState(false);
   const [hoveredContinent, setHoveredContinent] = useState(null);
@@ -55,7 +53,7 @@ function InitialPage() {
     e.preventDefault();
     const query = e.target.search.value;
     console.log("Search:", query);
-    navigate('/Activities'); // Example navigation
+    router.visit(route('Activities'));
   };
 
   return (
@@ -78,9 +76,6 @@ function InitialPage() {
           <p className="hero-subtitle">{t("Search from thousands of options")}</p>
           <Form onSubmit={handleSearch}>
             <InputGroup>
-              <InputGroup.Text>
-                <img src={lupa} alt={t("search")} style={{ width: "20px" }} />
-              </InputGroup.Text>
               <Form.Control type="text" name="search" placeholder={t("Search...")} />
               <Button variant="primary" type="submit">{t("Search")}</Button>
             </InputGroup>

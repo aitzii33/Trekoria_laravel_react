@@ -10,12 +10,27 @@ class PageController extends Controller
 {
     public function Landing()
     {
-        return Inertia::render('LandingPage');
+        return Inertia::render('LandingPage', [
+            'auth' => [
+                'user' => auth()->user() ? [
+                    'id' => auth()->user()->id,
+                    'name' => auth()->user()->name,
+                ] : null
+            ]
+        ]);
     }
 
     public function Home()
     {
-        return Inertia::render('Initial_Page');
+        return Inertia::render('Initial_Page', [
+            'auth' => [
+                'user' => auth()->user() ? [
+                    'id' => auth()->user()->id,
+                    'name' => auth()->user()->name,
+                ] : null
+            ]
+        ]);
+
     }
 
     public function Activities()
