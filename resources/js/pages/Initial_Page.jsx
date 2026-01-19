@@ -1,25 +1,26 @@
-import React, { useState } from "react";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import { useState } from "react";
 import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../assets/CSS/Home.css";
+import "../../css/Home.css";
 
 // Images
-import LandingImg1 from "../assets/img/LandingImg1.png";
-import LandingImg2 from "../assets/img/LandingImg2.jpg";
-import LandingImg3 from "../assets/img/LandingImg3.jpg";
-import lupa from "../assets/img/lupa.png";
-import Baloon from "../assets/img/Baloon.jpg";
-import TokyoImg from "../assets/img/Tokyo.webp";
-import Baloon2 from "../assets/img/Baloon2.webp";
+import LandingImg1 from "../img/LandingImg1.png";
+import LandingImg2 from "../img/LandingImg2.jpg";
+import LandingImg3 from "../img/LandingImg3.jpg";
+import lupa from "../img/lupa.png";
+import Baloon from "../img/Baloon.jpg";
+import TokyoImg from "../img/Tokyo.webp";
+import Baloon2 from "../img/Baloon2.webp";
 
 // Data
-import countriesData from "../assets/DATA/contries.json";
-import countryToContinent from "../assets/DATA/Continent.json";
+import countriesData from "../data/contries.json";
+import countryToContinent from "../data/Continent.json";
 
 // Popular cities with images
 const popularCities = [

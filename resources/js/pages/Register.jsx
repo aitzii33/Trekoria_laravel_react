@@ -1,9 +1,11 @@
-import { useForm, usePage,router } from '@inertiajs/react' 
-import { useEffect } from 'react'
-import Header from '../Components/Header.jsx'
-import Footer from '../Components/Footer.jsx'
-import logo from '../assets/img/logo.png'
-import '../assets/CSS/Register.css'
+import { useForm, usePage } from '@inertiajs/react' 
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+import logo from '../img/logo.png'
+
+import '../../css/Register.css'
 
 function RegisterPage() 
 {
@@ -20,7 +22,8 @@ function RegisterPage()
   })
 
 
-  const Verify = (e) => { 
+  const Verify = (e) => 
+  { 
     e.preventDefault(); 
     form.post(route('register.store'));
   };

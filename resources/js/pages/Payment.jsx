@@ -1,6 +1,7 @@
 import '../../css/Payment.css' 
-import { useForm, useRef } from '@inertiajs/react';
-import { useState } from 'react';
+
+import { useForm } from '@inertiajs/react';
+import { useState, useRef } from 'react';
 
 export default function OrderPage() 
 {

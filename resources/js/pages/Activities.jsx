@@ -1,13 +1,16 @@
+import "bootstrap/dist/css/bootstrap.min.css"
+import "react-datepicker/dist/react-datepicker.css"
+
+import '../../css/DatePicker.css'
+import '../../css/Activities.css'
+
+import Header from '../components/Header'
+import Footer from "../components/Footer"
+
+import { router } from '@inertiajs/react'
 import { useState } from "react"
 import { Container, Row, Button, Form, Col } from "reactstrap"
 import DatePicker from "react-datepicker"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "react-datepicker/dist/react-datepicker.css"
-import "../assets/CSS/DatePicker.css"
-import "../assets/CSS/Activities.css"
-import Header from "../Components/Header"
-import Footer from "../Components/Footer"
-import { router } from '@inertiajs/react'
 
 function Activities({ activities }) {
     const [selectedDate, setSelectedDate] = useState(null);

@@ -1,11 +1,14 @@
-import logo from '../assets/img/logo.png'
-import "../assets/CSS/LogIn.css"
+import logo from '../img/logo.png'
+
+import "../../css/LogIn.css"
+
 import { useState } from 'react'
-import { usePage } from '@inertiajs/inertia-react'
-import Header from '../Components/Header.jsx'
-import Footer from '../Components/Footer.jsx'
 import { router, usePage } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
 
 
 function Login() 

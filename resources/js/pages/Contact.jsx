@@ -1,70 +1,65 @@
-import '../assets/CSS/Contact.css'
+import '../../css/Contact.css'
+
 import { ProveEmail, ProveMessage } from '../Funtions'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
-import error from '../components/alert-error'
 import { useState } from 'react'
-import { Inertia } from '@inertiajs/inertia'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage, useForm } from '@inertiajs/react'
 
-function ContactUs()
+import error from '../components/alert-error'
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+
+
+function ContactUs() 
 {
-    const { status: serverStatus } = usePage().props;
+    const { flash, status: serverStatus } = usePage().props;
     const [status, setStatus] = useState('');
-    const { flash } = usePage().props ;
-    const form = useForm({ name: '', email: '', message: '' });
 
-
-    const handleSubmit = (e) => 
-    {
-        e.preventDefault();
-        Inertia.post('/contact/send', form); 
-    };
+    const { data: form, setData, post, reset } = useForm({
+        name: '',
+        email: '',
+        message: ''
+    });
 
     const handleChange = (e) => 
     {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        setData(e.target.name, e.target.value);
     };
-
 
     const validateEmail = (value) => 
     {
-        if (!value) 
-            return false;
+        if (!value) return false;
 
-        const dataEmail = ProveEmail(value);
-
-        if (dataEmail === false) 
+        const valid = ProveEmail(value);
+        if (!valid) 
         {
             error("The email must contain '@' and '.'");
             return false;
         }
         return true;
-    }
+    };
 
     const validateMessage = (value) => 
     {
-        if (!value) 
-            return false;
-        
-        const dataMessage = ProveMessage(value);
+        if (!value) return false;
 
-        if (dataMessage === false) 
+        const valid = ProveMessage(value);
+        if (!valid) 
         {
             error("The message must be between 20 and 120 characters");
             return false;
         }
         return true;
-    }
+    };
 
-
-    const sendEmail = (e) => 
+    const handleSubmit = (e) => 
     {
         e.preventDefault();
 
-        const emailValid = validateEmail(emailValue);
-        const messageValid = validateMessage(messageValue);
-        const nameValid = nameValue.trim() !== '';
+        const emailValid = validateEmail(form.email);
+        const messageValid = validateMessage(form.message);
+        const nameValid = form.name.trim() !== '';
 
         if (!emailValid || !messageValid || !nameValid) 
         {
@@ -72,15 +67,17 @@ function ContactUs()
             return;
         }
 
-        Inertia.post('/contact', {
-            name: nameValue,
-            email: emailValue,
-            message: messageValue
-        })
-
         setStatus('Sending...');
-    }
-
+        post('/contact/send', 
+        {
+            onSuccess: () => 
+            {
+                setStatus('Message sent successfully!');
+                reset(); 
+            },
+            onError: () => setStatus('Failed to send message.')
+        });
+    };
 
     return (
         <>
@@ -88,13 +85,9 @@ function ContactUs()
             <section className="about-gradient py-5 w-100">
                 <div className="container">
                     <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <div className="text-center text-white">
-                                <h1 className="display-5 fw-bold">Contact Us</h1>
-                                <p className="lead">
-                                    Get more closure to Trekoria, we are here to help you!
-                                </p>
-                            </div>
+                        <div className="col-md-8 text-center text-white">
+                            <h1 className="display-5 fw-bold">Contact Us</h1>
+                            <p className="lead">Get more closure to Trekoria, we are here to help you!</p>
                         </div>
                     </div>
                 </div>
