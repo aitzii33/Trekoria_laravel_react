@@ -28,6 +28,13 @@ body {
   height: 80px;
 }
 
+.nav-link, 
+.nav-links a,
+.Link a {
+  text-decoration: none !important;
+  color: black !important;
+}
+
 /* Spacer between logo and nav/button */
 .header-spacer {
   flex-grow: 1;
