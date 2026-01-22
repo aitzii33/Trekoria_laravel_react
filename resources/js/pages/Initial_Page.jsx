@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap"
+import { router, Link } from '@inertiajs/react' 
 import { useTranslation } from "react-i18next"
 
 import Header from "../components/Header"
@@ -12,7 +13,6 @@ import "../../css/Home.css"
 import LandingImg1 from "../img/LandingImg1.png"
 import LandingImg2 from "../img/LandingImg2.jpg"
 import LandingImg3 from "../img/LandingImg3.jpg"
-import lupa from "../img/lupa.png"
 import Baloon from "../img/Baloon.jpg"
 import TokyoImg from "../img/Tokyo.webp"
 import Baloon2 from "../img/Baloon2.webp"
@@ -40,10 +40,12 @@ function InitialPage() {
 
   // Build continents structure
   const continents = {};
-  Object.keys(countriesData).forEach((country) => {
+  Object.keys(countriesData).forEach((country) => 
+  {
     const continent = countryToContinent[country] || "Unknown";
     if (!continents[continent]) continents[continent] = [];
-    continents[continent].push({
+    continents[continent].push(
+    {
       name: country,
       cities: countriesData[country],
     });
@@ -77,7 +79,9 @@ function InitialPage() {
           <Form onSubmit={handleSearch}>
             <InputGroup>
               <Form.Control type="text" name="search" placeholder={t("Search...")} />
-              <Button variant="primary" type="submit">{t("Search")}</Button>
+              <Link href="/activities">
+                <Button variant="primary" type="submit">{t("Search")}</Button>
+              </Link>
             </InputGroup>
           </Form>
         </div>
@@ -92,17 +96,15 @@ function InitialPage() {
               <Col key={idx} md={3} sm={6}>
                 <Card className="city-card text-black text-center">
                   <Card.Img src={city.img} alt={t(city.name)} className="city-img" />
-                  <Card.ImgOverlay className="d-flex align-items-end p-2"></Card.ImgOverlay>
-                  <Card.Title>{t(city.name)}</Card.Title>
+                  <Card.ImgOverlay className="d-flex align-items-end p-2">
+                    <Card.Title style={{ color: 'black', backgroundColor:'white' }}>{t(city.name)}</Card.Title>
+                  </Card.ImgOverlay>
                 </Card>
               </Col>
             ))}
           </Row>
           <div className="text-center mt-3">
-            <Button
-              variant="primary"
-              onClick={() => setShowContinents(!showContinents)}
-            >
+            <Button variant="primary" onClick={() => setShowContinents(!showContinents)}>
               {t("See More")}
             </Button>
           </div>
@@ -118,16 +120,12 @@ function InitialPage() {
               {/* Continents */}
               <div className="me-4 continent-list" style={{ minWidth: "150px" }}>
                 {Object.keys(continents).map((cont, idx) => (
-                  <div
-                    key={idx}
-                    className="continent-item p-2 mb-2 rounded bg-light text-center"
+                  <div key={idx} className="continent-item p-2 mb-2 rounded bg-light text-center"
                     onMouseEnter={() => {
                       setHoveredContinent(continents[cont]);
                       setHoveredCountry(null);
                     }}
-                    onMouseLeave={() => setHoveredContinent(null)}
-                    style={{ cursor: "pointer" }}
-                  >
+                    onMouseLeave={() => setHoveredContinent(null)} style={{ cursor: "pointer" }}>
                     {t(cont)}
                   </div>
                 ))}
@@ -137,23 +135,14 @@ function InitialPage() {
               <div className="flex-grow-1 country-city-panel">
                 {hoveredContinent &&
                   hoveredContinent.map((country, idx) => (
-                    <div
-                      key={idx}
-                      className="country-item p-2 m-1 rounded bg-secondary text-white"
-                      onMouseEnter={() => setHoveredCountry(country)}
-                      onMouseLeave={() => setHoveredCountry(null)}
-                      style={{ cursor: "pointer" }}
-                    >
+                    <div key={idx} className="country-item p-2 m-1 rounded bg-secondary text-white" onMouseEnter={() => setHoveredCountry(country)} onMouseLeave={() => setHoveredCountry(null)} style={{ cursor: "pointer" }}>
                       {t(country.name)}
                       {hoveredCountry === country && (
                         <div className="cities mt-2">
                           <h5>{t("Cities in")} {t(country.name)}:</h5>
                           <div className="d-flex flex-wrap">
                             {country.cities.map((city, ci) => (
-                              <div
-                                key={ci}
-                                className="city-card p-2 m-1 rounded bg-light text-dark shadow-sm"
-                              >
+                              <div key={ci} className="city-card p-2 m-1 rounded bg-light text-dark shadow-sm">
                                 {t(city)}
                               </div>
                             ))}
@@ -167,7 +156,6 @@ function InitialPage() {
           </div>
         </section>
       )}
-
       <Footer />
     </>
   );
