@@ -1,0 +1,174 @@
+.profile-container {
+  min-height: 4 0vh;
+  background: white;
+  padding: 2rem 0;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: none !important;
+  border-radius: 20px !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15) !important;
+}
+
+.profile-avatar {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover;
+  border: 5px solid #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.profile-header {
+  background: linear-gradient(45deg, #2796D1 0%, #D1DCEC 100%);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 15px 15px 0 0;
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+}
+
+.profile-info {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-info strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.edit-mode .form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.edit-mode .form-control:focus {
+  border-color: #4facfe;
+  box-shadow: 0 0 0 0.2rem rgba(79, 172, 254, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(238, 90, 36, 0.4);
+}
+
+.btn-edit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(238, 90, 36, 0.6);
+  background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+}
+
+.btn-save {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+.btn-save:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 184, 148, 0.6);
+}
+
+.btn-cancel {
+  background: #636e72;
+  border: none;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #2d3436;
+  transform: translateY(-2px);
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  color: black;
+  font-weight: 500;
+  z-index: 9999;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.success {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+}
+
+.notification.error {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .profile-avatar {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .profile-header {
+    margin: -1rem -1rem 1rem -1rem;
+    padding: 1rem;
+  }
+  
+  .btn-edit, .btn-save, .btn-cancel {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
