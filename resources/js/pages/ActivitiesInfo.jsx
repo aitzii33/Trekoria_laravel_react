@@ -1,7 +1,8 @@
 import "react-datepicker/dist/react-datepicker.css"
 
-import { Container, Row, Col } from "reactstrap"
+import { Container, Row, Col, Dropdown } from "reactstrap"
 import { useState } from "react"
+import { router } from '@inertiajs/react'
 import DatePicker from "react-datepicker"
 
 import Header from '../components/Header'
@@ -9,12 +10,15 @@ import Footer from '../components/Footer'
 
 import "../../css/DatePicker.css"
 
-function ActivitiesInfo({ activity }) {
+function ActivitiesInfo({ activity = null }) 
+{
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedHour, setSelectedHour] = useState(null); 
 
-    const images = activity.images && activity.images.length > 0
+    const images = activity?.images && activity.images.length > 0
     ? activity.images
-    : [activity.image];
+    : [activity?.image || '/images/default.jpg'];
+
 
     return (
         <Container fluid className="px-1 px-sm-5 mx-auto mt-4">

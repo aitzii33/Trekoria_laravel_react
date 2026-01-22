@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Activities;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -35,7 +35,10 @@ class PageController extends Controller
 
     public function Activities()
     {
-        return Inertia::render('Activities');
+        return Inertia::render('Activities', [ 
+            'activities' => Activity::all(['place_id', 'name', 'description', 'continent', 'image'])
+        ]);
+
     }
 
     public function About()

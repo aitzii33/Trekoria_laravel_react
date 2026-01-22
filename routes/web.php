@@ -16,7 +16,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
-Route::get('/activities', [PageController::class, 'Activities'])->name('activities');
+Route::post('/activities', [PageController::class, 'Activities'])->name('activities');
 Route::get('/about', [PageController::class, 'About'])->name('about');
 
 
@@ -51,8 +51,8 @@ Route::get('/Pay', [PayController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
-Route::get('/Activity/{id?}', [ActivityController::class, 'form'])->name('Activity');
-Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('Activity.details');
+Route::get('/activities/{id?}', [ActivityController::class, 'form'])->name('Activity');
+Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('activity.details');
 
 
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
