@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, route } from '@inertiajs/react'  
 
 import '../../css/Profile.css'
 
@@ -7,8 +7,8 @@ import Userimg from '../img/Girl.avif'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
-function Profile() {
-    const navigate = useNavigate();
+function Profile() 
+{
 
     const [userData, setUserData] = useState({ username: 'devUser', fullName: 'Shannon Doe', birthDate: '1998-05-12',
         email: 'shannon@example.com', profilePic: Userimg });
@@ -82,9 +82,18 @@ function Profile() {
                                         Edit profile
                                     </button>
 
-                                    <button className="btn btn-outline-secondary" onClick={() => navigate('/home')}>
-                                        Return to home
-                                    </button>
+                                    <Link href='/home'>
+                                        <button className="btn btn-secondary" > 
+                                            Return to home 
+                                        </button>
+                                    </Link>
+
+                                    <form action={route('profile.delete')} method="POST">
+                                        @csrf
+                                        <button type="submit" className="btn btn-save">
+                                            Delete profile
+                                        </button>
+                                    </form>
                                 </div>
                             </>
                             ) : (
