@@ -2,7 +2,6 @@ import "react-datepicker/dist/react-datepicker.css"
 
 import { Container, Row, Col, Dropdown } from "reactstrap"
 import { useState } from "react"
-import { router } from '@inertiajs/react'
 import DatePicker from "react-datepicker"
 
 import Header from '../components/Header'
