@@ -12,12 +12,13 @@ import { useState } from "react"
 import { Container, Row, Button, Form, Col } from "reactstrap"
 import DatePicker from "react-datepicker"
 
-function Activities({ activities }) {
+function Activities({ activities = [] }) 
+{
     const [selectedDate, setSelectedDate] = useState(null);
 
     const routeActivityClick = (id) => 
     {
-        router.visit(route('Activity', { id })); 
+        router.visit(`/activities/${id}`);
     };
 
     const handleSubmit = (e) => 
@@ -29,7 +30,6 @@ function Activities({ activities }) {
     return (
         <Container>
             <Header />
-
             <Row className="justify-content-center align-items-center hero-row">
                 <Col md={10}>
                     <Row className="hero-box">
@@ -71,7 +71,6 @@ function Activities({ activities }) {
                     </Col>
                 ))}
             </Row>
-
             <Footer />
         </Container>
     );

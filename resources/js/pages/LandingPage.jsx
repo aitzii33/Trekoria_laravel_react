@@ -14,20 +14,11 @@ import BoatImg from '../img/Boat.avif'
 import Button from '../components/Button'
 import Header from '../components/Header_Landing'
 
-import { useTranslation } from "react-i18next"
-import { router } from '@inertiajs/react'
+import { Link } from '@inertiajs/react' 
 
 
 export default function Landing() 
 {
-  const { t } = useTranslation();
-  
-  const routeChange = () => 
-  {
-    router.visit(route('home'));
-  };
-
-
   return (
     <>
       <Header/>
@@ -45,7 +36,9 @@ export default function Landing()
                 Discover adventures, tours, and experiences in cities around the world.
                 Find what you love and book instantly.
               </p>
-              <Button text="Start Exploring" onClick={(routeChange)} />
+              <Link href="/home">
+                  <Button text="Start Exploring" />
+              </Link>
             </div>
 
             {/* Right: Collage of 3 Images */}

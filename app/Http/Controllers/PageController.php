@@ -35,9 +35,7 @@ class PageController extends Controller
 
     public function Activities()
     {
-        return Inertia::render('Activities', [
-            'activities' => Activities::all(), 
-        ]);
+        return Inertia::render('Activities');
     }
 
     public function About()
