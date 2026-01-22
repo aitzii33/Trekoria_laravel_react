@@ -90,11 +90,10 @@ function InitialPage() {
           <Row className="g-3">
             {popularCities.map((city, idx) => (
               <Col key={idx} md={3} sm={6}>
-                <Card className="city-card text-white text-center">
+                <Card className="city-card text-black text-center">
                   <Card.Img src={city.img} alt={t(city.name)} className="city-img" />
-                  <Card.ImgOverlay className="d-flex align-items-end p-2">
-                    <Card.Title>{t(city.name)}</Card.Title>
-                  </Card.ImgOverlay>
+                  <Card.ImgOverlay className="d-flex align-items-end p-2"></Card.ImgOverlay>
+                  <Card.Title>{t(city.name)}</Card.Title>
                 </Card>
               </Col>
             ))}
