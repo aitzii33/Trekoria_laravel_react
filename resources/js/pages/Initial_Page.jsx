@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap"
-import { router, Link } from '@inertiajs/react' 
+import { Link } from '@inertiajs/react' 
 import { useTranslation } from "react-i18next"
 
 import Header from "../components/Header"
@@ -29,7 +29,8 @@ const popularCities = [
   { name: "London", img: Baloon2 },
 ];
 
-function InitialPage() {
+function InitialPage() 
+{
   const { t } = useTranslation();
 
   const [showContinents, setShowContinents] = useState(false);
@@ -43,7 +44,12 @@ function InitialPage() {
   Object.keys(countriesData).forEach((country) => 
   {
     const continent = countryToContinent[country] || "Unknown";
-    if (!continents[continent]) continents[continent] = [];
+
+    if (!continents[continent])
+    {
+      continents[continent] = [];
+    }
+
     continents[continent].push(
     {
       name: country,
@@ -51,12 +57,12 @@ function InitialPage() {
     });
   });
 
-  const handleSearch = (e) => {
+  const handleSearch = (e) => 
+  {
     e.preventDefault();
-    const query = e.target.search.value;
-    console.log("Search:", query);
-    router.visit(route('Activities'));
+    router.push(`/activities?search=${encodeURIComponent(searchTerm)}`);
   };
+
 
   return (
     <>
@@ -76,7 +82,7 @@ function InitialPage() {
         <div className="search-overlay">
           <h1 className="hero-heading">{t("Find Your Perfect Place")}</h1>
           <p className="hero-subtitle">{t("Search from thousands of options")}</p>
-          <Form onSubmit={handleSearch}>
+          <Form onSubmit={handleSearch} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}>
             <InputGroup>
               <Form.Control type="text" name="search" placeholder={t("Search...")} />
               <Link href="/activities">

@@ -38,7 +38,6 @@ class PageController extends Controller
         return Inertia::render('Activities', [ 
             'activities' => Activity::all(['place_id', 'name', 'description', 'continent', 'image'])
         ]);
-
     }
 
     public function About()

@@ -11,13 +11,14 @@ class ActivityController extends Controller
 {
     public function form($id = null)
     {
-        $activities = Activity::all();
-        $selectedActivity = $id ? Activity::find($id) : null; 
-
-        return Inertia::render('ActivitiesInfo', [
-            'activities' => $activities,
-            'selectedActivity' => $selectedActivity,
-        ]);
+        $search = $request->query('search'); 
+        
+        $activities = Activity::when($search, function ($query, $search) 
+        {
+            return $query->where('name', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%");
+        })->paginate(10); 
+        
+        return view('activities.index', compact('activities', 'search'));
     }
 
     public function verifyAuth()

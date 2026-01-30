@@ -9,9 +9,8 @@ import Footer from '../components/Footer.jsx'
 
 function Profile() 
 {
-
     const [userData, setUserData] = useState({ username: 'devUser', fullName: 'Shannon Doe', birthDate: '1998-05-12',
-        email: 'shannon@example.com', profilePic: Userimg });
+                                               email: 'shannon@example.com', profilePic: Userimg });
 
     const [isEditing, setIsEditing] = useState(false);
     const [tempData, setTempData] = useState(userData);
