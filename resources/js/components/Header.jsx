@@ -4,25 +4,27 @@ import home from '../img/home.png'
 import '../../css/Header.css'
 import LanguageSelector from '../components/LanguageSelector'
 import { router, usePage, Link } from '@inertiajs/react' 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Form, Button, InputGroup } from "react-bootstrap"
 
 function Head({ currentLanguage, setLanguage}) 
 {
     const [showDropdown, setShowDropdown] = useState(false);
+    const hideDropdown = () => setShowDropdown(false);
     const { auth = {}, url } = usePage().props;  
 
     const toggleDropdown = (e) => 
     {
-        e.stopPropagation(); 
-        setShowDropdown(!showDropdown);
+        e.stopPropagation();
+        setShowDropdown((prev) => !prev);
     };
 
-    const hideDropdown = () => 
+    useEffect(() => 
     {
-
-        setShowDropdown(false); 
-    };
+        const handleClickOutside = () => setShowDropdown(false);
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
 
     const showSearchForm = ["/Activity", "/Activity.details"].includes(url);
     const handleSearch = (e) => 
@@ -53,7 +55,7 @@ function Head({ currentLanguage, setLanguage})
                     </Form>
                 )}
 
-                <div className="header-spacer"></div>
+                <div className="header-spacer"/>
 
                 <div className="nav-links">
                     <Link href="/home">
@@ -75,39 +77,32 @@ function Head({ currentLanguage, setLanguage})
                 </div>
 
                 {/* User Menu */}
-                <div className="header-access" style={{ position: 'relative' }}>
+                <div className="header-access" style={{ position: 'relative' }} onClick={toggleDropdown}>
                     {auth.user ? (
                         <>
-                            <Link href="/profile">
-                                <img src={userImg} alt="profile" style={{ width: "50px", height: "50px", borderRadius: "50%", objectFit: "cover", cursor: "pointer" }}/>
-                            </Link>
-                            
+                            <img src={userImg} alt="profile" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', cursor: 'pointer'}}/>
+
                             {showDropdown && (
-                                <ul 
-                                    style={{ 
-                                        position: "absolute", 
-                                        top: "100%", 
-                                        right: 0, 
-                                        background: "white", border: "1px solid #ccc", listStyle: "none", margin: 0, padding: 0, borderRadius: "4px", boxShadow: "0 2px 10px rgba(0,0,0,0.1)", zIndex: 1000, minWidth: "150px" }} onClick={(e) => e.stopPropagation()} >
-                                    <li>
-                                        <Link href="/profile" onClick={hideDropdown} style={{ display: "block", padding: "12px 16px", color: "#333", textDecoration: "none" }} >
-                                            Profile
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/logout" method="post" onClick={hideDropdown} style={{ display: "block", padding: "12px 16px", color: "#dc3545", textDecoration: "none", fontWeight: 500 }} >
-                                            Close session
-                                        </Link>
-                                    </li>
+                                <ul style={{ position: 'absolute', top: '100%', right: 0, background: 'white', border: '1px solid #ccc', 
+                                            listStyle: 'none', margin: 0, padding: 0, borderRadius: '4px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)', 
+                                            zIndex: 1000, minWidth: '150px' }} onClick={(e) => e.stopPropagation()}>
+                                <li>
+                                    <Link href="/profile" onClick={hideDropdown} style={{ display: 'block', padding: '12px 16px', color: '#333', 
+                                        textDecoration: 'none' }} > Profile </Link>
+                                </li>
+                                <li>
+                                    <Link href="/logout" method="post" onClick={hideDropdown} style={{ display: 'block', padding: '12px 16px', 
+                                        color: '#dc3545', textDecoration: 'none', fontWeight: 500 }}> Close session </Link>
+                                </li>
                                 </ul>
                             )}
                         </>
                     ) : (
                         <Link href="/login">
-                            <img src={userImg} alt="login" style={{ width: "50px", height: "50px", borderRadius: "50%", objectFit: "cover", cursor: "pointer"}}/>
+                            <img src={userImg} alt="login" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', cursor: 'pointer' }} />
                         </Link>
                     )}
-                </div>
+                    </div>
             </header>
         </div>
     );

@@ -51,7 +51,7 @@ Route::get('/Pay', [PayController::class, 'form'])->name('pay');
 Route::post('/VerifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
-Route::get('/Activities/{id?}', [ActivityController::class, 'form'])->name('Activity');
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 Route::post('/ActivityVerify', [ActivityController::class, 'verifyAuth'])->name('activity.details');
 
 
