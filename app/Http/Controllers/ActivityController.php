@@ -9,13 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
-    public function form($id = null)
+    public function index(Request $request)
     {
-        $search = $request->query('search'); 
-        
+        $search = $request->query('search');
         $activities = Activity::when($search, function ($query, $search) 
         {
-            return $query->where('name', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%");
+            return $query->where('name', 'LIKE', "%{$search}%");
         })->paginate(10); 
         
         return view('activities.index', compact('activities', 'search'));

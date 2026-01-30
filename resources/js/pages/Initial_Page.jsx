@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap"
-import { Link } from '@inertiajs/react' 
+import { Link, router } from '@inertiajs/react' 
 import { useTranslation } from "react-i18next"
 
 import Header from "../components/Header"
@@ -36,6 +36,7 @@ function InitialPage()
   const [showContinents, setShowContinents] = useState(false);
   const [hoveredContinent, setHoveredContinent] = useState(null);
   const [hoveredCountry, setHoveredCountry] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const images = [LandingImg1, LandingImg2, LandingImg3];
 
@@ -60,7 +61,7 @@ function InitialPage()
   const handleSearch = (e) => 
   {
     e.preventDefault();
-    router.push(`/activities?search=${encodeURIComponent(searchTerm)}`);
+    router.visit(`/activities?search=${encodeURIComponent(searchTerm)}`); 
   };
 
 
@@ -84,9 +85,9 @@ function InitialPage()
           <p className="hero-subtitle">{t("Search from thousands of options")}</p>
           <Form onSubmit={handleSearch} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}>
             <InputGroup>
-              <Form.Control type="text" name="search" placeholder={t("Search...")} />
+              <Form.Control type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t("Search...")}/>
               <Link href="/activities">
-                <Button variant="primary" type="submit">{t("Search")}</Button>
+                <Button variant="primary" type="submit">{t("Search")}</Button> 
               </Link>
             </InputGroup>
           </Form>
@@ -98,12 +99,15 @@ function InitialPage()
         <div className="container">
           <h2 className="mb-4">{t("Popular Cities")}</h2>
           <Row className="g-3">
-            {popularCities.map((city, idx) => (
-              <Col key={idx} md={3} sm={6}>
-                <Card className="city-card text-white text-center">
+            {popularCities.map((city, idx) => 
+            (
+              <Col md={3} sm={6}>
+                <Card onClick={() => router.push('/activities')} key={idx}>
                   <Card.Img src={city.img} alt={t(city.name)} className="city-img" />
-                  <Card.ImgOverlay className="d-flex align-items-end p-2">
-                    <Card.Title style={{ color: 'black', backgroundColor:'white' }}>{t(city.name)}</Card.Title>
+                  <Card.ImgOverlay className="d-flex align-items-end p-2" style={{ pointerEvents: 'none' }}>
+                    <Card.Title style={{color: 'black', backgroundColor:'white', padding: '5px 10px', borderRadius: '5px'}}>
+                      {t(city.name)}
+                    </Card.Title>
                   </Card.ImgOverlay>
                 </Card>
               </Col>
