@@ -31,8 +31,8 @@ class ProfileController extends Controller
 
     public function SoftDelete(Request $request)
     {
-        Auth::user()->delete(); // soft delete
-        return redirect('/')->with('success', 'Profile deleted');
+        Auth::user()->delete();
+        return redirect()->back()->with('success', 'Profile deleted');
     }
 
     public function Restored($id)

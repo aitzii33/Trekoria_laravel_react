@@ -14,8 +14,6 @@ import '../../css/DatePicker.css'
 import '../../css/Activities.css'
 
 
-
-
 function Activities({ activities = [] }) 
 {
     const [selectedDate, setSelectedDate] = useState(null);

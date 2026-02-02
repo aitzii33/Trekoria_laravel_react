@@ -7,18 +7,8 @@ import Footer from '../components/Footer.jsx'
 import '../../css/Profile.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Userimg from '../img/Girl.avif'
-
-function Profile() 
+function Profile({ userData }) 
 {
-    const [userData, setUserData] = useState({
-        username: 'devUser',
-        fullName: 'Shannon Doe',
-        birthDate: '1998-05-12',
-        email: 'shannon@example.com',
-        profilePic: Userimg,
-    });
-
     const [isEditing, setIsEditing] = useState(false);
     const [tempData, setTempData] = useState(userData);
 
