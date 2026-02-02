@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link } from '@inertiajs/react'  
 
-import '../../css/Profile.css'
-
-import Userimg from '../img/Girl.avif'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+
+import '../../css/Profile.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import Userimg from '../img/Girl.avif'
 
 function Profile() 
 {
@@ -67,7 +69,7 @@ function Profile()
                             <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.username : userData.username}
                             </p>
-                            <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
+                            <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.email : userData.email}
                             </p>
                         </div>

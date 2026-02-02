@@ -1,7 +1,3 @@
-import logo from '../img/logo.png'
-
-import "../../css/LogIn.css"
-
 import { useState } from 'react'
 import { router, Link } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
@@ -9,12 +5,15 @@ import { Container } from 'reactstrap'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
+import "../../css/LogIn.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import logo from '../img/logo.png'
+
 
 function Login() 
 {
     const [status, setStatus] = useState('');
-    const [user_name, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
     const [form, setForm] = useState({ user_name: '', password: ''});
  
@@ -59,7 +58,10 @@ function Login()
                                 <input type="password" className="form-control" name="password" onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
                             </div>
 
-                            <input type="checkbox" id='remember' placeholder='Remember me'></input>
+                            <div className="checkbox-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+                                <input type="checkbox" id="remember"/>
+                                <label htmlFor="remember" style={{ margin: 0 }}>Remember me</label>
+                            </div>
 
                             <div className="text-center pt-1 mb-5 pb-1">
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>

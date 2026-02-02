@@ -1,12 +1,13 @@
 import { useForm, usePage } from '@inertiajs/react' 
-import { router, Link } from '@inertiajs/react' 
+import { Link } from '@inertiajs/react' 
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import logo from '../img/logo.png'
-
 import '../../css/Register.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import logo from '../img/logo.png'
 
 function RegisterPage() 
 {
