@@ -64,10 +64,10 @@ function Profile()
                     <div className={`card profile-card ${isEditing ? 'edit-mode' : ''}`}>
                         <div className="profile-header text-center">
                             <img src={isEditing ? tempData.profilePic : userData.profilePic} alt="Profile" className="profile-avatar mx-auto d-block"/>
-                            <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
+                            <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.username : userData.username}
                             </p>
-                            <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
+                            <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.email : userData.email}
                             </p>
                         </div>
@@ -86,19 +86,17 @@ function Profile()
                                         </div>
                                     </div>
 
-                                    <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                                        <button className="btn btn-edit" onClick={handleEdit}>
+                                    <div className="profile-buttons-center mt-4">
+                                        <Link href="/home" className="btn btn-secondary profile-btn">
+                                            Return to home
+                                        </Link>
+                                        
+                                        <button className="btn btn-edit profile-btn" onClick={handleEdit}>
                                             Edit profile
                                         </button>
-
-                                        <Link href="/home">
-                                            <button className="btn btn-secondary">
-                                                Return to home
-                                            </button>
-                                        </Link>
-
-                                        <form action="/profile/delete" method="POST">
-                                            <button type="submit" className="btn btn-save">
+                                        
+                                        <form action="/profile/delete" method="POST" className="d-inline">
+                                            <button type="submit" className="btn btn-save profile-btn">
                                                 Delete profile
                                             </button>
                                         </form>
@@ -133,12 +131,12 @@ function Profile()
                                         </div>
                                     </div>
 
-                                    <div className="d-flex justify-content-between mt-4">
+                                    <div className="profile-buttons">  
                                         <button type="button" className="btn btn-cancel" onClick={handleCancel}>
                                             Cancel
                                         </button>
 
-                                        <form action="/profile/modify" method="POST">
+                                        <form action="/profile/modify" method="POST" className="d-inline">
                                             <button type="submit" className="btn btn-save">
                                                 Save changes
                                             </button>
