@@ -1,4 +1,5 @@
 import { useForm, usePage } from '@inertiajs/react' 
+import { router, Link } from '@inertiajs/react' 
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -98,9 +99,11 @@ function RegisterPage()
           <div className="col-lg-6 right-panel d-flex flex-column justify-content-center align-items-center text-center p-4 bg-primary text-white">
             <h2 className="mb-3">Already have an account?</h2>
             <p className="mb-4"> Click below to login and start your adventure! </p>
-            <button className="btn btn-outline-light px-4 py-2" onClick={() => form.visit(route('login'))}>
-              Login
-            </button>
+            <Link href='/login'>
+              <button className="btn btn-outline-light px-4 py-2">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>

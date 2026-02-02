@@ -170,3 +170,21 @@ body {
 .nav-link:hover::after {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+    .register-cta .btn-cta-register {
+        padding: 10px 20px !important;
+        font-size: 12px !important;
+    }
+}
+
+.logo-link img,
+.nav-link-icon img,
+.user-link img {
+    display: block;
+}
+
+.nav-link-icon {
+    display: inline-flex;
+    align-items: center;
+}

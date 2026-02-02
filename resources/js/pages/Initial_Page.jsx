@@ -86,9 +86,7 @@ function InitialPage()
           <Form onSubmit={handleSearch} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}>
             <InputGroup>
               <Form.Control type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder={t("Search...")}/>
-              <Link href="/activities">
-                <Button variant="primary" type="submit">{t("Search")}</Button> 
-              </Link>
+              <Button variant="primary" type="submit">{t("Search")}</Button> 
             </InputGroup>
           </Form>
         </div>
@@ -99,10 +97,9 @@ function InitialPage()
         <div className="container">
           <h2 className="mb-4">{t("Popular Cities")}</h2>
           <Row className="g-3">
-            {popularCities.map((city, idx) => 
-            (
-              <Col md={3} sm={6}>
-                <Card onClick={() => router.push('/activities')} key={idx}>
+            {popularCities.map((city, idx) => (
+              <Col key={city.name || idx} md={3} sm={6}>  
+                <Card onClick={() => router.push('/activities')}>
                   <Card.Img src={city.img} alt={t(city.name)} className="city-img" />
                   <Card.ImgOverlay className="d-flex align-items-end p-2" style={{ pointerEvents: 'none' }}>
                     <Card.Title style={{color: 'black', backgroundColor:'white', padding: '5px 10px', borderRadius: '5px'}}>
@@ -120,6 +117,7 @@ function InitialPage()
           </div>
         </div>
       </section>
+
 
       {/* Continents → Countries → Cities */}
       {showContinents && (

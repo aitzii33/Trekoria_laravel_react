@@ -82,7 +82,7 @@ function ContactUs()
     return (
         <>
             <Header />
-            <section className="about-gradient py-5 w-100">
+            {/*<section className="about-gradient py-5 w-100">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-8 text-center text-white">
@@ -91,8 +91,7 @@ function ContactUs()
                         </div>
                     </div>
                 </div>
-            </section>
-
+            </section>*/}
             <form id="contact-form" onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
                 {flash.status && <p style={{ color: 'green' }}>{flash.status}</p>}
 

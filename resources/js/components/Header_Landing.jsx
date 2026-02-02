@@ -31,17 +31,11 @@ export default function Head({currentLanguage, setLanguage})
 
         {/* Navigation */}
         <div className="nav-links">
-            <Link href="/home"> 
-              <img src={home} alt="Home" style={{ width: "20px", height: "20px" }} className="me-4 nav-ico"/>
-            </Link>
-
-            <Link href="/about"> 
-              <a className="nav-link me-4">About Us</a>
-            </Link>
-
-            <Link href="/contact"> 
-              <a className="nav-link me-4">Contact</a>
-            </Link>
+          <Link href="/home" className="nav-link-icon me-4">
+            <img src={home} alt="Home" style={{ width: "20px", height: "20px" }} className="nav-ico"/>
+          </Link>
+          <Link href="/about" className="nav-link me-4">About Us</Link>
+          <Link href="/contact" className="nav-link me-4">Contact</Link>
         </div>
         
         {/* Language Selector */}

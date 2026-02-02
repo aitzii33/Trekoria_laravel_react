@@ -3,22 +3,20 @@ import logo from '../img/logo.png'
 import "../../css/LogIn.css"
 
 import { useState } from 'react'
-import { router, usePage } from '@inertiajs/react' 
+import { router, Link } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 
-
 function Login() 
 {
-    const { status: serverStatus } = usePage().props;
     const [status, setStatus] = useState('');
     const [user_name, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const [form, setForm] = useState({ email: '', password: ''})
+    const [form, setForm] = useState({ user_name: '', password: ''});
  
     const Verify = (e) => 
     { 
@@ -53,27 +51,27 @@ function Login()
                         </div> 
  
                         <form onSubmit={Verify} > 
-                            {props.flash.warning && <div className="alert alert-warning">{props.flash.warning}</div>}
-
                             <div className="form-outline mb-4">
-                                <input type="text" className="form-control" name="user_name" value={form.email} onBlur={(e) => setUsername(e.target.value)}  placeholder="Introduce your email" required/>
+                                <input type="text" className="form-control" name="user_name" onBlur={(e) => setUsername(e.target.value)}  placeholder="Introduce your email" required/>
                             </div>
  
                             <div className="form-outline mb-4">
-                                <input type="password" className="form-control" name="password" value={form.password} onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
+                                <input type="password" className="form-control" name="password" onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
                             </div>
 
-                            <input type="checkbox" id='remember' value='Remember me'></input>
+                            <input type="checkbox" id='remember' placeholder='Remember me'></input>
 
                             <div className="text-center pt-1 mb-5 pb-1">
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>
                                 {status && <p className="text-danger">{status}</p>}
-                                {serverStatus && <p className="text-danger">{serverStatus}</p>}
                             </div>
 
                             <div className="d-flex align-items-center justify-content-center pb-4">
                                 <p className="mb-0 me-2">Don't have an account?</p>
-                                <a className="btn btn-outline-danger" href="/register">Register</a>
+
+                                <Link href="/Register">
+                                    <p className="btn btn-outline-danger">Register</p>
+                                </Link>
                             </div>
                         </form>
                     </div>
@@ -84,4 +82,4 @@ function Login()
     )
 }
 
-export default Login
+export default Login;
