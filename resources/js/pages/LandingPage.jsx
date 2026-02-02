@@ -1,6 +1,10 @@
+import { Link } from '@inertiajs/react' 
+
+import Button from '../components/Button'
+import Header from '../components/Header_Landing'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "react-datepicker/dist/react-datepicker.css"
-
 import '../../css/InitialPage.css'
 
 import img1 from '../img/LandingImg1.png'
@@ -11,10 +15,6 @@ import girlImg from '../img/Girl.avif'
 import BaloonImg from '../img/Baloon.jpg'
 import BoatImg from '../img/Boat.avif'
 
-import Button from '../components/Button'
-import Header from '../components/Header_Landing'
-
-import { Link } from '@inertiajs/react' 
 
 
 export default function Landing() 

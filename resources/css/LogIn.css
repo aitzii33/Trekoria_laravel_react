@@ -11,6 +11,14 @@ body {
   background-repeat: no-repeat;
 }
 
+.checkbox-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 20px !important;
+}
+
+
 .form-outline input {
   padding: 10px 20px;
   border: 1px solid lightgrey !important;

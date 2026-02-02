@@ -2,6 +2,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 import '../../css/About.css'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 import team1 from '../img/team1.png'
 import team2 from '../img/team2.png'
