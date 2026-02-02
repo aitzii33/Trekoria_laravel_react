@@ -27,7 +27,7 @@ function Profile({ userData })
             if (file) 
             {
                 const imageUrl = URL.createObjectURL(file);
-                setTempData({ ...tempData, profilePic: imageUrl });
+                setTempData({ ...tempData, image: imageUrl });
             }
         } 
         else 
@@ -48,6 +48,11 @@ function Profile({ userData })
         setIsEditing(false);
     };
 
+    if (!userData) 
+    {
+        return (<div>Loading...</div>);
+    }
+
     return (
         <>
             <Header />
@@ -55,7 +60,7 @@ function Profile({ userData })
                 <div className="container">
                     <div className={`card profile-card ${isEditing ? 'edit-mode' : ''}`}>
                         <div className="profile-header text-center">
-                            <img src={isEditing ? tempData.profilePic : userData.profilePic} alt="Profile" className="profile-avatar mx-auto d-block"/>
+                            <img src={isEditing ? tempData.image : userData.image} alt="Profile" className="profile-avatar mx-auto d-block"/>
                             <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.username : userData.username}
                             </p>

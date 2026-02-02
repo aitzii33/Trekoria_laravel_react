@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { router, Link } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
+import { useState, useEffect } from 'react'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -14,8 +14,18 @@ import logo from '../img/logo.png'
 function Login() 
 {
     const [status, setStatus] = useState('');
-
+    const [rememberMe, setRememberMe] = useState(false);
     const [form, setForm] = useState({ user_name: '', password: ''});
+
+    useEffect(() => 
+    {
+        const saved = localStorage.getItem('rememberMe');
+
+        if (saved === 'true') 
+        {
+            setRememberMe(true);
+        }
+    }, []);
  
     const Verify = (e) => 
     { 
@@ -37,7 +47,20 @@ function Login()
         {
             router.visit(route('home')); 
         } 
-      }; 
+
+        if (rememberMe) 
+        {
+            localStorage.setItem('userToken', token);
+        }
+    };
+    
+    const handleRememberChange = (e) => 
+    {
+        const isChecked = e.target.checked;
+        setRememberMe(isChecked);
+        localStorage.setItem('rememberMe', isChecked);
+    };
+
 
     return (
         <> 
@@ -59,7 +82,7 @@ function Login()
                             </div>
 
                             <div className="checkbox-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
-                                <input type="checkbox" id="remember"/>
+                                <input type="checkbox" id="remember" checked={rememberMe} onChange={handleRememberChange}/>
                                 <label htmlFor="remember" style={{ margin: 0 }}>Remember me</label>
                             </div>
 
@@ -79,7 +102,6 @@ function Login()
                     </div>
                 </div>
             </Container>
-            <Footer />
         </>
     )
 }
