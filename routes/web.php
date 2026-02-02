@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
@@ -65,6 +66,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/{id}/update', [CartController::class, 'updateQuantity'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
     Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+});
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::get('/customers', [AdminController::class, 'customers'])->name('customers');
+    Route::get('/activities', [AdminController::class, 'activities'])->name('activities');
+    Route::get('/analytics', [AdminController::class, 'analytics'])->name('analytics');
+
 });
 
 
