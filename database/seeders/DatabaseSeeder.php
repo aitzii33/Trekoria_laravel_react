@@ -23,26 +23,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        TypeUsers::create(['name' => 'Admin']);
-        TypeUsers::create(['name' => 'User']);
-        
+        TypeUsers::firstOrCreate(['type_user' => 'Admin']);
+        TypeUsers::firstOrCreate(['type_user' => 'User']);
+
         Places::create([
             'city' => 'Madrid', 
             'country' => 'Spain', 
             'continent' => 'Europe'
         ]);
         
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'surname' => 'Test',
-                'username' => 'testuser',
-                'type_user' => 1,
-                'birth_day' => '1990-01-01',
-                'password' => Hash::make('password'),
-            ]
-        );
+
+        User::create(
+        ['email' => 'shannon@example.com'],
+        [
+            'name' => 'Shannon',
+            'last_name' => 'Doe',
+            'user_name' => 'testuser',
+            'birth_day' => '1998-05-12',
+            'type_user' => 1,
+            'image' => '../img/Girl.avif',
+            'password' => Hash::make('12345'),
+        ]);
         
         User::factory(40)->create();
     }

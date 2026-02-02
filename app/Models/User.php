@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     public $incrementing = true;  
 
-    protected $fillable = ['name', 'user_name', 'last_name', 'email', 'birth_day', 'type_user'];
+    protected $fillable = ['name', 'user_name', 'last_name', 'email', 'birth_day', 'type_user', 'image', 'password'];
 
     public function typeUser()
     {

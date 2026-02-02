@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TypeUsers extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['type_user'];
 
     public function users()
     {
