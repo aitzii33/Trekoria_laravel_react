@@ -28,7 +28,7 @@ function Footer()
                         <div className="row">
                             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                                 <h6 className="text-uppercase text-black mb-4 font-weight-bold">Products</h6>
-                                <p><a className="text-black" href="#!">Activities</a></p>
+                                <p className="text-black" href="#!">Activities</p>
                             </div>
 
                             <hr className="w-100 clearfix d-md-none" />
@@ -36,8 +36,8 @@ function Footer()
                             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
 
                                 <h6 className="text-uppercase text-black mb-4 font-weight-bold">Useful links</h6>
-                                <p><a className="text-black" onClick={routeAboutUs}>About us</a></p>
-                                <p><a className="text-black" onClick={routeContactUs}>Contact form</a></p>
+                                <p className="text-black" onClick={routeAboutUs}>About us</p>
+                                <p className="text-black" onClick={routeContactUs}>Contact form</p>
 
                             </div>
 
@@ -45,9 +45,9 @@ function Footer()
 
                             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 ">
                                 <h6 className="text-uppercase text-black mb-4 font-weight-bold">Contact</h6>
-                                <p><a className="text-black"> Donostia, calle urbieta 20010, SP</a></p>
-                                <p><a className="text-black"> infoTrekoria@gmail.com </a></p>
-                                <p><a className="text-black"> +34 200 74 95 18 </a></p>
+                                <p className="text-black"> Donostia, calle urbieta 20010, SP</p>
+                                <p className="text-black"> infoTrekoria@gmail.com </p>
+                                <p className="text-black"> +34 200 74 95 18 </p>
                             </div>
                         </div>
                     </section>
@@ -59,9 +59,9 @@ function Footer()
                         <div className="col-md-7 col-lg-8 text-center text-md-start">
                             <div className="p-3 text-black">
                                 © 2020 Copyright:
-                                <a className="text-black" href="https://Trekoria.com/" target="_blank" rel="noopener noreferrer">
+                                <p className="text-black" href="https://Trekoria.com/" target="_blank" rel="noopener noreferrer">
                                     Trekoria.com
-                                </a>
+                                </p>
                             </div>
                         </div>
 

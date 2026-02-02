@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     public function form()
     {
-        return Inertia::render('Register');
+        return Inertia::render('RegistPage');
     }
 
     public function sendEmail(Request $request)
