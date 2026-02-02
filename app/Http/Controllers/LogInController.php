@@ -30,7 +30,10 @@ class LogInController extends Controller
                 return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
 
-            return redirect()->intended('/home');
+            $userdata = Auth::user();
+            $cookie = cookie('userdata', json_encode($userdata), 60);  
+            
+            return redirect()->intended('/home')->cookie($cookie);  
         }
 
         return redirect()->back()->with('status', 'The username or password is incorrect.');

@@ -8,13 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Cookie;
+
 
 class ProfileController extends Controller
 {
-    //for the form, to soft delete(the profile) and the modifications(username, password)
-    public function form()
+    public function form(Request $request)
     {
-        return Inertia::render('MyProfile');
+        $userdata = json_decode($request->cookie('userdata'), true); 
+
+        if (!$userdata) 
+        {
+            return Inertia::render('MyProfile', [
+                'userdata' => null,
+            ]);
+        }
+
+        return Inertia::render('MyProfile', [
+            'userdata' => $userdata,
+        ]);
     }
 
     public function SoftDelete(Request $request)
