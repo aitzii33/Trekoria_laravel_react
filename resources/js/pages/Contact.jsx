@@ -118,7 +118,6 @@ function ContactUs()
                 {status && <p className="text-danger mt-2">{status}</p>}
                 {serverStatus && <p className="text-success mt-2">{serverStatus}</p>}
             </form>
-            <Footer />
         </>
     )
 }
