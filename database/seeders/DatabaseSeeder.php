@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    // database/seeders/DatabaseSeeder.php
     public function run(): void
     {
         TypeUsers::create(['name' => 'Admin']);

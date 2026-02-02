@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from '@inertiajs/react'  
 
 import Header from '../components/Header.jsx'
@@ -7,10 +7,26 @@ import Footer from '../components/Footer.jsx'
 import '../../css/Profile.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-function Profile({ userData }) 
+import Userimg from '../img/Girl.avif'; 
+
+
+function Profile() //{ userData }
 {
     const [isEditing, setIsEditing] = useState(false);
+
+    const [userData, setUserData] = useState({
+        username: 'devUser',
+        fullName: 'Shannon Doe',
+        birthDate: '1998-05-12',
+        email: 'shannon@example.com',
+        image: Userimg,
+    });
+
     const [tempData, setTempData] = useState(userData);
+
+    useEffect(() => {
+        setTempData(userData);
+    }, [userData]);
 
     const handleEdit = () => 
     {
@@ -18,8 +34,7 @@ function Profile({ userData })
         setIsEditing(!isEditing);
     };
 
-    const handleChange = (e) => 
-    {
+    const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === 'profilePic') 
         {
@@ -27,10 +42,10 @@ function Profile({ userData })
             if (file) 
             {
                 const imageUrl = URL.createObjectURL(file);
-                setTempData({ ...tempData, image: imageUrl });
+                setTempData({ ...tempData, image: imageUrl }); 
             }
         } 
-        else 
+        else
         {
             setTempData({ ...tempData, [name]: value });
         }
@@ -48,7 +63,7 @@ function Profile({ userData })
         setIsEditing(false);
     };
 
-    if (!userData) 
+    if (!userData.image) 
     {
         return (<div>Loading...</div>);
     }
@@ -101,7 +116,7 @@ function Profile({ userData })
                                 </>
                             ) : (
                                 <form onSubmit={handleSave}>
-                                    <div className="mb-4">
+                                      <div className="mb-4">
                                         <label className="form-label fw-bold">Profile image</label>
                                         <input type="file" name="profilePic" className="form-control" accept="image/*" onChange={handleChange}/>
                                     </div>
