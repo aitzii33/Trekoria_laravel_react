@@ -1,0 +1,9 @@
+node_modules
+vendor
+.env
+storage/logs/*
+bootstrap/cache/*
+.nyc_output
+coverage
+.DS_Store
+Thumbs.db
