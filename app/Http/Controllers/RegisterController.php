@@ -2,59 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Inertia\Inertia;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Mail\RegisterConfirmation;
-use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class RegisterController extends Controller
 {
+    // Show registration page
     public function form()
     {
-        return Inertia::render('RegistPage');
+        return Inertia::render('RegistPage'); // Make sure this path matches your React page
     }
 
-    public function sendEmail(Request $request)
+    // Store user in DB
+    public function store(Request $request)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'surname' => 'required|string|max:255',
-        'birthday' => 'required|date',
-        'email' => 'required|email|unique:users',
-        'username' => 'required|string|unique:users',
-        'password' => 'required|min:8|confirmed',  
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,user_name',
+            'email' => 'required|email|max:255|unique:users,email',
+            'birthday' => 'required|date|before:-18 years',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if (User::where('email', $request->email)->orWhere('username', $request->username)->exists()) 
-        {
-            return redirect()->back()->with('error', 'The user exist yet');
-        }
-
-        $pendingData = $request->only(['name', 'surname', 'birthday', 'email', 'username', 'password']);
-        $pendingData['token'] = Str::uuid(); 
-        $pendingData['pending_until'] = now()->addHour();
-
-        User::create($pendingData);  
-
-        Mail::to($request->email)->send(new RegisterConfirmation($pendingData));
-
-        return redirect()->back()->with('status', '¡Email enviado! Confirma para activar.');
-    }
-
-    public function confirm($token)
-    {
-        $user = User::where('pending_token', $token)->where('pending_until', '>', now())->firstOrFail();
-
-        $user->update([
-            'password' => Hash::make($user->password),
-            'pending_token' => null,
-            'pending_until' => null,
-            'email_verified_at' => now(),
+        $user = \App\Models\User::create([
+            'name' => $request->name,
+            'last_name' => null,
+            'user_name' => $request->username,
+            'birth_day' => $request->birthday,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+            'type_user' => 1,
+            'pending_token' => \Illuminate\Support\Str::uuid(),
+            'pending_until' => now()->addHour(),
+            'remember_token' => \Illuminate\Support\Str::random(10),
         ]);
 
-        return inertia('RegisterSuccess');
+        return redirect()->route('login')->with('status', 'Registration successful! Check your email to confirm.');
     }
-
 }

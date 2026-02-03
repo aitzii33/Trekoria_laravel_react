@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('type_users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('type_user', function (Blueprint $table) {
+            $table->id('id_typeUser'); // 1 = Normal, 2 = Admin
             $table->string('name');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('type_users');
+        Schema::dropIfExists('type_user');
     }
 };
+

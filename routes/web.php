@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\AdminController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
@@ -42,6 +43,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
+
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
 Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
 Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
@@ -66,7 +68,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
     Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 });
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::get('/customers', [AdminController::class, 'customers'])->name('customers');
+    Route::get('/activities', [AdminController::class, 'activities'])->name('activities');
+    Route::get('/analytics', [AdminController::class, 'analytics'])->name('analytics');
 
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::post('/bookings', [AdminController::class, 'storeBooking'])->name('bookings.store');
+    Route::put('/bookings/{id}', [AdminController::class, 'updateBooking'])->name('bookings.update');
+    Route::delete('/bookings/{id}', [AdminController::class, 'deleteBooking'])->name('bookings.delete');
+});
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+    Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
+});
 
 Route::middleware(['auth', 'can:admin'])->group(function () 
 {
