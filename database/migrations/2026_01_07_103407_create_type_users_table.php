@@ -8,9 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('type_user', function (Blueprint $table) {
-            $table->id('id_typeUser'); // 1 = Normal, 2 = Admin
-            $table->string('name');
+        Schema::create('type_users', function (Blueprint $table) {
+            $table->id();
+            $table->string('type_user');
+
             $table->timestamps();
         });
     }
