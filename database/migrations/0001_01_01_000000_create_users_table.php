@@ -20,9 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('birth_day')->nullable();
-            $table->smallInteger('type_user')->unsigned(); // FK to type_user
-            $table->string('pending_token')->nullable();
-            $table->timestamp('pending_until')->nullable();
+            $table->binary('image')->nullable();
+            $table->smallInteger('type_user')->unsigned();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

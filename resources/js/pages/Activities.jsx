@@ -1,16 +1,18 @@
+
+import { router } from '@inertiajs/react'
+import { useState } from "react"
+import { Container, Row, Button, Form, Col } from "reactstrap"
+import DatePicker from "react-datepicker"
+
+import Header from '../components/Header'
+import Footer from "../components/Footer"
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-datepicker/dist/react-datepicker.css"
 
 import '../../css/DatePicker.css'
 import '../../css/Activities.css'
 
-import Header from '../components/Header'
-import Footer from "../components/Footer"
-
-import { router } from '@inertiajs/react'
-import { useState } from "react"
-import { Container, Row, Button, Form, Col } from "reactstrap"
-import DatePicker from "react-datepicker"
 
 function Activities({ activities = [] }) 
 {

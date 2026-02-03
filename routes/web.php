@@ -45,8 +45,8 @@ Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])-
 
 
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
-Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
-Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
+Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
+Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
 
 Route::get('/Pay', [PayController::class, 'form'])->name('pay');

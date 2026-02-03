@@ -1,4 +1,6 @@
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
+
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 export default function ResetPassword({ token, email: initialEmail }) 

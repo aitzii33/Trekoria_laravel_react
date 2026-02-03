@@ -1,16 +1,21 @@
 import { useForm, usePage } from '@inertiajs/react' 
-import { router, Link } from '@inertiajs/react' 
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Link } from '@inertiajs/react'
+import { useState } from 'react' 
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import logo from '../img/logo.png'
-
 import '../../css/Register.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import logo from '../img/logo.png'
+import plane from '../img/plane.jpeg'
 
 function RegisterPage() 
 {
-  const { flash } = usePage().props  
+  const { flash } = usePage().props;
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const form = useForm({
   name: '',
@@ -22,12 +27,19 @@ function RegisterPage()
 });
 
 
-
   const Verify = (e) => 
   { 
-    e.preventDefault(); 
-    form.post(route('register.store'));
+    e.preventDefault();
+
+    form.post(route('register.store'), 
+    {
+      onSuccess: () => 
+      {
+        setShowConfirmModal(true); 
+      }
+    });
   };
+
 
   return ( 
     <> 
@@ -39,7 +51,6 @@ function RegisterPage()
               <img src={logo} alt="logo" className="logo-img" />
             </div>
 
-            <h1 className="fw-bold mb-3 text-center">Welcome to Tripify 🌍</h1>
             <p className="text-muted mb-3 text-center">
               Explore unforgettable trips, activities, and experiences worldwide.
             </p>
@@ -141,9 +152,12 @@ function RegisterPage()
 
           </div>
 
-          <div className="col-lg-6 right-panel d-flex flex-column justify-content-center align-items-center text-center p-4 bg-primary text-white">
+          <div className="col-lg-6 right-panel d-flex flex-column justify-content-center align-items-center text-center p-4 bg-primary text-white" >
+            {/*<img src={plane} alt='plane' style={{ height: '260px', width: '520px' }}></img>*/}
+
             <h2 className="mb-3">Already have an account?</h2>
             <p className="mb-4"> Click below to login and start your adventure! </p>
+
             <Link href='/login'>
               <button className="btn btn-outline-light px-4 py-2">
                 Login
@@ -152,7 +166,24 @@ function RegisterPage()
           </div>
         </div>
       </div>
-      <Footer />
+
+      <Modal isOpen={showConfirmModal} toggle={() => setShowConfirmModal(false)}>
+        <ModalHeader toggle={() => setShowConfirmModal(false)}>
+          ¡Registro exitoso!
+        </ModalHeader>
+
+        <ModalBody>
+          We've sent a confirmation email to your account.
+          <br />
+          Check your inbox (and spam folder).
+        </ModalBody>
+
+        <ModalFooter>
+          <Button color="primary" onClick={() => setShowConfirmModal(false)}>
+            OK, check email
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   );
 }

@@ -1,24 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from '@inertiajs/react'  
 
-import '../../css/Profile.css'
-
-import Userimg from '../img/Girl.avif'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
-function Profile() 
+import '../../css/Profile.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import Userimg from '../img/Girl.avif'; 
+
+
+function Profile() //{ userData }
 {
+    const [isEditing, setIsEditing] = useState(false);
+
     const [userData, setUserData] = useState({
         username: 'devUser',
         fullName: 'Shannon Doe',
         birthDate: '1998-05-12',
         email: 'shannon@example.com',
-        profilePic: Userimg,
+        image: Userimg,
     });
 
-    const [isEditing, setIsEditing] = useState(false);
     const [tempData, setTempData] = useState(userData);
+
+    useEffect(() => {
+        setTempData(userData);
+    }, [userData]);
 
     const handleEdit = () => 
     {
@@ -26,8 +34,7 @@ function Profile()
         setIsEditing(!isEditing);
     };
 
-    const handleChange = (e) => 
-    {
+    const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (name === 'profilePic') 
         {
@@ -35,10 +42,10 @@ function Profile()
             if (file) 
             {
                 const imageUrl = URL.createObjectURL(file);
-                setTempData({ ...tempData, profilePic: imageUrl });
+                setTempData({ ...tempData, image: imageUrl }); 
             }
         } 
-        else 
+        else
         {
             setTempData({ ...tempData, [name]: value });
         }
@@ -56,6 +63,11 @@ function Profile()
         setIsEditing(false);
     };
 
+    if (!userData.image) 
+    {
+        return (<div>Loading...</div>);
+    }
+
     return (
         <>
             <Header />
@@ -63,8 +75,8 @@ function Profile()
                 <div className="container">
                     <div className={`card profile-card ${isEditing ? 'edit-mode' : ''}`}>
                         <div className="profile-header text-center">
-                            <img src={isEditing ? tempData.profilePic : userData.profilePic} alt="Profile" className="profile-avatar mx-auto d-block"/>
-                            <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
+                            <img src={isEditing ? tempData.image : userData.image} alt="Profile" className="profile-avatar mx-auto d-block"/>
+                            <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
                                 {isEditing ? tempData.username : userData.username}
                             </p>
                             <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
@@ -86,19 +98,17 @@ function Profile()
                                         </div>
                                     </div>
 
-                                    <div className="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                                        <button className="btn btn-edit" onClick={handleEdit}>
+                                    <div className="profile-buttons-center mt-4">
+                                        <Link href="/home" className="btn btn-secondary profile-btn">
+                                            Return to home
+                                        </Link>
+                                        
+                                        <button className="btn btn-edit profile-btn" onClick={handleEdit}>
                                             Edit profile
                                         </button>
-
-                                        <Link href="/home">
-                                            <button className="btn btn-secondary">
-                                                Return to home
-                                            </button>
-                                        </Link>
-
-                                        <form action="/profile/delete" method="POST">
-                                            <button type="submit" className="btn btn-save">
+                                        
+                                        <form action="/profile/delete" method="POST" className="d-inline">
+                                            <button type="submit" className="btn btn-save profile-btn">
                                                 Delete profile
                                             </button>
                                         </form>
@@ -106,7 +116,7 @@ function Profile()
                                 </>
                             ) : (
                                 <form onSubmit={handleSave}>
-                                    <div className="mb-4">
+                                      <div className="mb-4">
                                         <label className="form-label fw-bold">Profile image</label>
                                         <input type="file" name="profilePic" className="form-control" accept="image/*" onChange={handleChange}/>
                                     </div>
@@ -133,12 +143,12 @@ function Profile()
                                         </div>
                                     </div>
 
-                                    <div className="d-flex justify-content-between mt-4">
+                                    <div className="profile-buttons">  
                                         <button type="button" className="btn btn-cancel" onClick={handleCancel}>
                                             Cancel
                                         </button>
 
-                                        <form action="/profile/modify" method="POST">
+                                        <form action="/profile/modify" method="POST" className="d-inline">
                                             <button type="submit" className="btn btn-save">
                                                 Save changes
                                             </button>

@@ -58,9 +58,8 @@ function Footer()
                     <div className="row d-flex align-items-center">
                         <div className="col-md-7 col-lg-8 text-center text-md-start">
                             <div className="p-3 text-black">
-                                © 2020 Copyright:
                                 <p className="text-black" href="https://Trekoria.com/" target="_blank" rel="noopener noreferrer">
-                                    Trekoria.com
+                                    © 2020 Copyright: Trekoria.com
                                 </p>
                             </div>
                         </div>

@@ -35,12 +35,10 @@ class LogInController extends Controller
                 return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
 
-            // Redirect based on user type
-            if ($user->type_user == 2) {
-                return redirect()->route('admin.dashboard'); // admin dashboard
-            }
-
-            return redirect()->intended('/home'); // normal user
+            $userdata = Auth::user();
+            $cookie = cookie('userdata', json_encode($userdata), 60);  
+            
+            return redirect()->intended('/home')->cookie($cookie);  
         }
 
         return redirect()->back()->with('status', 'The username or password is incorrect.');
