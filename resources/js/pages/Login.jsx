@@ -1,22 +1,31 @@
-import logo from '../img/logo.png'
-
-import "../../css/LogIn.css"
-
-import { useState } from 'react'
 import { router, Link } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
+import { useState, useEffect } from 'react'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
+import "../../css/LogIn.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import logo from '../img/logo.png'
 
 
 function Login() 
 {
     const [status, setStatus] = useState('');
-    const [user_name, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [rememberMe, setRememberMe] = useState(false);
     const [form, setForm] = useState({ user_name: '', password: ''});
+
+    useEffect(() => 
+    {
+        const saved = localStorage.getItem('rememberMe');
+
+        if (saved === 'true') 
+        {
+            setRememberMe(true);
+        }
+    }, []);
  
     const Verify = (e) => 
     { 
@@ -38,7 +47,20 @@ function Login()
         {
             router.visit(route('home')); 
         } 
-      }; 
+
+        if (rememberMe) 
+        {
+            localStorage.setItem('userToken', token);
+        }
+    };
+    
+    const handleRememberChange = (e) => 
+    {
+        const isChecked = e.target.checked;
+        setRememberMe(isChecked);
+        localStorage.setItem('rememberMe', isChecked);
+    };
+
 
     return (
         <> 
@@ -59,7 +81,10 @@ function Login()
                                 <input type="password" className="form-control" name="password" onBlur={(e) => setPassword(e.target.value)} placeholder="Introduce your password" required/>
                             </div>
 
-                            <input type="checkbox" id='remember' placeholder='Remember me'></input>
+                            <div className="checkbox-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+                                <input type="checkbox" id="remember" checked={rememberMe} onChange={handleRememberChange}/>
+                                <label htmlFor="remember" style={{ margin: 0 }}>Remember me</label>
+                            </div>
 
                             <div className="text-center pt-1 mb-5 pb-1">
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>
@@ -77,7 +102,6 @@ function Login()
                     </div>
                 </div>
             </Container>
-            <Footer />
         </>
     )
 }

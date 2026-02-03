@@ -1,5 +1,3 @@
-import "react-datepicker/dist/react-datepicker.css"
-
 import { Container, Row, Col, Dropdown } from "reactstrap"
 import { useState } from "react"
 import DatePicker from "react-datepicker"
@@ -8,6 +6,8 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 import "../../css/DatePicker.css"
+import "react-datepicker/dist/react-datepicker.css"
+
 
 function ActivitiesInfo({ activity = null }) 
 {

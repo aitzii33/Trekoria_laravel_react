@@ -1,13 +1,14 @@
-import '../../css/Contact.css'
-
 import { ProveEmail, ProveMessage } from '../Funtions'
 import { useState } from 'react'
 import { usePage, useForm } from '@inertiajs/react'
 
-import error from '../components/alert-error'
-
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
+import '../../css/Contact.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import error from '../components/alert-error'
 
 
 
@@ -117,7 +118,6 @@ function ContactUs()
                 {status && <p className="text-danger mt-2">{status}</p>}
                 {serverStatus && <p className="text-success mt-2">{serverStatus}</p>}
             </form>
-            <Footer />
         </>
     )
 }

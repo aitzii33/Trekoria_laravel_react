@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Carousel, Form, Button, InputGroup, Card, Row, Col } from "react-bootstrap"
-import { Link, router } from '@inertiajs/react' 
+import { router } from '@inertiajs/react' 
 import { useTranslation } from "react-i18next"
 
 import Header from "../components/Header"

@@ -3,12 +3,13 @@ import { useState } from 'react'
 
 import Header from '../components/Header'
 
-import BoatImg from "../img/Boat.avif"
-
 import '../../css/Cart.css'
 
+import BoatImg from "../img/Boat.avif"
 
-function Cart() {
+
+function Cart() 
+{
     const { activities } = usePage().props;
     const [quantities, setQuantities] = useState(
         activities.reduce((acc, activity) => 
@@ -18,20 +19,22 @@ function Cart() {
         }, {})
     );
 
-    const getTotal = () => {
+    const getTotal = () => 
+    {
         return activities.reduce((sum, activity) => {
             const qty = quantities[activity.id] || 1;
             return sum + (activity.price * qty);
         }, 0);
     };
 
-    const eliminate = (id) => {
+    const eliminate = (id) => 
+    {
         router.delete(route('cart.destroy', id));
     };
 
-    const updateQuantity = (id, quantity) => {
+    const updateQuantity = (id, quantity) => 
+    {
         setQuantities(prev => ({ ...prev, [id]: parseInt(quantity) }));
-        // Here you could also make an API call to update cart in backend
         router.post(route('cart.update', id), { quantity: parseInt(quantity) });
     };
 

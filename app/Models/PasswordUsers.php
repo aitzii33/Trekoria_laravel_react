@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PasswordUsers extends Model
 {
+    use HasFactory;
+    
     protected $fillable = ['id_user', 'user', 'password'];
 
     public function user()
