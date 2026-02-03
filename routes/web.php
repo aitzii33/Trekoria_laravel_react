@@ -61,7 +61,8 @@ Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.crea
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () 
+{
     Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'addActivity'])->name('cart.add');
     Route::post('/cart/{id}/update', [CartController::class, 'updateQuantity'])->name('cart.update');
@@ -97,5 +98,6 @@ Route::middleware(['auth', 'can:admin'])->group(function ()
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
-
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
+
+Route::post('/usuarios-masivo', [AdminController::class, 'createfromfile']);

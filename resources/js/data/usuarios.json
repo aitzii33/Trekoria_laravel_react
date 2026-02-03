@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Ana López Pérez",
+    "last_name": "López Pérez",
+    "user_name": "ana_lopez",
+    "email": "ana.lopez@test.com",
+    "password": "password123",
+    "birth_day": "1990-05-15",
+    "image": null,
+    "type_user_id": 1
+  },
+  {
+    "name": "Carlos Admin",
+    "last_name": "García Ruiz",
+    "user_name": "carlos_admin",
+    "email": "admin@test.com",
+    "password": "admin123",
+    "birth_day": "1985-03-22",
+    "image": null,
+    "type_user_id": 2
+  },
+  {
+    "name": "María Fernández",
+    "last_name": "Fernández Gómez",
+    "user_name": "maria_fernandez",
+    "email": "maria@test.com",
+    "password": "maria456",
+    "birth_day": "1992-11-08",
+    "image": null,
+    "type_user_id": 1
+  },
+  {
+    "name": "Pedro Martínez",
+    "last_name": "Martínez Soto",
+    "user_name": "pedro_martinez",
+    "email": "pedro@test.com",
+    "password": "pedro789",
+    "birth_day": "1988-07-30",
+    "image": null,
+    "type_user_id": 1
+  }
+]
