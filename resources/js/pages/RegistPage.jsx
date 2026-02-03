@@ -18,14 +18,14 @@ function RegisterPage()
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const form = useForm({
-    name: '',
-    surname: '',
-    birthday: '',
-    email: '',
-    username: '',
-    password: '',
-    password_confirmation: ''
-  })
+  name: '',
+  username: '',
+  email: '',
+  birthday: '',
+  password: '',
+  password_confirmation: '',
+});
+
 
   const Verify = (e) => 
   { 
@@ -63,48 +63,93 @@ function RegisterPage()
             )}
 
             <form onSubmit={Verify} className="w-100"> 
-              <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your name" value={form.name} onChange={e => form.setData('name', e.target.value)} required/>
-                {form.errors.name && <small className="text-danger">{form.errors.name}</small>}
-              </div> 
 
-              <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your surname" value={form.surname} onChange={e => form.setData('surname', e.target.value)} required/>
-                {form.errors.surname && <small className="text-danger">{form.errors.surname}</small>}
-              </div> 
+            {/* Name */}
+            <div className="form-outline mb-2"> 
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={e => form.setData('name', e.target.value)}
+                required
+              />
+              {form.errors.name && <small className="text-danger">{form.errors.name}</small>}
+            </div> 
 
-              <div className="form-outline mb-2">
-                <input type="date" className="form-control" value={form.birthday} onChange={e => form.setData('birthday', e.target.value)} required/>
-                {form.errors.birthday && <small className="text-danger">{form.errors.birthday}</small>}
-              </div> 
+            {/* Birthday */}
+            <div className="form-outline mb-2">
+              <input 
+                type="date" 
+                  name="birthday"
+                className="form-control" 
+                value={form.birthday} 
+                onChange={e => form.setData('birthday', e.target.value)} 
+                required
+              />
+              {form.errors.birthday && <small className="text-danger">{form.errors.birthday}</small>}
+            </div> 
 
-              <div className="form-outline mb-2"> 
-                <input type="email" className="form-control" placeholder="Introduce your email" value={form.email} onChange={e => form.setData('email', e.target.value)} required/>
-                {form.errors.email && <small className="text-danger">{form.errors.email}</small>}
-              </div> 
+            {/* Email */}
+            <div className="form-outline mb-2"> 
+              <input 
+                type="email" 
+                className="form-control" 
+                name="email"
+                placeholder="Introduce your email" 
+                value={form.email} 
+                onChange={e => form.setData('email', e.target.value)} 
+                required
+              />
+              {form.errors.email && <small className="text-danger">{form.errors.email}</small>}
+            </div> 
 
-              <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your username" value={form.username} onChange={e => form.setData('username', e.target.value)} required/>
-                {form.errors.username && <small className="text-danger">{form.errors.username}</small>}
-              </div> 
+            {/* Username */}
+            <div className="form-outline mb-2"> 
+              <input 
+                type="text" 
+                className="form-control" 
+                name="username"
+                placeholder="Introduce your username" 
+                value={form.username} 
+                onChange={e => form.setData('username', e.target.value)} 
+                required
+              />
+              {form.errors.username && <small className="text-danger">{form.errors.username}</small>}
+            </div> 
 
-              <div className="form-outline mb-2"> 
-                <input type="password" className="form-control" placeholder="Introduce your password" value={form.password} onChange={e => form.setData('password', e.target.value)} required/>
-                {form.errors.password && <small className="text-danger">{form.errors.password}</small>}
-              </div> 
+            {/* Password */}
+            <div className="form-outline mb-2"> 
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={e => form.setData('password', e.target.value)}
+                required
+              />
+              {form.errors.password && <small className="text-danger">{form.errors.password}</small>}
+            </div> 
 
-              <div className="form-outline mb-3"> 
-                <input type="password" className="form-control" placeholder="Repeat your password" value={form.password_confirmation} onChange={e => form.setData('password_confirmation', e.target.value)} required/>
-              </div>
+            {/* Password Confirmation */}
+            <div className="form-outline mb-3"> 
+              <input
+                type="password"
+                name="password_confirmation"
+                value={form.password_confirmation}
+                onChange={e => form.setData('password_confirmation', e.target.value)}
+                required
+              />
+            </div>
 
-              <button className="btn btn-primary w-100 mb-3" type="submit" disabled={form.processing} > 
-                {form.processing ? 'Enviando...' : 'Register'}
-              </button> 
+            {/* Submit Button */}
+            <button className="btn btn-primary w-100 mb-3" type="submit" disabled={form.processing}> 
+              {form.processing ? 'Enviando...' : 'Register'}
+            </button> 
 
-              <small className="text-muted d-block text-center">
-                By registering, you agree to our Terms & Privacy Policy.
-              </small>
-            </form>
+            <small className="text-muted d-block text-center">
+              By registering, you agree to our Terms & Privacy Policy.
+            </small>
+          </form>
+
           </div>
 
           <div className="col-lg-6 right-panel d-flex flex-column justify-content-center align-items-center text-center p-4 bg-primary text-white" >
