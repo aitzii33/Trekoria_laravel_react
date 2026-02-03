@@ -43,6 +43,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
+
 Route::get('/Profile', [ProfileController::class, 'form'])->name('profile');
 Route::post('/Delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
 Route::post('/Modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
@@ -76,6 +77,20 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 });
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::post('/bookings', [AdminController::class, 'storeBooking'])->name('bookings.store');
+    Route::put('/bookings/{id}', [AdminController::class, 'updateBooking'])->name('bookings.update');
+    Route::delete('/bookings/{id}', [AdminController::class, 'deleteBooking'])->name('bookings.delete');
+});
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+    Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
+});
 
 Route::middleware(['auth', 'can:admin'])->group(function () 
 {

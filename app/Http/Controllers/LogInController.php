@@ -8,39 +8,41 @@ use Illuminate\Support\Facades\Auth;
 
 class LogInController extends Controller
 {
+    // Show login page
     public function form()
     {
-        return Inertia::render('Login', ['status' => session('status')]);
+        return Inertia::render('Login'); // make sure this matches your React page path
     }
 
+    // Handle login POST
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'user_name' => 'required|text',
-            'password' => 'required|string'
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) 
-        {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (!Auth::user()->hasVerifiedEmail()) 
-            {
+            $user = Auth::user();
+
+            // Check if email is verified
+            if ($user->pending_token !== null && $user->pending_until !== null && now()->lt($user->pending_until)) {
                 Auth::logout();
                 return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
 
-            return redirect()->intended('/home');
+            // Redirect based on user type
+            if ($user->type_user == 2) {
+                return redirect()->route('admin.dashboard'); // admin dashboard
+            }
+
+            return redirect()->intended('/home'); // normal user
         }
 
         return redirect()->back()->with('status', 'The username or password is incorrect.');
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/login');
     }
 }

@@ -15,17 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('user_name')->nullable();
+            $table->string('user_name')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();  
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('birth_day')->nullable();
-            $table->smallInteger('type_user')->unsigned();
+            $table->smallInteger('type_user')->unsigned(); // FK to type_user
+            $table->string('pending_token')->nullable();
+            $table->timestamp('pending_until')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('type_user')->references('id_typeUser')->on('type_user');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
