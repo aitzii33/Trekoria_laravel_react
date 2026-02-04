@@ -60,6 +60,12 @@ function Login()
         localStorage.setItem('rememberMe', isChecked);
     };
 
+    const handleLogin = (e) => 
+    {
+        e.preventDefault(); 
+        post('/login/prove'); 
+    };
+
 
     return (
         <> 
@@ -86,7 +92,9 @@ function Login()
                             </div>
 
                             <div className="text-center pt-1 mb-5 pb-1">
-                                <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>
+                                <button onClick={handleLogin} className="btn btn-primary w-100 mb-3">
+                                    Log in
+                                </button>
                                 {status && <p className="text-danger">{status}</p>}
 
                                 <Link href="/forgotPass">

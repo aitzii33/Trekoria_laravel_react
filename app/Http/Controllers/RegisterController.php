@@ -19,12 +19,12 @@ class RegisterController extends Controller
     public function sendEmail(Request $request)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'surname' => 'required|string|max:255',
-        'birthday' => 'required|date',
-        'email' => 'required|email|unique:users',
-        'username' => 'required|string|unique:users',
-        'password' => 'required|min:8|confirmed',  
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|string|unique:users',
+            'password' => 'required|min:8|confirmed',  
         ]);
 
         if (User::where('email', $request->email)->orWhere('username', $request->username)->exists()) 

@@ -1,6 +1,5 @@
-import { useForm, usePage } from '@inertiajs/react' 
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { Link } from '@inertiajs/react'
+import { Link, useForm, usePage } from '@inertiajs/react' 
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { useState } from 'react' 
 
 import Header from '../components/Header'
@@ -36,6 +35,12 @@ function RegisterPage()
         setShowConfirmModal(true); 
       }
     });
+  };
+
+  const handleRegister = (e) => 
+  {
+    e.preventDefault(); 
+    post('/register/send'); 
   };
 
 
@@ -95,11 +100,9 @@ function RegisterPage()
                 <input type="password" className="form-control" placeholder="Repeat your password" value={form.password_confirmation} onChange={e => form.setData('password_confirmation', e.target.value)} required/>
               </div>
 
-              <form action="/register" method="POST" className="d-inline">
-                <button type="submit" className="btn btn-primary w-100 mb-3">
-                  Register
-                </button>
-              </form> 
+              <button onClick={handleRegister} className="btn btn-primary w-100 mb-3">
+                Register
+              </button>
 
               <small className="text-muted d-block text-center">
                 By registering, you agree to our Terms & Privacy Policy.

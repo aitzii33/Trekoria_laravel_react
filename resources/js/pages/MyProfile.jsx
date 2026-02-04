@@ -63,6 +63,24 @@ function Profile() //{ userData }
         setIsEditing(false);
     };
 
+    const handleDelete = (e) => 
+    {
+        e.preventDefault(); 
+        post('/profile/delete'); 
+    };
+
+    const handleLogout = (e) => 
+    {
+        e.preventDefault(); 
+        post('/logout'); 
+    };
+
+    const handleModify = (e) => 
+    {
+        e.preventDefault(); 
+        post('/profile/modify'); 
+    };
+
     if (!userData.image) 
     {
         return (<div>Loading...</div>);
@@ -107,17 +125,13 @@ function Profile() //{ userData }
                                             Edit profile
                                         </button>
                                         
-                                        <form action="/profile/delete" method="POST" className="d-inline">
-                                            <button type="submit" className="btn btn-edit profile-btn">
-                                                Delete profile
-                                            </button>
-                                        </form>
+                                        <button onClick={handleDelete} className="btn btn-edit profile-btn">
+                                            Delete profile
+                                        </button>
 
-                                        <form action="/logout" method="POST" className="d-inline">
-                                            <button type="submit" className="btn btn-secondary profile-btn">
-                                                Log out
-                                            </button>
-                                        </form>
+                                        <button onClick={handleLogout} className="btn btn-secondary profile-btn">
+                                            Log out
+                                        </button>
                                     </div>
                                 </>
                             ) : (
@@ -150,15 +164,13 @@ function Profile() //{ userData }
                                     </div>
 
                                     <div className="profile-buttons">  
-                                        <button type="button" className="btn btn-cancel" onClick={handleCancel}>
+                                        <button type="button" className="btn btn-cancel profile-btn" onClick={handleCancel}>
                                             Cancel
                                         </button>
 
-                                        <form action="/profile/modify" method="POST" className="d-inline">
-                                            <button type="submit" className="btn btn-save">
-                                                Save changes
-                                            </button>
-                                        </form>
+                                        <button onClick={handleModify} className="btn btn-save profile-btn">
+                                            Save changes
+                                        </button>
                                     </div>
                                 </form>
                             )}

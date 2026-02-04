@@ -38,7 +38,7 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/register', [RegisterController::class, 'form'])->name('register.form');
-Route::post('/register', [RegisterController::class, 'sendEmail'])->name('register.send');
+Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.send');
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 

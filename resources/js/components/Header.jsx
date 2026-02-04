@@ -20,6 +20,13 @@ function Head({ currentLanguage, setLanguage})
         setShowDropdown((prev) => !prev);
     };
 
+    const handleLogout = (e) => 
+    {
+        e.preventDefault(); 
+        setShowDropdown(false);
+        post('/logout'); 
+    };
+
     useEffect(() => 
     {
         const handleClickOutside = () => setShowDropdown(false);
@@ -157,7 +164,7 @@ function Head({ currentLanguage, setLanguage})
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/logout" method="post" onClick={hideDropdown} style={{ display: 'block', padding: '12px 16px', 
+                                        <Link href="/logout" method="post" onClick={handleLogout} style={{ display: 'block', padding: '12px 16px', 
                                                                                                            color: '#dc3545', textDecoration: 'none', 
                                                                                                            fontWeight: 500 }}> 
                                             Close session 
