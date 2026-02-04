@@ -28,6 +28,10 @@ return new class extends Migration
                 $table->softDeletes();
                 $table->rememberToken();
                 $table->timestamps();
+                // migration
+                $table->uuid('pending_token')->nullable();
+                $table->timestamp('pending_until')->nullable();
+                $table->boolean('is_pending')->default(true);
             });
 
 

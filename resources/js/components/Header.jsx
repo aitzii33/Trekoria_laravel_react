@@ -14,12 +14,14 @@ function Head({ currentLanguage, setLanguage})
     
     const hideDropdown = () => setShowDropdown(false);
 
-    const toggleDropdown = (e) => {
+    const toggleDropdown = (e) => 
+    {
         e.stopPropagation();
         setShowDropdown((prev) => !prev);
     };
 
-    useEffect(() => {
+    useEffect(() => 
+    {
         const handleClickOutside = () => setShowDropdown(false);
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
@@ -27,20 +29,22 @@ function Head({ currentLanguage, setLanguage})
 
     const showSearchForm = ["/Activity", "/Activity.details"].includes(url);
 
-    const handleSearch = (e) => {
+    const handleSearch = (e) => 
+    {
         e.preventDefault();
         const query = e.target.search.value;
         console.log("Search:", query);
         router.visit('/activities'); 
     };
 
-    const renderRegisterCTA = () => {
+    const renderRegisterCTA = () => 
+    {
         if (auth.user) return null;
         
         return (
             <div className="register-cta me-4">
                 <Link 
-                    href="/Register" 
+                    href="/register" 
                     className="btn-cta-register"
                     style={{ 
                         background: 'linear-gradient(45deg, #ff6b6b, #feca57)', 
@@ -54,15 +58,18 @@ function Head({ currentLanguage, setLanguage})
                         fontSize: '14px', 
                         display: 'inline-block'
                     }}
-                    onMouseEnter={(e) => {
+
+                    onMouseEnter={(e) => 
+                    {
                         e.target.style.transform = 'translateY(-2px)';
                         e.target.style.boxShadow = '0 6px 20px rgba(255,107,107,0.6)';
                     }}
-                    onMouseLeave={(e) => {
+
+                    onMouseLeave={(e) => 
+                    {
                         e.target.style.transform = 'translateY(0)';
                         e.target.style.boxShadow = '0 4px 15px rgba(255,107,107,0.4)';
-                    }}
-                >
+                    }}>
                     Sign up for free!
                 </Link>
             </div>

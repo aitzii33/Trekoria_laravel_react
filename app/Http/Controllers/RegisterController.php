@@ -32,29 +32,32 @@ class RegisterController extends Controller
             return redirect()->back()->with('error', 'The user exist yet');
         }
 
-        $pendingData = $request->only(['name', 'surname', 'birthday', 'email', 'username', 'password']);
-        $pendingData['token'] = Str::uuid(); 
+        $pendingData['password'] = $request->password;
+        $pendingData['pending_token'] = Str::uuid();
         $pendingData['pending_until'] = now()->addHour();
+        $pendingData['is_pending'] = true;
 
-        User::create($pendingData);  
+        $user = User::create($pendingData);
 
-        Mail::to($request->email)->send(new RegisterConfirmation($pendingData));
+        Mail::to($user->email)->send(new RegisterConfirmation($user));
 
-        return redirect()->back()->with('status', '¡Email enviado! Confirma para activar.');
+        return back()->with('status', 'Email sent! Confirm to activate.');
     }
 
     public function confirm($token)
     {
-        $user = User::where('pending_token', $token)->where('pending_until', '>', now())->firstOrFail();
+        $user = User::where('pending_token', $token)->where('pending_until', '>', now())->where('is_pending', true)->firstOrFail();
 
         $user->update([
             'password' => Hash::make($user->password),
             'pending_token' => null,
             'pending_until' => null,
+            'is_pending' => false,
             'email_verified_at' => now(),
         ]);
 
+        Auth::login($user);
+
         return inertia('RegisterSuccess');
     }
-
 }

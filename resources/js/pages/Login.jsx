@@ -89,7 +89,7 @@ function Login()
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>
                                 {status && <p className="text-danger">{status}</p>}
 
-                                <Link href="/ForgotPass">
+                                <Link href="/forgotPass">
                                     <p className="link" style={{ color:'black' }}>Forgot password/user?</p>
                                 </Link>
                             </div>
@@ -97,7 +97,7 @@ function Login()
                             <div className="d-flex align-items-center justify-content-center pb-4">
                                 <p className="mb-0 me-2">Don't have an account?</p>
 
-                                <Link href="/Register">
+                                <Link href="/register">
                                     <p className="btn btn-outline-danger">Register</p>
                                 </Link>
                             </div>

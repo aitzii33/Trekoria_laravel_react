@@ -103,13 +103,19 @@ function Profile() //{ userData }
                                             Return to home
                                         </Link>
                                         
-                                        <button className="btn btn-edit profile-btn" onClick={handleEdit}>
+                                        <button className="btn btn-save profile-btn" onClick={handleEdit}>
                                             Edit profile
                                         </button>
                                         
                                         <form action="/profile/delete" method="POST" className="d-inline">
-                                            <button type="submit" className="btn btn-save profile-btn">
+                                            <button type="submit" className="btn btn-edit profile-btn">
                                                 Delete profile
+                                            </button>
+                                        </form>
+
+                                        <form action="/logout" method="POST" className="d-inline">
+                                            <button type="submit" className="btn btn-secondary profile-btn">
+                                                Log out
                                             </button>
                                         </form>
                                     </div>
