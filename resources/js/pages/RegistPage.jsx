@@ -4,13 +4,11 @@ import { Link } from '@inertiajs/react'
 import { useState } from 'react' 
 
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 
 import '../../css/Register.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import logo from '../img/logo.png'
-import plane from '../img/plane.jpeg'
 
 function RegisterPage() 
 {

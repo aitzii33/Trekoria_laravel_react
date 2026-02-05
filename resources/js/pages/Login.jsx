@@ -3,7 +3,6 @@ import { Container } from 'reactstrap'
 import { useState, useEffect } from 'react'
 
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 
 import "../../css/LogIn.css"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -89,6 +88,10 @@ function Login()
                             <div className="text-center pt-1 mb-5 pb-1">
                                 <button className="btn btn-primary btn-block fa-lg mb-3" type="submit">Log in</button>
                                 {status && <p className="text-danger">{status}</p>}
+
+                                <Link href="/ForgotPass">
+                                    <p className="link" style={{ color:'black' }}>Forgot password/user?</p>
+                                </Link>
                             </div>
 
                             <div className="d-flex align-items-center justify-content-center pb-4">

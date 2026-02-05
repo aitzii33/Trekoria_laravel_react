@@ -23,27 +23,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        TypeUsers::create(['name' => 'Admin']);
-        TypeUsers::create(['name' => 'User']);
-        
+        TypeUsers::firstOrCreate(['type_user' => 'Admin']);
+        TypeUsers::firstOrCreate(['type_user' => 'User']);
+
         Places::create([
             'city' => 'Madrid', 
             'country' => 'Spain', 
             'continent' => 'Europe'
         ]);
-        
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'surname' => 'Test',
-                'username' => 'testuser',
-                'type_user' => 1,
-                'birth_day' => '1990-01-01',
-                'password' => Hash::make('password'),
-            ]
-        );
-        
-        User::factory(40)->create();
+
+        Activities::create([
+            'place_id' => 1,
+            'name' => 'ride a horse',
+            'description' => 'It would be a group of 5 persons and a instructore. This activity has a 40 minutes of duration.',
+            'location' => 'C. de Medellín, nº10, 4º-1',
+        ]);
+
+
+        User::create(
+        ['email' => 'shannon@example.com'],
+        [
+            'name' => 'Shannon',
+            'last_name' => 'Doe',
+            'user_name' => 'testuser',
+            'birth_day' => '1998-05-12',
+            'type_user' => 1,
+            'password' => Hash::make('12345'),
+        ]);
     }
 }

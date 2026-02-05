@@ -1,7 +1,12 @@
+import { useState } from 'react'
+
 import '../../css/Contact.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 function ForgotPass()
 {
+    const [status, setStatus] = useState('');
     const [email, setEmail] = useState('');
 
     const Verify = (e) => 

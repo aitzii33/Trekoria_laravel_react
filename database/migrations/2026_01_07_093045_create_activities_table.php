@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('place_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
-            $table->string('continent');
+            $table->string('location');
             $table->string('imagen')->nullable();
             $table->timestamps();
         });
