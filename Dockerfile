@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY resources/js resources/js
-COPY vite.config.js .
+# COPY vite.config.js .
 RUN npm run build
 
 # Production
