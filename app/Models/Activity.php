@@ -8,12 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Activity extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name', 'description'];
 
+    // Fillable fields for mass assignment
+    protected $fillable = [
+        'place_id',
+        'name',
+        'description',
+        'location',
+        'image',
+        'price',
+        'is_active',
+    ];
+
+    // Relationships
     public function place()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Places::class);
     }
 
     public function timeSchedules()
