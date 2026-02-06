@@ -27,12 +27,11 @@ class RegisterController extends Controller
             'password' => 'required|min:8|confirmed',  
         ]);
 
-        if (User::where('email', $request->email)->orWhere('username', $request->username)->exists()) 
-        {
-            return redirect()->back()->with('error', 'The user exist yet');
-        }
-
-        $pendingData['password'] = $request->password;
+        $pendingData = $request->only([
+            'name', 'surname', 'birthday', 'email', 'username'
+        ]);
+        
+        $pendingData['password'] = $request->password; 
         $pendingData['pending_token'] = Str::uuid();
         $pendingData['pending_until'] = now()->addHour();
         $pendingData['is_pending'] = true;
@@ -41,8 +40,9 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new RegisterConfirmation($user));
 
-        return back()->with('status', 'Email sent! Confirm to activate.');
+        return back()->with('status', 'Email sent! Confirm to activate.'); 
     }
+
 
     public function confirm($token)
     {

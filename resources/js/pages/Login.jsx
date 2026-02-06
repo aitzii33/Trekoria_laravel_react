@@ -92,7 +92,7 @@ function Login()
                             </div>
 
                             <div className="text-center pt-1 mb-5 pb-1">
-                                <button onClick={handleLogin} className="btn btn-primary w-100 mb-3">
+                                <button onClick={handleLogin} className="btn btn-primary">
                                     Log in
                                 </button>
                                 {status && <p className="text-danger">{status}</p>}

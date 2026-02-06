@@ -3,18 +3,16 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { useState } from 'react' 
 
 import Header from '../components/Header'
-
 import '../../css/Register.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+import logo from '../img/logo.png'  
 
-import logo from '../img/logo.png'
-
-function RegisterPage() 
+function RegisterPage()
 {
   const { flash } = usePage().props;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const form = useForm({
+  const { data, setData, post, processing, errors } = useForm({
     name: '',
     surname: '',
     birthday: '',
@@ -22,27 +20,19 @@ function RegisterPage()
     username: '',
     password: '',
     password_confirmation: ''
-  })
+  });
 
-  const Verify = (e) => 
-  { 
+  const handleSubmit = (e) => 
+  {
     e.preventDefault();
-
-    form.post(route('register.store'), 
-    {
+    post(route('register.sendEmail'), 
+    { 
       onSuccess: () => 
       {
         setShowConfirmModal(true); 
       }
     });
   };
-
-  const handleRegister = (e) => 
-  {
-    e.preventDefault(); 
-    post('/register/send'); 
-  };
-
 
   return ( 
     <> 
@@ -65,43 +55,43 @@ function RegisterPage()
               <div className="alert alert-danger mb-3">{flash.error}</div>
             )}
 
-            <form onSubmit={Verify} className="w-100"> 
+            <form onSubmit={handleSubmit} className="w-100"> 
               <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your name" value={form.name} onChange={e => form.setData('name', e.target.value)} required/>
-                {form.errors.name && <small className="text-danger">{form.errors.name}</small>}
+                <input type="text" className="form-control" placeholder="Introduce your name" value={data.name} onChange={e => setData('name', e.target.value)} required/>
+                {errors.name && <small className="text-danger">{errors.name}</small>}
               </div> 
 
               <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your surname" value={form.surname} onChange={e => form.setData('surname', e.target.value)} required/>
-                {form.errors.surname && <small className="text-danger">{form.errors.surname}</small>}
+                <input type="text" className="form-control" placeholder="Introduce your surname" value={data.surname} onChange={e => setData('surname', e.target.value)} required/>
+                {errors.surname && <small className="text-danger">{errors.surname}</small>}
               </div> 
 
               <div className="form-outline mb-2">
-                <input type="date" className="form-control" value={form.birthday} onChange={e => form.setData('birthday', e.target.value)} required/>
-                {form.errors.birthday && <small className="text-danger">{form.errors.birthday}</small>}
+                <input type="date" className="form-control" value={data.birthday} onChange={e => setData('birthday', e.target.value)} required/>
+                {errors.birthday && <small className="text-danger">{errors.birthday}</small>}
               </div> 
 
               <div className="form-outline mb-2"> 
-                <input type="email" className="form-control" placeholder="Introduce your email" value={form.email} onChange={e => form.setData('email', e.target.value)} required/>
-                {form.errors.email && <small className="text-danger">{form.errors.email}</small>}
+                <input type="email" className="form-control" placeholder="Introduce your email" value={data.email} onChange={e => setData('email', e.target.value)} required/>
+                {errors.email && <small className="text-danger">{errors.email}</small>}
               </div> 
 
               <div className="form-outline mb-2"> 
-                <input type="text" className="form-control" placeholder="Introduce your username" value={form.username} onChange={e => form.setData('username', e.target.value)} required/>
-                {form.errors.username && <small className="text-danger">{form.errors.username}</small>}
+                <input type="text" className="form-control" placeholder="Introduce your username" value={data.username} onChange={e => setData('username', e.target.value)} required/>
+                {errors.username && <small className="text-danger">{errors.username}</small>}
               </div> 
 
               <div className="form-outline mb-2"> 
-                <input type="password" className="form-control" placeholder="Introduce your password" value={form.password} onChange={e => form.setData('password', e.target.value)} required/>
-                {form.errors.password && <small className="text-danger">{form.errors.password}</small>}
+                <input type="password" className="form-control" placeholder="Introduce your password" value={data.password} onChange={e => setData('password', e.target.value)} required/>
+                {errors.password && <small className="text-danger">{errors.password}</small>}
               </div> 
 
               <div className="form-outline mb-3"> 
-                <input type="password" className="form-control" placeholder="Repeat your password" value={form.password_confirmation} onChange={e => form.setData('password_confirmation', e.target.value)} required/>
+                <input type="password" className="form-control" placeholder="Repeat your password" value={data.password_confirmation} onChange={e => setData('password_confirmation', e.target.value)} required/>
               </div>
 
-              <button onClick={handleRegister} className="btn btn-primary w-100 mb-3">
-                Register
+              <button type="submit" disabled={processing} className="btn btn-primary w-100 mb-3">
+                {processing ? 'Sended...' : 'Register'}
               </button>
 
               <small className="text-muted d-block text-center">
@@ -116,7 +106,7 @@ function RegisterPage()
 
             <Link href='/login'>
               <button className="btn btn-outline-light px-4 py-2">
-                Login
+                Log in
               </button>
             </Link>
           </div>
