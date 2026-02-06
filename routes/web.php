@@ -52,8 +52,10 @@ Route::get('/pay', [PayController::class, 'form'])->name('pay');
 Route::post('/pay/verifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
-Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
-Route::post('/activities/details', [ActivityController::class, 'verifyAuth'])->name('activity.details');
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+Route::get('/activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+Route::get('/api/activities/nearby', [ActivityController::class, 'nearby']);
+Route::post('/api/activities/{activity}/track', [ActivityController::class, 'storeTrack']);
 
 
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
