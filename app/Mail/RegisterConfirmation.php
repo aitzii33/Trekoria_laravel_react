@@ -13,12 +13,14 @@ class RegisterConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public User $user; 
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(User $user)  
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -37,7 +39,7 @@ class RegisterConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.register-confirmation',  
         );
     }
 

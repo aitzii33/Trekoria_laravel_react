@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder
             'location' => 'C. de Medellín, nº10, 4º-1',
         ]);
 
-
         User::create(
         ['email' => 'shannon@example.com'],
         [

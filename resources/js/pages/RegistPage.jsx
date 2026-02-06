@@ -1,6 +1,5 @@
-import { useForm, usePage } from '@inertiajs/react' 
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { Link } from '@inertiajs/react'
+import { Link, useForm, usePage } from '@inertiajs/react' 
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { useState } from 'react' 
 
 import Header from '../components/Header'
@@ -36,6 +35,12 @@ function RegisterPage()
         setShowConfirmModal(true); 
       }
     });
+  };
+
+  const handleRegister = (e) => 
+  {
+    e.preventDefault(); 
+    post('/register/send'); 
   };
 
 
@@ -95,9 +100,9 @@ function RegisterPage()
                 <input type="password" className="form-control" placeholder="Repeat your password" value={form.password_confirmation} onChange={e => form.setData('password_confirmation', e.target.value)} required/>
               </div>
 
-              <button className="btn btn-primary w-100 mb-3" type="submit" disabled={form.processing} > 
-                {form.processing ? 'Enviando...' : 'Register'}
-              </button> 
+              <button onClick={handleRegister} className="btn btn-primary w-100 mb-3">
+                Register
+              </button>
 
               <small className="text-muted d-block text-center">
                 By registering, you agree to our Terms & Privacy Policy.
@@ -106,8 +111,6 @@ function RegisterPage()
           </div>
 
           <div className="col-lg-6 right-panel d-flex flex-column justify-content-center align-items-center text-center p-4 bg-primary text-white" >
-            {/*<img src={plane} alt='plane' style={{ height: '260px', width: '520px' }}></img>*/}
-
             <h2 className="mb-3">Already have an account?</h2>
             <p className="mb-4"> Click below to login and start your adventure! </p>
 
@@ -122,7 +125,7 @@ function RegisterPage()
 
       <Modal isOpen={showConfirmModal} toggle={() => setShowConfirmModal(false)}>
         <ModalHeader toggle={() => setShowConfirmModal(false)}>
-          ¡Registro exitoso!
+          Registration successful!
         </ModalHeader>
 
         <ModalBody>
