@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Userimg from '../img/Girl.avif'; 
 
 
-function Profile() //{ userData }
+function Profile({ userData }) 
 {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -34,7 +34,8 @@ function Profile() //{ userData }
         setIsEditing(!isEditing);
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e) => 
+    {
         const { name, value, files } = e.target;
         if (name === 'profilePic') 
         {
