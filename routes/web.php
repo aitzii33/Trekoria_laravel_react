@@ -129,6 +129,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('customers', fn() => Inertia::render('Admin/Customers'))->name('customers');
     Route::get('analytics', fn() => Inertia::render('Admin/Analytics'))->name('analytics');
 });
+Route::prefix('admin')
+    //->middleware(['auth', 'admin'])
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('activities', ActivityController::class);
+    });
 
 
 
