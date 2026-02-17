@@ -196,3 +196,17 @@ footer {
     margin: 0 auto;
   }
 }
+
+#activityMap {
+    border: 2px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stats-preview {
+    border-left: 4px solid #28a745;
+}
+
+.activity-actions .price {
+    font-size: 2.5rem !important;
+    font-weight: bold;
+}

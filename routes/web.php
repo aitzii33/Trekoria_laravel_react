@@ -1,19 +1,22 @@
 <?php
 
-use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PayController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\LogInController;
-use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\LogInController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Admin\AdminController;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Laravel\Fortify\Features;
 
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
@@ -39,7 +42,7 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/register', [RegisterController::class, 'form'])->name('register.form');
-Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.send');
+Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.sendEmail');
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
@@ -52,8 +55,10 @@ Route::get('/pay', [PayController::class, 'form'])->name('pay');
 Route::post('/pay/verifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
-Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
-Route::post('/activities/details', [ActivityController::class, 'verifyAuth'])->name('activity.details');
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
+Route::get('/activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+Route::get('/api/activities/nearby', [ActivityController::class, 'nearby']);
+Route::post('/api/activities/{activity}/track', [ActivityController::class, 'storeTrack']);
 
 
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
