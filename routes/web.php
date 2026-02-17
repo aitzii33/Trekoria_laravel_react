@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
@@ -11,13 +12,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProfileController;
-
-use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
@@ -64,6 +61,22 @@ Route::post('/api/activities/{activity}/track', [ActivityController::class, 'sto
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
+Route::middleware('auth')->group(function () 
+{
+    // Dashboard principal
+    Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
+    
+    // Métricas por actividad
+    Route::get('/analytics/activities', [AnalyticsController::class, 'activitiesMetrics']);
+
+    // Métricas por guías
+    Route::get('/analytics/guides', [AnalyticsController::class, 'guidesMetrics']);
+
+    // Ventas por fecha
+    Route::get('/analytics/sales', [AnalyticsController::class, 'salesMetrics']);
+});
+
+
 
 Route::middleware('auth')->group(function () 
 {
@@ -100,6 +113,7 @@ Route::prefix('admin')->name('admin.')->group(function ()
     Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
 });
 
+//with login
 /*Route::middleware(['auth', 'can:admin'])->group(function () 
 {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -134,12 +148,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('customers', fn() => Inertia::render('Admin/Customers'))->name('customers');
     Route::get('analytics', fn() => Inertia::render('Admin/Analytics'))->name('analytics');
 });
+
+/*
 Route::prefix('admin')
     //->middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
         Route::resource('activities', ActivityController::class);
-    });
+    });*/
 
 
 

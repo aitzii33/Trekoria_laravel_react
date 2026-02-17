@@ -8,60 +8,69 @@ use App\Models\Places;     // your Places model
 
 class ActivitiesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Make sure there are places
         $allPlaces = Places::all();
 
-        if ($allPlaces->isEmpty()) {
+        if ($allPlaces->isEmpty()) 
+        {
             $this->command->info('No places found. Please seed Places first.');
             return;
         }
 
-        // Example dummy activities
         $activitiesData = [
             [
                 'name' => 'Ride a Horse',
                 'description' => 'Group of 5 persons with an instructor. Duration: 40 minutes.',
-                'price' => 50,
+                'price' => 50.00,
                 'is_active' => true,
             ],
             [
                 'name' => 'Hiking Adventure',
-                'description' => 'Guided mountain hiking tour.',
-                'price' => 60,
+                'description' => 'Guided mountain hiking tour. Includes snacks and safety gear.',
+                'price' => 60.00,
                 'is_active' => true,
             ],
             [
                 'name' => 'City Walking Tour',
-                'description' => 'Discover hidden gems in the city.',
-                'price' => 25,
+                'description' => 'Discover hidden gems in the city with a professional guide.',
+                'price' => 25.00,
                 'is_active' => true,
             ],
             [
                 'name' => 'Kayaking',
-                'description' => 'Enjoy 2 hours of kayaking on the lake.',
-                'price' => 40,
+                'description' => 'Enjoy 2 hours of kayaking on the lake. Life jackets included.',
+                'price' => 40.00,
                 'is_active' => true,
             ],
             [
                 'name' => 'Cycling Tour',
-                'description' => 'Guided cycling tour around the city.',
-                'price' => 35,
+                'description' => 'Guided cycling tour around the city. Bikes provided.',
+                'price' => 35.00,
                 'is_active' => true,
             ],
         ];
 
-        // Loop through dummy data and assign random place
-        foreach ($activitiesData as $activity) {
+        foreach ($activitiesData as $activity)
+        {
             $place = $allPlaces->random();
 
             Activity::create(array_merge($activity, [
                 'place_id' => $place->id,
-                'location' => $place->city, // optional: set location as the city name
+                'location' => $place->city ?? 'Unknown', // opcional: ciudad del lugar
+                'imagen' => null, // puedes agregar URL o nombre de archivo
+                'lat' => $place->lat ?? null,
+                'lng' => $place->lng ?? null,
+                'distance' => rand(1, 20), // km
+                'duration' => rand(30, 180) * 60, // segundos
+                'avg_speed' => rand(5, 20), // km/h
+                'elevation_gain' => rand(50, 500), // metros
+                'track_points' => json_encode([
+                    ['lat' => $place->lat ?? 0, 'lng' => $place->lng ?? 0],
+                    ['lat' => ($place->lat ?? 0) + 0.01, 'lng' => ($place->lng ?? 0) + 0.01],
+                    ['lat' => ($place->lat ?? 0) + 0.02, 'lng' => ($place->lng ?? 0) + 0.02],
+                ]),
+                'completed_at' => now(),
             ]));
         }
 

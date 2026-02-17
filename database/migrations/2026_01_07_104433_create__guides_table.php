@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('guides', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_activity')->constrained()->cascadeOnDelete();
-            $table->boolean('guide');
+            $table->foreignId('activity_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->decimal('price');
+            $table->decimal('price', 8, 2);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

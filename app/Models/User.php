@@ -22,14 +22,9 @@ class User extends Authenticatable
         return $this->belongsTo(TypeUser::class, 'type_user', 'id_typeUser');
     }
 
-    public function isAdmin()
+    public function passwords()
     {
-        return $this->role === 'admin';
-    }
-    
-    public function isUser()
-    {
-        return $this->role === 'user';
+        return $this->hasMany(PasswordUser::class);
     }
 
 
