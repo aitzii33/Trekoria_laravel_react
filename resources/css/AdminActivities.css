@@ -1,0 +1,243 @@
+/* Admin container */
+.admin-container {
+    padding: 30px;
+    font-family: 'Inter', sans-serif;
+    color: #2D2D2D;
+}
+
+/* Header */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px; /* more spacing below header */
+}
+
+.page-title {
+    font-size: 32px;          /* bigger, impactful */
+    font-weight: 700;          /* bold */
+    color: #2796D1;            /* Trekoria Deep Blue */
+    letter-spacing: 0.5px;     /* subtle spacing */
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #2796D1; /* accent line for professionalism */
+    display: inline-block;      /* underline matches text width */
+}
+
+
+.btn-primary {
+    background: #2796D1; /* Deep Blue */
+    color: #FFFFFF;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: #1E7FB0;
+}
+
+/* Card */
+.card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+/* Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #D1DCEC; /* Light Blue divider */
+}
+
+.admin-table td {
+    padding: 14px;
+    border-bottom: 1px solid #D1DCEC;
+}
+
+.admin-table tr:hover {
+    background-color: #D1DCEC; /* Light Blue hover */
+}
+
+/* Badges */
+.badge-active {
+    background: #E5E592; /* Soft Yellow */
+    color: #15803D;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-inactive {
+    background: #FEE2E2;
+    color: #B91C1C;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Action buttons */
+.btn-edit {
+    background: #eccc49; /* Golden Yellow accent */
+    border: none;
+    padding: 6px 12px;
+    margin-right: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-edit:hover {
+    background: #E6B800;
+}
+
+.btn-delete {
+    background: #d13a3a;
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-delete:hover {
+    background: #DC2626;
+}
+
+/* Form */
+.form-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.form-grid label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.form-grid input,
+.form-grid textarea,
+.form-grid select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #D1DCEC;
+    font-size: 14px;
+    color: #2D2D2D;
+}
+
+.error {
+    color: #DC2626;
+    font-size: 12px;
+}
+
+/* Form actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: #E5E592; /* Soft Yellow */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background: #DAD877;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    backdrop-filter: blur(4px);
+}
+
+/* Modal Box */
+.modal {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1000;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Delete modal specific */
+.delete-modal h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.delete-modal p {
+    font-size: 14px;
+    color: #2D2D2D;
+    margin-bottom: 20px;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.modal-header {
+    margin-bottom: 20px; /* space between title and form */
+    border-bottom: 2px solid #2796D1; /* subtle underline */
+    padding-bottom: 8px;
+}
+
+.modal-title {
+    font-size: 26px;         /* slightly smaller than page header */
+    font-weight: 700;         /* bold */
+    color: #2796D1;           /* Trekoria Deep Blue */
+    letter-spacing: 0.5px;    /* subtle spacing */
+    margin: 0;
+    display: inline-block;     /* underline fits text width */
+}
+.search-input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    width: 220px;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2796D1;  /* Trekoria Deep Blue */
+    box-shadow: 0 0 4px rgba(39, 150, 209, 0.4);
+}
