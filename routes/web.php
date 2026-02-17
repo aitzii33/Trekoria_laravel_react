@@ -11,10 +11,13 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
@@ -97,10 +100,48 @@ Route::prefix('admin')->name('admin.')->group(function ()
     Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
 });
 
-Route::middleware(['auth', 'can:admin'])->group(function () 
+/*Route::middleware(['auth', 'can:admin'])->group(function () 
 {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', fn() => inertia('Admin/Dashboard'))->name('dashboard');
+});
+
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Admin Dashboard (optional)
+    Route::get('/dashboard', function () {
+        return inertia('Admin/Dashboard');
+    })->name('dashboard');
+
+    // Resource routes for activities (CRUD)
+    Route::resource('activities', ActivityController::class);
+});*/
+
+// Temporary design routes (no login)
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard
+    Route::get('dashboard', fn() => Inertia::render('Admin/Dashboard'))->name('dashboard');
+
+    // Resource routes for Activities (full CRUD handled by controller)
+    Route::resource('activities', ActivityController::class);
+
+    // Other pages (just Inertia for now)
+    Route::get('bookings', fn() => Inertia::render('Admin/Bookings'))->name('bookings');
+    Route::get('customers', fn() => Inertia::render('Admin/Customers'))->name('customers');
+    Route::get('analytics', fn() => Inertia::render('Admin/Analytics'))->name('analytics');
+});
+Route::prefix('admin')
+    //->middleware(['auth', 'admin'])
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('activities', ActivityController::class);
+    });
+
+
 
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
 

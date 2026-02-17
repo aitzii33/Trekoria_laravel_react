@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Places extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['city', 'country', 'continent', 'image'];
-
-    public function activities()
-    {
-        return $this->hasMany(Activity::class);
-    }
+    protected $fillable = ['city', 'country', 'continent'];
 }
