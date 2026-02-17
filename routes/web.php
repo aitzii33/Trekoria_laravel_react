@@ -14,26 +14,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-<<<<<<< HEAD
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PayController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\LogInController;
-use App\Http\Controllers\ForgotController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\ActivityController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Admin\AdminController;
-=======
->>>>>>> 343d23e (some changes)
-
-=======
->>>>>>> refs/remotes/origin/faeture-Aitziber
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
@@ -116,6 +96,7 @@ Route::prefix('admin')->name('admin.')->group(function ()
     Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
 });
 
+//with login
 /*Route::middleware(['auth', 'can:admin'])->group(function () 
 {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -150,12 +131,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('customers', fn() => Inertia::render('Admin/Customers'))->name('customers');
     Route::get('analytics', fn() => Inertia::render('Admin/Analytics'))->name('analytics');
 });
+
+/*
 Route::prefix('admin')
     //->middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
         Route::resource('activities', ActivityController::class);
-    });
+    });*/
 
 
 
