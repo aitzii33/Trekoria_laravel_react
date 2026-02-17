@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name')->nullable();
-            $table->string('service')->nullable();
+            $table->foreignId('availability_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('guide_id')->nullable()->constrained();
+            $table->integer('people');
+            $table->decimal('total_price', 8, 2);
+            $table->string('status'); // pending, paid, cancelled
             $table->timestamps();
         });
     }

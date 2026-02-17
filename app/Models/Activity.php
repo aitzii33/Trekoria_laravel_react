@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Guides;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
@@ -33,6 +34,11 @@ class Activity extends Model
 
     public function guides()
     {
-        return $this->hasMany(Guide::class);
+        return $this->hasMany(Guides::class);
+    }
+
+    public function bookings() 
+    {
+        return $this->hasManyThrough(Booking::class, Availability::class, 'time_schedule_id', 'availability_id');
     }
 }

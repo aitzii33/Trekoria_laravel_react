@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('password_users', function (Blueprint $table) {
+        Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('user');
-            $table->string('password');
+            $table->foreignId('time_schedule_id')->constrained()->cascadeOnDelete();
+            $table->date('date'); 
+            $table->integer('capacity');
+            $table->integer('reserved')->default(0);
             $table->timestamps();
         });
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_users');
+        Schema::dropIfExists('availabilities');
     }
 };

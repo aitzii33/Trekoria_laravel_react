@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('location');
+            $table->decimal('price', 8, 2);
+            $table->boolean('is_active')->default(true);
             $table->string('imagen')->nullable();
             $table->decimal('lat', 10, 7)->nullable();
             $table->decimal('lng', 10, 7)->nullable();

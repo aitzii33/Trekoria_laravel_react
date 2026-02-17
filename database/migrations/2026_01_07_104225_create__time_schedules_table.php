@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_time_schedules', function (Blueprint $table) {
+        Schema::create('time_schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_activity')->constrained()->cascadeOnDelete();
-            $table->string('day_week');
-            $table->string('hour');
+            $table->tinyInteger('day_of_week'); // 0-6
+            $table->time('start_time');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_time_schedules');
+        Schema::dropIfExists('time_schedules');
     }
 };

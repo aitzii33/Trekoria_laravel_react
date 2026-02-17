@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
@@ -59,6 +60,22 @@ Route::post('/api/activities/{activity}/track', [ActivityController::class, 'sto
 
 Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+
+Route::middleware('auth')->group(function () 
+{
+    // Dashboard principal
+    Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
+    
+    // Métricas por actividad
+    Route::get('/analytics/activities', [AnalyticsController::class, 'activitiesMetrics']);
+
+    // Métricas por guías
+    Route::get('/analytics/guides', [AnalyticsController::class, 'guidesMetrics']);
+
+    // Ventas por fecha
+    Route::get('/analytics/sales', [AnalyticsController::class, 'salesMetrics']);
+});
+
 
 
 Route::middleware('auth')->group(function () 
