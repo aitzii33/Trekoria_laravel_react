@@ -2,17 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cart;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
-use App\Models\Guides;
-use App\Models\Orders;
 use App\Models\Places;
-use App\Models\Activity;
 use App\Models\TypeUsers;
-use App\Models\TimeSchedule;
-use App\Models\PasswordUsers;
-use App\Models\Disponibilities;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

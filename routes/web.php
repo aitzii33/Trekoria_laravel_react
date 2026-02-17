@@ -1,7 +1,21 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\LogInController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PayController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\CartController;
@@ -14,6 +28,8 @@ use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\AdminController;
+=======
+>>>>>>> 343d23e (some changes)
 
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');

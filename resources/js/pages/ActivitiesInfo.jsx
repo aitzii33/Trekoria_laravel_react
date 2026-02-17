@@ -3,17 +3,19 @@ import { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import _defaultimage from "../img/DefaultUserImage.png"
 import "../../css/DatePicker.css"
 import "react-datepicker/dist/react-datepicker.css"
 
-function ActivitiesInfo({ activity = null }) {
+function ActivitiesInfo({ activity = null }) 
+{
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedHour, setSelectedHour] = useState(null);
     const [mapKey, setMapKey] = useState(0); 
 
     const images = activity?.images && activity.images.length > 0
         ? activity.images
-        : [activity?.image || '/images/default.jpg'];
+        : [activity?.image || _defaultimage];
 
     const formatDuration = (seconds) => 
     {
@@ -125,11 +127,6 @@ function ActivitiesInfo({ activity = null }) {
             )}
 
             <script async src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=geometry&callback=initActivityMap"></script>
-            <script>
-            function initActivityMap() {
-            }
-            </script>
-
             <Footer />
         </Container>
     );

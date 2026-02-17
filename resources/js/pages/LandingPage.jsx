@@ -59,16 +59,16 @@ export default function Landing()
         <div className="container">
           <div className="row g-4">
             <div className="col-lg-3 col-md-6">
-              <img src={img1} className="w-100 rounded shadow" alt="New York City"/>
+              <img src={img1} className="w-100 rounded shadow" alt="New York City" id='paris' onClick={redirectActivity}/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img src={img2} className="w-100 rounded shadow" alt="Eiffel Tower, Paris"/>
+              <img src={img2} className="w-100 rounded shadow" alt="Eiffel Tower, Paris" id='tokyo' onClick={redirectActivity}/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img src={img3} className="w-100 rounded shadow" alt="Tokyo cityscape"/>
+              <img src={img3} className="w-100 rounded shadow" alt="Tokyo cityscape" id='newyork' onClick={redirectActivity}/>
             </div>
             <div className="col-lg-3 col-md-6">
-              <img src={img4} className="w-100 rounded shadow" alt="Paris city view" />
+              <img src={img4} className="w-100 rounded shadow" alt="Paris city view" id='london' onClick={redirectActivity}/>
             </div>
           </div>
         </div>

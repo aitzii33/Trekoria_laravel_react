@@ -83,16 +83,6 @@ function ContactUs()
     return (
         <>
             <Header />
-            {/*<section className="about-gradient py-5 w-100">
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8 text-center text-white">
-                            <h1 className="display-5 fw-bold">Contact Us</h1>
-                            <p className="lead">Get more closure to Trekoria, we are here to help you!</p>
-                        </div>
-                    </div>
-                </div>
-            </section>*/}
             <form id="contact-form" onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
                 {flash.status && <p style={{ color: 'green' }}>{flash.status}</p>}
 
