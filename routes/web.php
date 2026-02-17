@@ -11,9 +11,16 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+<<<<<<< HEAD
+=======
+use Laravel\Fortify\Features;
+
+>>>>>>> refs/remotes/origin/faeture-Aitziber
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
