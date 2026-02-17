@@ -8,7 +8,7 @@ use App\Models\Places;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ActivityController extends Controller
+class AdminActivityController extends Controller
 {
     public function index(Request $request)
     {
