@@ -16,9 +16,12 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Admin\AdminCustomerController;
+use App\Http\Controllers\User\UserActivitiesController;
+use App\Http\Controllers\User\UserHomeController;
 
 Route::get('/', [PageController::class, 'Landing'])->name('landing');
 Route::get('/home', [PageController::class, 'Home'])->name('home');
+Route::get('/home2', [UserHomeController::class, 'index'])->name('user.home');
 Route::post('/activities', [PageController::class, 'Activities'])->name('activities');
 Route::get('/about', [PageController::class, 'About'])->name('about');
 
@@ -96,8 +99,7 @@ Route::prefix('admin')
         Route::resource('customers', AdminCustomerController::class)
             ->except(['create','edit','show']);
     });
-
-
+Route::get('/activities', [UserActivitiesController::class, 'index'])->name('user.activities.index');
 
 Route::get('dashboard', 'App\Http\Controllers\PayController@dashboard')->middleware('auth');
 

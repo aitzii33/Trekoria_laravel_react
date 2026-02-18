@@ -17,6 +17,7 @@ class Activity extends Model
         'location',
         'image',
         'price',
+        'date',
         'is_active',
     ];
 
@@ -33,6 +34,6 @@ class Activity extends Model
 
     public function guides()
     {
-        return $this->hasMany(Guide::class);
+        return $this->hasMany(Guide::class, 'id_activity');
     }
 }

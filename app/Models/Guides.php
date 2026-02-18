@@ -9,11 +9,11 @@ class Guides extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['id_activity', 'guide', 'name', 'price'];
+    protected $fillable = ['id_activity', 'guide', 'name', 'price','date'];
 
     // Relación: Un guía pertenece a una actividad
     public function activity()
     {
-        return $this->belongsTo(Activity::class);
+        return $this->belongsTo(Activity::class, 'id_activity');
     }
 }

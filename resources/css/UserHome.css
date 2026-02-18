@@ -1,0 +1,157 @@
+/* UserHome.css */
+
+/* ---------- General Page Styles ---------- */
+body {
+    background-color: #FFFFFF; /* white page background */
+    color: #2D2D2D; /* dark gray text */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+/* ---------- Cards ---------- */
+.card {
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #FFFFFF;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Titles */
+.card-title {
+    color: #2796D1; /* Deep Blue */
+    font-weight: 600;
+}
+
+/* Card Subtitles */
+.card-subtitle {
+    color: #2D2D2D;
+    font-size: 0.9rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+    background-color: #2796D1;
+    border-color: #2796D1;
+    color: #FFFFFF;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1F78B5;
+    transform: translateY(-2px);
+}
+
+.btn-outline-warning {
+    border-color: #E5E592;
+    color: #2D2D2D;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline-warning:hover {
+    background-color: #E5E592;
+    color: #2D2D2D;
+}
+
+/* ---------- Popular Cities Cards ---------- */
+.hover-scale {
+    transition: transform 0.2s;
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Sections ---------- */
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #2D2D2D;
+    font-weight: 700;
+}
+
+/* Accent Headers */
+section h1, section h2 {
+    color: #2796D1;
+}
+
+/* ---------- Continents & Countries ---------- */
+.continent-item {
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #2796D1;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.continent-item:hover {
+    transform: translateY(-2px);
+}
+
+/* Country & Cities */
+.country-item {
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+    background-color: #F5F5F5;
+    color: #2D2D2D;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.country-item:hover {
+    background-color: #E5E5E5;
+}
+
+.city-card {
+    border-radius: 6px;
+    padding: 6px 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #D1DCEC; /* subtle separation */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.city-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* ---------- Inputs ---------- */
+input.form-control {
+    border-radius: 8px;
+    border: 1px solid #2796D1;
+    transition: border-color 0.2s;
+}
+
+input.form-control:focus {
+    border-color: #1F78B5;
+    box-shadow: none;
+}
+
+
+/* ---------- Responsive adjustments ---------- */
+@media (max-width: 768px) {
+    .continent-item, .country-item, .city-card {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
