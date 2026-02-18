@@ -6,7 +6,6 @@ use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Geocoder\Query\ReverseQuery;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 
 class ActivityController extends Controller

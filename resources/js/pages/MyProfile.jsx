@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from '@inertiajs/react'  
-import { Inertia } from '@inertiajs/inertia';
+import { Inertia } from '@inertiajs/inertia'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -8,7 +8,7 @@ import Footer from '../components/Footer.jsx'
 import '../../css/Profile.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Userimg from '../img/Girl.avif'; 
+import Userimg from '../img/Girl.avif'
 
 
 function Profile() 

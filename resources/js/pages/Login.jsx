@@ -1,6 +1,7 @@
 import { router, Link } from '@inertiajs/react' 
 import { Container } from 'reactstrap'
 import { useState, useEffect } from 'react'
+import { Inertia } from '@inertiajs/inertia'
 
 import Header from '../components/Header'
 
@@ -63,7 +64,7 @@ function Login()
     const handleLogin = (e) => 
     {
         e.preventDefault(); 
-        post('/login/prove'); 
+        Inertia.post('/login/prove'); 
     };
 
 

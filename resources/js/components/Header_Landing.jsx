@@ -1,12 +1,11 @@
-import logo from '../img/logo.png'
-import home from '../img/home.png'
-
-import '../../css/Header.css'
-
-import { Link, router } from '@inertiajs/react'  
+import { Link } from '@inertiajs/react'  
 
 import LanguageSelector from '../components/LanguageSelector'
 
+import '../../css/Header.css'
+
+import logo from '../img/logo.png'
+import home from '../img/home.png'
 
 
 export default function Head({currentLanguage, setLanguage}) 

@@ -1,9 +1,12 @@
 import { Container, Row, Col, Dropdown, Card, CardBody, CardTitle } from "reactstrap"
-import { useState, useEffect } from "react"
+import { useState } from "react"
+
 import DatePicker from "react-datepicker"
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
 import _defaultimage from "../img/DefaultUserImage.png"
+
 import "../../css/DatePicker.css"
 import "react-datepicker/dist/react-datepicker.css"
 

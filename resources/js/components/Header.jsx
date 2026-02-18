@@ -1,11 +1,16 @@
-import logo from '../img/logo.png'
-import userImg from '../img/DefaultUserImage.png'
-import home from '../img/home.png'
-import '../../css/Header.css'
-import LanguageSelector from '../components/LanguageSelector'
 import { router, usePage, Link } from '@inertiajs/react' 
 import { useState, useEffect } from "react"
 import { Form, Button, InputGroup } from "react-bootstrap"
+import { Inertia } from '@inertiajs/inertia'
+
+import LanguageSelector from '../components/LanguageSelector'
+
+import '../../css/Header.css'
+
+import logo from '../img/logo.png'
+import userImg from '../img/DefaultUserImage.png'
+import home from '../img/home.png'
+
 
 function Head({ currentLanguage, setLanguage}) 
 {
@@ -24,7 +29,7 @@ function Head({ currentLanguage, setLanguage})
     {
         e.preventDefault(); 
         setShowDropdown(false);
-        post('/logout'); 
+        Inertia.post('/profile/logout'); 
     };
 
     useEffect(() => 

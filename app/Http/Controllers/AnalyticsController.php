@@ -45,4 +45,14 @@ class AnalyticsController extends Controller
 
         return response()->json($sales);
     }
+
+    public function kpis()
+    {
+        return response()->json([
+            'total_activities' => Activity::count(),
+            'total_bookings' => Booking::count(),
+            'total_people' => Booking::sum('people'),
+            'total_revenue' => Booking::sum('total_price'),
+        ]);
+    }
 }
