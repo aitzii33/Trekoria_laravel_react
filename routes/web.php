@@ -38,14 +38,15 @@ Route::post('/sendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
+
 Route::get('/register', [RegisterController::class, 'form'])->name('register.form');
 Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.sendEmail');
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
-Route::get('/profile', [ProfileController::class, 'form'])->name('profile');
-Route::post('/profile/logout', [LogInController::class, 'logout'])->name('profile.logout');
-Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete');
+Route::get('/profile', [ProfileController::class, 'form'])->name('profile')->middleware('auth');
+Route::post('/profile/logout', [LogInController::class, 'logout'])->name('profile.logout')->middleware('auth');
+Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
 Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
 
@@ -95,7 +96,6 @@ Route::prefix('admin')->name('admin.')->group(function ()
     Route::put('/bookings/{id}', [AdminController::class, 'updateBooking'])->name('bookings.update');
     Route::delete('/bookings/{id}', [AdminController::class, 'deleteBooking'])->name('bookings.delete');
 });
-
 
 Route::prefix('admin')->name('admin.')->group(function () 
 {

@@ -10,17 +10,19 @@ class LogInController extends Controller
 {
     public function form()
     {
-        return Inertia::render('Login', ['status' => session('status')]);
+        return Inertia::render('Login', [
+            'status' => session('status')
+        ]);
     }
 
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'user_name' => 'required|text',
+            'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
 
-        if (Auth::attempt($credentials)) 
+        if (Auth::attempt($credentials, $request->boolean('remember'))) 
         {
             $request->session()->regenerate();
 
@@ -29,14 +31,10 @@ class LogInController extends Controller
                 Auth::logout();
                 return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
-
-            $userdata = Auth::user();
-            $cookie = cookie('userdata', json_encode($userdata), 60);  
-            
-            return redirect()->intended('/home')->cookie($cookie);  
+            return redirect()->intended('/home');
         }
 
-        return redirect()->back()->with('status', 'The username or password is incorrect.');
+        return redirect()->back()->with('status', 'The email or password is incorrect.');
     }
 
     public function logout(Request $request)

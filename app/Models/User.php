@@ -19,12 +19,12 @@ class User extends Authenticatable
 
     public function typeUser()
     {
-        return $this->belongsTo(TypeUser::class, 'type_user', 'id_typeUser');
+        return $this->belongsTo(TypeUsers::class, 'type_user', 'id_typeUser');
     }
 
     public function passwords()
     {
-        return $this->hasMany(PasswordUser::class);
+        return $this->hasMany(PasswordUsers::class);
     }
 
 
