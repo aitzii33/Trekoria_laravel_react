@@ -4,10 +4,11 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\LogInController;
-use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\LogInController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminActivityController;
 use App\Http\Controllers\RegisterController;
@@ -39,7 +40,7 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/register', [RegisterController::class, 'form'])->name('register.form');
-Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.send');
+Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('register.sendEmail');
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
