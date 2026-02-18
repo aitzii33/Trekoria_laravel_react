@@ -1,7 +1,6 @@
 <?php
 
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\CartController;
@@ -57,8 +56,8 @@ Route::get('/activities', [ActivityController::class, 'index'])->name('activitie
 Route::post('/activities/details', [ActivityController::class, 'verifyAuth'])->name('activity.details');
 
 
-Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
-Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+//Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+//Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
 
 Route::middleware('auth')->group(function () 
