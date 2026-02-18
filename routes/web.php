@@ -31,8 +31,8 @@ Route::post('/login/prove', [LogInController::class, 'login'])->name('login.perf
 Route::post('/logout', [LogInController::class, 'logout'])->name('logout');
 
 
-Route::get('/forgotPass', [ForgotController::class, 'form'])->name('forgot');
-Route::post('/sendEmail', [ForgotController::class, 'sendEmail'])->name('forgot.perform');
+Route::get('/forgot', [ForgotController::class, 'form']); 
+Route::post('/forgot.perform', [ForgotController::class, 'sendEmail']);
 
 
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showForm'])->name('password.reset');

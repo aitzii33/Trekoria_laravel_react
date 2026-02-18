@@ -86,7 +86,7 @@ function Login()
                                 </button>
                                 {status && <p className="text-danger">{status}</p>}
 
-                                <Link href="/forgotPass">
+                                <Link href="/forgot">
                                     <p className="link" style={{ color: 'black' }}>Forgot password/user?</p>
                                 </Link>
                             </div>
