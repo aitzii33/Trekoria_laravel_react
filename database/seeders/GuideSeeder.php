@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Activity;
 use App\Models\Guides;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GuideSeeder extends Seeder

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Disponibility;
 use App\Models\TimeSchedule;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DisponibilitySeeder extends Seeder
