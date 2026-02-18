@@ -58,6 +58,12 @@ function InitialPage()
     });
   });
 
+  const routeActivities = (ci) =>
+  {
+    e.preventDefault();
+    router.visit(`/activities?search=${encodeURIComponent(ci)}`); 
+  }
+
   const handleSearch = (e) => 
   {
     e.preventDefault();
@@ -150,7 +156,7 @@ function InitialPage()
                           <h5>{t("Cities in")} {t(country.name)}:</h5>
                           <div className="d-flex flex-wrap">
                             {country.cities.map((city, ci) => (
-                              <div key={ci} className="city-card p-2 m-1 rounded bg-light text-dark shadow-sm">
+                              <div key={ci} className="city-card p-2 m-1 rounded bg-light text-dark shadow-sm" onClick={routeActivities(ci)}>
                                 {t(city)}
                               </div>
                             ))}

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Cookie;
 
 
 class ProfileController extends Controller
@@ -32,6 +31,11 @@ class ProfileController extends Controller
     public function SoftDelete(Request $request)
     {
         Auth::user()->delete();
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
         return redirect()->back()->with('success', 'Profile deleted');
     }
 

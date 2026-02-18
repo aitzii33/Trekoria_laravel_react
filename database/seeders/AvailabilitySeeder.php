@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Availability;
 use App\Models\TimeSchedule;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AvailabilitySeeder extends Seeder

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from '@inertiajs/react'  
+import { Inertia } from '@inertiajs/inertia';
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -10,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Userimg from '../img/Girl.avif'; 
 
 
-function Profile({ userData }) 
+function Profile() 
 {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -24,7 +25,8 @@ function Profile({ userData })
 
     const [tempData, setTempData] = useState(userData);
 
-    useEffect(() => {
+    useEffect(() => 
+    {
         setTempData(userData);
     }, [userData]);
 
@@ -67,19 +69,19 @@ function Profile({ userData })
     const handleDelete = (e) => 
     {
         e.preventDefault(); 
-        post('/profile/delete'); 
+        Inertia.post('/profile/delete'); 
     };
 
     const handleLogout = (e) => 
     {
         e.preventDefault(); 
-        post('/logout'); 
+        Inertia.post('/profile/logout'); 
     };
 
     const handleModify = (e) => 
     {
         e.preventDefault(); 
-        post('/profile/modify'); 
+        Inertia.post('/profile/modify'); 
     };
 
     if (!userData.image) 

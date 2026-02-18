@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Activity;
 use App\Models\TimeSchedule;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ScheduleSeeder extends Seeder
@@ -16,7 +15,8 @@ class ScheduleSeeder extends Seeder
     {
         $allActivities = Activity::all();
 
-        if ($allActivities->isEmpty()) {
+        if ($allActivities->isEmpty()) 
+        {
             $this->command->info('No activities found. Please seed Activities first.');
             return;
         }

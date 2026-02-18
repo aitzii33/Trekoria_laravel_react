@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Activity; // your Activities model
-use App\Models\Places;     // your Places model
+use App\Models\Activity; 
+use App\Models\Places;  
 
 class ActivitiesTableSeeder extends Seeder
 {
@@ -57,8 +57,8 @@ class ActivitiesTableSeeder extends Seeder
 
             Activity::create(array_merge($activity, [
                 'place_id' => $place->id,
-                'location' => $place->city ?? 'Unknown', // opcional: ciudad del lugar
-                'imagen' => null, // puedes agregar URL o nombre de archivo
+                'location' => $place->city ?? 'Unknown', 
+                'imagen' => null, 
                 'lat' => $place->lat ?? null,
                 'lng' => $place->lng ?? null,
                 'distance' => rand(1, 20), // km
