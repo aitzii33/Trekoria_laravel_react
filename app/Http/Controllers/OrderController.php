@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -25,7 +27,7 @@ class OrderController extends Controller
             'cvv' => 'required|string|max:4|min:3',
         ]);
 
-        $order = Order::create($validated + [
+        $order = Orders::create($validated + [
             'status' => 'completed',
             'total' => 25.00
         ]);
