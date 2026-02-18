@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Userimg from '../img/Girl.avif'; 
 
 
-function Profile({ userData }) 
+function Profile() 
 {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -73,7 +73,7 @@ function Profile({ userData })
     const handleLogout = (e) => 
     {
         e.preventDefault(); 
-        post('/logout'); 
+        post('/profile/logout'); 
     };
 
     const handleModify = (e) => 

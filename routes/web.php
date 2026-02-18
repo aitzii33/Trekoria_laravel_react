@@ -43,7 +43,8 @@ Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('r
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
-Route::get('/profile', [ProfileController::class, 'form'])->name('profile');
+Route::get('/profile', [ProfileController::class, 'form'])->name('profile')->middleware('auth');
+Route::post('/profile/logout', [LogInController::class, 'logout'])->name('profile.logout')->middleware('auth');
 Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
 Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
@@ -63,20 +64,11 @@ Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.stor
 
 Route::middleware('auth')->group(function () 
 {
-    // Dashboard principal
     Route::get('/analytics/overview', [AnalyticsController::class, 'overview']);
-    
-    // Métricas por actividad
     Route::get('/analytics/activities', [AnalyticsController::class, 'activitiesMetrics']);
-
-    // Métricas por guías
     Route::get('/analytics/guides', [AnalyticsController::class, 'guidesMetrics']);
-
-    // Ventas por fecha
     Route::get('/analytics/sales', [AnalyticsController::class, 'salesMetrics']);
 });
-
-
 
 Route::middleware('auth')->group(function () 
 {

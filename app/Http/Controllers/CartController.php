@@ -5,31 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function form()
+    public function __construct()
     {
-        $activities = session('activities', []);
-        
-        return Inertia::render('Cart', [
-            'activities' => $activities
-        ]);
+        $this->middleware('auth');
     }
 
-    public function eliminateActivity(Request $request, $id)
+    public function form()
     {
-        $activities = session('activities', []);
-
-        $activities = array_values(array_filter(
-            $activities,
-            fn($a) => $a['id'] != $id
-        ));
-
-        session(['activities' => $activities]);
-
-        return back()->with('message', 'Activity removed from cart');
+        return Inertia::render('Cart', [
+            'activities' => session('activities', [])
+        ]);
     }
 
     public function addActivity(Request $request)
@@ -39,18 +27,14 @@ class CartController extends Controller
         ]);
 
         $activity = Activity::findOrFail($request->activity_id);
+
         $activities = session('activities', []);
 
-        $exists = false;
-        foreach ($activities as &$activityItem) {
-            if ($activityItem['id'] == $request->activity_id) {
-                $activityItem['quantity'] = ($activityItem['quantity'] ?? 1) + 1;
-                $exists = true;
-                break;
-            }
-        }
+        $index = collect($activities)->search(fn($item) => $item['id'] == $activity->id);
 
-        if (!$exists) {
+        if ($index !== false) {
+            $activities[$index]['quantity']++;
+        } else {
             $activities[] = [
                 'id' => $activity->id,
                 'name' => $activity->name,
@@ -73,6 +57,7 @@ class CartController extends Controller
         ]);
 
         $activities = session('activities', []);
+
         foreach ($activities as &$activity) {
             if ($activity['id'] == $id) {
                 $activity['quantity'] = $request->quantity;
@@ -81,17 +66,26 @@ class CartController extends Controller
         }
 
         session(['activities' => $activities]);
+
         return back();
+    }
+
+    public function eliminateActivity($id)
+    {
+        $activities = collect(session('activities', []))
+            ->reject(fn($item) => $item['id'] == $id)
+            ->values()
+            ->toArray();
+
+        session(['activities' => $activities]);
+
+        return back()->with('message', 'Activity removed');
     }
 
     public function clearCart()
     {
         session()->forget('activities');
-        return back()->with('message', 'Cart cleared');
-    }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+        return back()->with('message', 'Cart cleared');
     }
 }
