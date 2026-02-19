@@ -29,7 +29,7 @@ class UserHomeController extends Controller
             ->with('place')
             ->groupBy('place_id')
             ->orderByRaw('COUNT(*) DESC')
-            ->take(5)
+            ->take(6)
             ->get()
             ->map(function ($a) {
                 return [
