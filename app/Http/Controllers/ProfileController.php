@@ -1,49 +1,53 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-
 
 class ProfileController extends Controller
 {
     public function form(Request $request)
     {
-        $userdata = json_decode($request->cookie('userdata'), true); 
+        $user = Auth::user();
 
-        if (!$userdata) 
+        if (!$user) 
         {
-            return Inertia::render('MyProfile', [
+            return Inertia::render('Profile', [
                 'userdata' => null,
             ]);
         }
 
-        return Inertia::render('MyProfile', [
-            'userdata' => $userdata,
+        return Inertia::render('Profile', [
+            'userdata' => [
+                'username' => $user->username,
+                'fullName' => $user->fullName ?? '',
+                'birthDate' => $user->birthDate ?? '',
+                'email' => $user->email,
+                'image' => $user->image ?? null, 
+            ],
         ]);
     }
 
     public function SoftDelete(Request $request)
     {
-        Auth::user()->delete();
+        $user = Auth::user();
+
+        if (!$user) 
+        {
+            abort(403, 'No authenticated user.');
+        }
+
+        $user->delete(); 
 
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
-        return redirect()->back()->with('success', 'Profile deleted');
+
+        return redirect('/login')->with('success', 'Profile deleted successfully.');
     }
 
-    public function Restored($id)
-    {
-        User::withTrashed()->findOrFail($id)->restore();
-        return redirect()->back()->with('success', 'Profile restored');
-    }
+
 
     public function Modify(Request $request)
     {
@@ -55,17 +59,16 @@ class ProfileController extends Controller
         }
 
         $validated = $request->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
-            'current_password' => ['required', 'current_password'],
-            'password' => ['nullable', 'confirmed', Password::defaults()]
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'birthDate' => 'nullable|date',
         ]);
 
         $user->username = $validated['username'];
-
-        if (!empty($validated['password'])) 
-        {
-            $user->password = Hash::make($validated['password']);
-        }
+        $user->name = $validated['name'] ?? $user->name;
+        $user->last_name = $validated['last_name'] ?? $user->last_name;
+        $user->birthDate = $validated['birthDate'] ?? $user->birthDate;
 
         $user->save();
 

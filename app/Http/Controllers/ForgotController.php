@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
+use App\Mail\ResetPasswordMail;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
+use Inertia\Inertia;
 
 class ForgotController extends Controller
 {
@@ -12,7 +16,7 @@ class ForgotController extends Controller
         return Inertia::render('Forgot_Pass');
     }
 
-    public function sendEmail()
+    public function sendEmail(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -20,13 +24,15 @@ class ForgotController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (!$user) 
+        {
             return back()->withErrors(['email' => 'The user does not exist with that email.']);
         }
 
         $token = Password::createToken($user);
 
         Mail::to($user->email)->send(new ResetPasswordMail($user, $token));
-        return back()->with('status', 'Correo de recuperación enviado.');
+
+        return redirect('/login')->with('status', 'Recovery email sent.');
     }
 }

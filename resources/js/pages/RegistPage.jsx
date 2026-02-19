@@ -3,8 +3,10 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { useState } from 'react' 
 
 import Header from '../components/Header'
+
 import '../../css/Register.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+
 import logo from '../img/logo.png'  
 
 function RegisterPage()

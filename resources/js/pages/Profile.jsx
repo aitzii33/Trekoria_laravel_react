@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link } from '@inertiajs/react'  
-import { Inertia } from '@inertiajs/inertia';
+import { Link, usePage } from '@inertiajs/react'  
+import { Inertia } from '@inertiajs/inertia'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -8,19 +8,21 @@ import Footer from '../components/Footer.jsx'
 import '../../css/Profile.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Userimg from '../img/Girl.avif'; 
-
+import Userimg from '../img/Girl.avif'
 
 function Profile() 
 {
+    const { userdata } = usePage().props;
+
     const [isEditing, setIsEditing] = useState(false);
 
     const [userData, setUserData] = useState({
-        username: 'devUser',
-        fullName: 'Shannon Doe',
-        birthDate: '1998-05-12',
-        email: 'shannon@example.com',
-        image: Userimg,
+        username: userdata?.username || 'devUser',
+        name: userdata?.name || '',
+        name: userdata?.name || '',
+        birthDate: userdata?.birthDate || '',
+        email: userdata?.email || '',
+        image: userdata?.image || Userimg, 
     });
 
     const [tempData, setTempData] = useState(userData);
@@ -57,6 +59,7 @@ function Profile()
     const handleSave = (e) =>
     {
         e.preventDefault();
+        Inertia.post('/profile/modify', tempData);
         setUserData(tempData);
         setIsEditing(false);
     };
@@ -69,19 +72,17 @@ function Profile()
     const handleDelete = (e) => 
     {
         e.preventDefault(); 
-        Inertia.post('/profile/delete'); 
+        if (confirm('Are you sure you want to delete your profile?')) 
+        {
+            Inertia.post('/profile/delete');
+        }
     };
+
 
     const handleLogout = (e) => 
     {
         e.preventDefault(); 
         Inertia.post('/profile/logout'); 
-    };
-
-    const handleModify = (e) => 
-    {
-        e.preventDefault(); 
-        Inertia.post('/profile/modify'); 
     };
 
     if (!userData.image) 
@@ -96,12 +97,12 @@ function Profile()
                 <div className="container">
                     <div className={`card profile-card ${isEditing ? 'edit-mode' : ''}`}>
                         <div className="profile-header text-center">
-                            <img src={isEditing ? tempData.image : userData.image} alt="Profile" className="profile-avatar mx-auto d-block"/>
+                            <img src={tempData.image || Userimg} alt="Profile" className="profile-avatar mx-auto d-block"/>
                             <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
-                                {isEditing ? tempData.username : userData.username}
+                                {tempData.username}
                             </p>
                             <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
-                                {isEditing ? tempData.email : userData.email}
+                                {tempData.email}
                             </p>
                         </div>
 
@@ -112,10 +113,9 @@ function Profile()
                                         <div className="profile-info">
                                             <strong>Complete name:</strong> {userData.fullName}
                                         </div>
-
                                         <div className="profile-info">
                                             <strong>Birth date:</strong>{' '}
-                                            {new Date(userData.birthDate).toLocaleDateString('es-ES')}
+                                            {userData.birthDate ? new Date(userData.birthDate).toLocaleDateString('es-ES') : ''}
                                         </div>
                                     </div>
 
@@ -139,7 +139,7 @@ function Profile()
                                 </>
                             ) : (
                                 <form onSubmit={handleSave}>
-                                      <div className="mb-4">
+                                    <div className="mb-4">
                                         <label className="form-label fw-bold">Profile image</label>
                                         <input type="file" name="profilePic" className="form-control" accept="image/*" onChange={handleChange}/>
                                     </div>
@@ -157,12 +157,16 @@ function Profile()
 
                                     <div className="row g-3 mt-3">
                                         <div className="col-md-6">
-                                            <label className="form-label fw-bold">Complete name</label>
-                                            <input type="text" name="fullName" className="form-control" value={tempData.fullName} onChange={handleChange} required/>
+                                            <label className="form-label fw-bold">Name</label>
+                                            <input type="text" name="last_name" className="form-control" value={tempData.name} onChange={handleChange}/>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <label className="form-label fw-bold">Last name</label>
+                                            <input type="text" name="fullName" className="form-control" value={tempData.last_name} onChange={handleChange}/>
                                         </div>
                                         <div className="col-md-6">
                                             <label className="form-label fw-bold">Birth date</label>
-                                            <input type="date" name="birthDate" className="form-control" value={tempData.birthDate} onChange={handleChange} required/>
+                                            <input type="date" name="birthDate" className="form-control" value={tempData.birthDate} onChange={handleChange}/>
                                         </div>
                                     </div>
 
@@ -171,7 +175,7 @@ function Profile()
                                             Cancel
                                         </button>
 
-                                        <button onClick={handleModify} className="btn btn-save profile-btn">
+                                        <button type="submit" className="btn btn-save profile-btn">
                                             Save changes
                                         </button>
                                     </div>

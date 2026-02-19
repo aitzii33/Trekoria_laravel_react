@@ -1,8 +1,7 @@
-import React from "react";
-import { Link } from "@inertiajs/react";
-import { route } from "ziggy-js";
-import './../../../css/adminLayout.css';
-import adminAvatar from "./../../img/DefaultUserImage.png";
+import { Link } from "@inertiajs/react"
+import { route } from "ziggy-js"
+import './../../../css/adminLayout.css'
+import adminAvatar from "./../../img/DefaultUserImage.png"
 
 const MENU = [
     { key: "dashboard", label: "General", route: "admin.dashboard" },
@@ -36,14 +35,7 @@ export default function Layout({ children }) {
 
                     <span className="admin-name">Administrator</span>
 
-                    <Link
-                        href={route("logout")}
-                        method="post"
-                        as="button"
-                        className="logout-btn"
-                    >
-                        Logout
-                    </Link>
+                    <Link href={route("logout")} method="post" as="button" className="logout-btn"> Logout </Link>
                 </div>
             </aside>
 
