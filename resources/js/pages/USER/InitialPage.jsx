@@ -12,9 +12,15 @@ export default function InitialPage({ popularCities, activities, search }) {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState(search || "");
 
+  // 20 random placeholder images
+  const placeholderImages = Array.from(
+    { length: 20 },
+    (_, i) => `https://picsum.photos/400/250?random=${i + 1}`
+  );
+
   const handleSearch = (e) => {
     e.preventDefault();
-    router.get("/home", { search: searchTerm }); // updated route
+    router.get("/home", { search: searchTerm });
   };
 
   return (
@@ -73,36 +79,47 @@ export default function InitialPage({ popularCities, activities, search }) {
         </Container>
       </section>
 
-      {/* Activities */}
-      <section className="py-5 bg-white">
+      {/* Activities Section */}
+      <section className="activities-section py-5">
         <Container>
-          <h2 className="mb-5 text-center activities-title">{t("Activities")}</h2>
+          <h2 className="section-title text-center mb-5">{t("Activities")}</h2>
+
           <Row className="g-4 justify-content-center">
             {activities.length > 0 ? (
               activities.map((act, idx) => {
-                const placeholderImages = Array.from({ length: 20 }, (_, i) => `https://picsum.photos/400/250?random=${i+1}`);
-                const randomImg = placeholderImages[idx % placeholderImages.length];
+                const imgUrl = act.image || placeholderImages[idx % placeholderImages.length];
 
                 return (
                   <Col key={idx} xs={12} sm={6} md={4} lg={3} className="d-flex">
-                    <Card className="activity-card flex-fill position-relative">
+                    <Card className="activity-card flex-fill">
+                      {/* Image */}
                       <div className="activity-img-wrapper">
-                        <img src={randomImg} alt={act.name} className="activity-img" />
+                        <img src={imgUrl} alt={act.name} className="activity-img" />
                         <div className="overlay-gradient"></div>
+
+                        {/* Price badge */}
+                        {act.price != null && (
+                          <div className="activity-price-badge">
+                            ${act.price.toFixed(2)}
+                          </div>
+                        )}
                       </div>
-                      <Card.Body className="d-flex flex-column h-100 position-relative">
+
+                      {/* Text & button */}
+                      <Card.Body className="d-flex flex-column h-100">
                         <div className="activity-text">
                           <Card.Title className="activity-name">{act.name}</Card.Title>
                           <Card.Subtitle className="mb-3 activity-place">
                             {act.place.city}, {act.place.country}
                           </Card.Subtitle>
                         </div>
+
                         <Button
-                          className="activity-btn"
-                          onClick={() => router.get(`/activities/${act.id}`)}
-                        >
-                          {t("View Details")}
-                        </Button>
+  className="activity-btn mt-auto"
+  onClick={() => router.get(`/activities/${act.id}`)}
+>
+  {t("View Details")}
+</Button>
                       </Card.Body>
                     </Card>
                   </Col>

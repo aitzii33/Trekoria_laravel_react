@@ -8,13 +8,15 @@ use Inertia\Inertia;
 
 class UserActivitiesController extends Controller
 {
-     public function index()
-    {
-        // Fetch all activities (active and inactive)
-        $activities = Activity::with('place')->get();
+    public function show($id)
+{
+    // Fetch the activity with related place
+    $activity = Activity::with('place')->findOrFail($id);
 
-        return Inertia::render('USER/UserActivities', [
-            'activities' => $activities,
-        ]);
-    }
+    // Render the ActivityDetails Inertia page
+    return Inertia::render('USER/ActivityDetails', [
+        'activity' => $activity
+    ]);
+}
+
 }
