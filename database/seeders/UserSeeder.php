@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\PasswordUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -149,12 +150,19 @@ class UserSeeder extends Seeder
 
         foreach ($users as $userData) 
         {
+            // Crear usuario principal
             $user = User::create([
                 'name' => $userData['name'],
                 'email' => $userData['email'],
+            ]);
+
+            // Crear password
+            PasswordUsers::create([
+                'user_id' => $user->id,
                 'password' => Hash::make('12345678'), 
             ]);
 
+            // Crear perfil
             userdata::create([
                 'user_id' => $user->id,
                 'last_name' => $userData['last_name'],
