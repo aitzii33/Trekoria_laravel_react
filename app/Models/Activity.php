@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Availability;
+use App\Models\Booking;
 use App\Models\Guides;
+use App\Models\Places;
+use App\Models\TimeSchedule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +31,7 @@ class Activity extends Model
         return $this->belongsTo(Places::class);
     }
 
-    public function timeSchedules()
+    public function schedules()
     {
         return $this->hasMany(TimeSchedule::class);
     }

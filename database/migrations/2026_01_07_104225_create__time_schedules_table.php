@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('time_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_activity')->constrained()->cascadeOnDelete();
+            $table->foreignId('activity_id')->constrained('activities')->cascadeOnDelete();
             $table->tinyInteger('day_of_week'); // 0-6
             $table->time('start_time');
             $table->timestamps();

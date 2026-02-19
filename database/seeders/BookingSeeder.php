@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Disponibility;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BookingSeeder extends Seeder
 {
@@ -14,40 +15,58 @@ class BookingSeeder extends Seeder
      */
     public function run(): void
     {
-        $allUsers = User::all();
-        $allDisponibilities = Disponibility::all();
+        $users = User::all();
+        $disponibilities = Disponibility::with('activity.guides')->get();
 
-        if ($allUsers->isEmpty() || $allDisponibilities->isEmpty()) 
+        if ($users->isEmpty() || $disponibilities->isEmpty()) 
         {
-            $this->command->info('No users or disponibilities found. Please seed Users and Disponibilities first.');
+            $this->command->warn('Seed Users and Disponibilities first.');
             return;
         }
 
-        foreach ($allDisponibilities as $availability) 
+        foreach ($disponibilities as $availability) 
         {
-            $numBookings = rand(0, $availability->total_people);
 
-            for ($i = 0; $i < $numBookings; $i++) 
+            $remaining = $availability->total_people - $availability->reserve_people;
+
+            if ($remaining <= 0) 
             {
-                $user = $allUsers->random();
-                $guide = $availability->activity->guides()->inRandomOrder()->first();
+                continue;
+            }
 
-                $people = rand(1, max(1, $availability->total_people - $availability->reserve_people));
+            $bookingsToCreate = rand(1, min(3, $remaining));
 
-                Booking::create([
-                    'availability_id' => $availability->id,
-                    'user_id' => $user->id,
-                    'guide_id' => $guide?->id,
-                    'people' => $people,
-                    'total_price' => $people * ($guide->price ?? 0),
-                    'status' => ['pending', 'paid', 'cancelled'][rand(0, 2)],
-                ]);
+            for ($i = 0; $i < $bookingsToCreate; $i++) 
+            {
 
-                $availability->reserve_people += $people;
-                $availability->save();
+                $remaining = $availability->total_people - $availability->reserve_people;
+
+                if ($remaining <= 0) {
+                    break;
+                }
+
+                $user = $users->random();
+                $guide = $availability->activity->guides->random() ?? null;
+
+                $people = rand(1, $remaining);
+                $price = $guide?->price ?? $availability->activity->price ?? 0;
+
+                DB::transaction(function () use ($availability, $user, $guide, $people, $price) {
+
+                    Booking::create([
+                        'availability_id' => $availability->id,
+                        'user_id' => $user->id,
+                        'guide_id' => $guide?->id,
+                        'people' => $people,
+                        'total_price' => $people * $price,
+                        'status' => collect(['pending', 'paid', 'cancelled'])->random(),
+                    ]);
+
+                    $availability->increment('reserve_people', $people);
+                });
             }
         }
 
-        $this->command->info('Bookings seeded successfully!');
+        $this->command->info('Bookings seeded successfully.');
     }
 }

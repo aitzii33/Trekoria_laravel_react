@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use App\Models\Orders;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Testing\Fakes\Fake;
 
 class OrderSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        $faker = Fake::create();
 
         for ($i = 0; $i < 10; $i++) 
         {

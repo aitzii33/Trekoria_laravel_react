@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class LogInController extends Controller
 {
@@ -21,6 +22,8 @@ class LogInController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
+        
+        Log::alert($credentials);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) 
         {
@@ -31,9 +34,12 @@ class LogInController extends Controller
                 Auth::logout();
                 return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
+            Log::alert('logeado');
             return redirect()->intended('/home');
         }
 
+        Log::alert('1');
+        
         return redirect()->back()->with('status', 'The email or password is incorrect.');
     }
 

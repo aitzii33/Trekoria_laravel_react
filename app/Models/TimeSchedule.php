@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Activity;
+use App\Models\Disponibility;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class TimeSchedule extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['id_activity', 'day_week', 'hour'];
+    protected $fillable = ['activity_id', 'day_week', 'hour'];
 
     public function activity()
     {
