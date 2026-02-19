@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
@@ -146,9 +147,24 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($users as $user) 
+        foreach ($users as $userData) 
         {
-            User::create($user);
+            $user = User::create([
+                'name' => $userData['name'],
+                'email' => $userData['email'],
+                'password' => Hash::make('12345678'), 
+            ]);
+
+            userdata::create([
+                'user_id' => $user->id,
+                'last_name' => $userData['last_name'],
+                'user_name' => $userData['user_name'],
+                'birth_day' => $userData['birth_day'],
+                'type_user_id' => $userData['type_user_id'],
+                'pending_token' => $userData['pending_token'] ?? Str::uuid(),
+                'pending_until' => $userData['pending_until'] ?? null,
+                'is_pending' => $userData['is_pending'],
+            ]);
         }
     }
 }
