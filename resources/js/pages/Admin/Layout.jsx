@@ -6,7 +6,7 @@ import adminAvatar from "./../../img/DefaultUserImage.png"
 const MENU = [
     { key: "dashboard", label: "General", route: "admin.dashboard" },
     { key: "bookings", label: "Bookings", route: "admin.bookings" },
-    { key: "customers", label: "Customers", route: "admin.customers" },
+    { key: "customers", label: "Customers", route: "admin.customers.index" },
     { key: "activities", label: "Activities", route: "admin.activities.index"},
     { key: "analytics", label: "Analytics", route: "admin.analytics" },
 ];

@@ -1,79 +1,93 @@
-import React, { useState, useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import React, { useEffect } from "react";
+import { useForm } from "@inertiajs/react";
 
 export default function CustomerForm({ customer, close }) {
-  const [form, setForm] = useState({
-    id: null,
-    name: "",
-    email: "",
-    password: "",
-  });
 
-  useEffect(() => {
-    if (customer) {
-      setForm({
-        id: customer.id,
-        name: customer.name,
-        email: customer.email,
+    const { data, setData, post, put, processing, errors, reset } = useForm({
+        name: "",
+        email: "",
         password: "",
-      });
-    }
-  }, [customer]);
+    });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+    // preload when editing
+    useEffect(() => {
+        if (customer) {
+            setData({
+                name: customer.name || "",
+                email: customer.email || "",
+                password: "",
+            });
+        }
+    }, [customer]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (form.id) {
-      Inertia.put(`/admin/customers/${form.id}`, form);
-    } else {
-      Inertia.post(`/admin/customers`, form);
-    }
-    close();
-  };
+    const submit = (e) => {
+        e.preventDefault();
 
-  return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h3>{form.id ? "Edit Customer" : "Add New Customer"}</h3>
+        if (customer) {
+            put(route("admin.customers.update", customer.id), {
+                onSuccess: () => close(),
+            });
+        } else {
+            post(route("admin.customers.store"), {
+                onSuccess: () => {
+                    reset();
+                    close();
+                },
+            });
+        }
+    };
 
-        <div className="form-grid">
-          <label>Name</label>
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
+    return (
+        <div className="modal-overlay">
+            <div className="modal">
+                <div className="modal-header">
+                    <h2>{customer ? "Edit Customer" : "Add Customer"}</h2>
+                </div>
 
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
+                <form onSubmit={submit} className="form-grid">
 
-          <label>Password {form.id && "(leave blank to keep current)"}</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-          />
+                    <div>
+                        <label>Name</label>
+                        <input
+                            value={data.name}
+                            onChange={e => setData("name", e.target.value)}
+                        />
+                        {errors.name && <span className="error">{errors.name}</span>}
+                    </div>
+
+                    <div>
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            value={data.email}
+                            onChange={e => setData("email", e.target.value)}
+                        />
+                        {errors.email && <span className="error">{errors.email}</span>}
+                    </div>
+
+                    {!customer && (
+                        <div>
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                value={data.password}
+                                onChange={e => setData("password", e.target.value)}
+                            />
+                            {errors.password && <span className="error">{errors.password}</span>}
+                        </div>
+                    )}
+
+                    <div className="form-actions">
+                        <button type="button" onClick={close} className="btn-secondary">
+                            Cancel
+                        </button>
+
+                        <button type="submit" disabled={processing} className="btn-primary">
+                            {processing ? "Saving..." : customer ? "Update" : "Create"}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div className="form-actions">
-          <button className="btn-secondary" onClick={close}>Cancel</button>
-          <button className="btn-primary" onClick={handleSubmit}>
-            {form.id ? "Update" : "Add"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

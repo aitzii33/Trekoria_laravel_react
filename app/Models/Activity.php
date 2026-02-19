@@ -22,6 +22,7 @@ class Activity extends Model
         'location',
         'image',
         'price',
+        'date',
         'is_active',
     ];
 
@@ -38,11 +39,6 @@ class Activity extends Model
 
     public function guides()
     {
-        return $this->hasMany(Guides::class);
-    }
-
-    public function bookings() 
-    {
-        return $this->hasManyThrough(Booking::class, Availability::class, 'time_schedule_id', 'availability_id');
+        return $this->hasMany(Guide::class, 'id_activity');
     }
 }

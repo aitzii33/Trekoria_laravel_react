@@ -8,19 +8,17 @@ use App\Models\Places;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ActivityController extends Controller
+class AdminActivityController extends Controller
 {
     public function index(Request $request)
     {
         $search = $request->query('search');
 
         $activities = Activity::with('place')
-            ->when($search, fn($query) =>
-                $query->where('name', 'like', "%{$search}%")
-            )
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+    ->latest()
+    ->paginate(50) // show more per page
+    ->withQueryString();
+
 
         return Inertia::render('Admin/Activities/Index', [
             'activities' => $activities,
