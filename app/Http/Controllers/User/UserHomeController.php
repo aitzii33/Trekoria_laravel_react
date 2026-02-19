@@ -28,12 +28,14 @@ class UserHomeController extends Controller
                 ];
             });
 
-        $activities = Activity::with('place')->when($search, function($query) use ($search) {
-                $query->whereHas('place', function($q) use ($search) {
-                    $q->where('city', 'like', "%{$search}%")->orWhere('country', 'like', "%{$search}%");
-                });
-            })
-            ->get();
+      $activities = Activity::with('place')
+    ->get()
+    ->map(function ($activity) {
+        // Just prefix with 'activities/' (relative to public)
+        $activity->imagen = 'activities/' . $activity->imagen;
+        return $activity;
+    });
+
 
         return Inertia::render('USER/InitialPage', [
             'continents' => $continents,

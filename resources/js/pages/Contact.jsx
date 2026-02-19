@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { usePage, useForm } from '@inertiajs/react'
 
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 import '../../css/Contact.css'
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -82,6 +83,20 @@ function ContactUs()
     return (
         <>
             <Header />
+            <section className="about-gradient py-5 w-100">
+                <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
+                    <div className="text-center text-white">
+                        <h1 className="display-5 fw-bold">Contact Us</h1>
+                        <p className="lead">
+                        Turning destinations into unforgettable experiences
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </section>
             <form id="contact-form" onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
                 {flash.status && <p style={{ color: 'green' }}>{flash.status}</p>}
 
@@ -107,6 +122,7 @@ function ContactUs()
                 {status && <p className="text-danger mt-2">{status}</p>}
                 {serverStatus && <p className="text-success mt-2">{serverStatus}</p>}
             </form>
+            <Footer />
         </>
     )
 }
