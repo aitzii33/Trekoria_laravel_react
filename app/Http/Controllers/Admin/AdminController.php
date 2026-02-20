@@ -124,5 +124,12 @@ public function deleteCustomer($id)
     {
         Booking::findOrFail($id)->delete();
         return redirect()->route('admin.bookings');
+
+
+    public function analytics()
+    {
+        return Inertia::render('Admin/Analytics');
     }
+
+
 }

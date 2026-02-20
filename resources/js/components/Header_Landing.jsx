@@ -37,10 +37,7 @@ export default function Head({currentLanguage, setLanguage})
           <Link href="/contact" className="nav-link me-4">Contact</Link>
         </div>
         
-        {/* Language Selector */}
-          <div className="me-4">
-              <LanguageSelector currentLanguage={currentLanguage} setLanguage={setLanguage} />
-          </div>
+       
       </header>
     </div>
   );

@@ -125,3 +125,105 @@ body {
     transform: rotate(0deg) !important;
   }
 }
+/* ---------- Responsive Media Queries ---------- */
+
+/* Tablets and below */
+@media (max-width: 992px) {
+  .landing-section {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .text-section {
+    align-items: center;
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  .app-name {
+    font-size: 2.5rem;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .text-section p {
+    font-size: 1rem;
+  }
+
+  .image-section {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .collage-wrapper {
+    width: 90%;
+    height: auto;
+  }
+
+  .collage-img {
+    position: relative;
+    width: 80%;
+    margin: 1rem auto;
+    top: 0 !important;
+    left: 0 !important;
+    transform: rotate(0deg) !important;
+    z-index: 1 !important;
+  }
+}
+
+/* Small devices / mobile phones */
+@media (max-width: 576px) {
+  .app-name {
+    font-size: 2rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .text-section p {
+    font-size: 0.95rem;
+  }
+
+  .collage-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .collage-img {
+    width: 100%;
+    margin: 0.5rem auto;
+  }
+}
+
+/* Extra small devices / very small screens */
+@media (max-width: 400px) {
+  .landing-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .app-name {
+    font-size: 1.8rem;
+  }
+
+  .main-title {
+    font-size: 1.2rem;
+  }
+
+  .text-section p {
+    font-size: 0.9rem;
+  }
+
+  .collage-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .collage-img {
+    width: 100%;
+    margin: 0.3rem auto;
+  }
+}

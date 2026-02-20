@@ -13,27 +13,48 @@ class UserHomeController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+
         $places = Places::all();
 
+        // Organize continents
         $continents = [];
         foreach ($places as $place) {
             $continents[$place->continent][$place->country][] = $place->city;
         }
 
-        $popularCities = Activity::select('place_id')->with('place')->groupBy('place_id')->orderByRaw('COUNT(*) DESC')->take(5)->get()
+        // Popular cities based on activities
+        $popularCities = Activity::select('place_id')
+            ->with('place')
+            ->where('is_active', true) // only active activities
+            ->groupBy('place_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(5)
+            ->get()
             ->map(function ($a) {
                 return [
-                    'name' => $a->place->city,
-                    'id' => $a->place->id,
+                    'name' => $a->place->city ?? 'Unknown',
+                    'id' => $a->place->id ?? null,
                 ];
             });
 
-        $activities = Activity::with('place')->when($search, function($query) use ($search) {
-                $query->whereHas('place', function($q) use ($search) {
-                    $q->where('city', 'like', "%{$search}%")->orWhere('country', 'like', "%{$search}%");
+        // Fetch only active activities with search filter
+        $activities = Activity::with('place')
+            ->where('is_active', true)
+            ->when($search, function ($query, $search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('location', 'like', "%{$search}%")
+                      ->orWhereHas('place', function ($q2) use ($search) {
+                          $q2->where('city', 'like', "%{$search}%")
+                             ->orWhere('country', 'like', "%{$search}%");
+                      });
                 });
             })
-            ->get();
+            ->get()
+            ->map(function ($activity) {
+                $activity->imagen = 'activities/' . $activity->imagen;
+                return $activity;
+            });
 
         return Inertia::render('USER/InitialPage', [
             'continents' => $continents,

@@ -69,6 +69,7 @@ export default function Index() {
                                 <th>Name</th>
                                 <th>Location</th>
                                 <th>Price</th>
+                                <th>Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -81,6 +82,7 @@ export default function Index() {
                                         {a.place?.city}, {a.place?.country}
                                     </td>
                                     <td>${a.price}</td>
+                                    <td>{new Date(a.date).toLocaleDateString()}</td>  {/* <-- Show date nicely */}
                                     <td>
                                         <span className={
                                             a.is_active

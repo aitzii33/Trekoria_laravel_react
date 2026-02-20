@@ -8,155 +8,128 @@ import Footer from "../../components/Footer";
 
 import "../../../css/UserHome.css";
 
-export default function InitialPage({ continents, popularCities, activities, search }) {
-    const { t } = useTranslation();
-    const [searchTerm, setSearchTerm] = useState(search || "");
-    const [showContinents, setShowContinents] = useState(false);
-    const [hoveredContinent, setHoveredContinent] = useState(null);
-    const [hoveredCountry, setHoveredCountry] = useState(null);
+export default function InitialPage({ popularCities, activities, search }) {
+  const { t } = useTranslation();
+  const [searchTerm, setSearchTerm] = useState(search || "");
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        router.get("/home2", { search: searchTerm });
-    };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    router.get("/home", { search: searchTerm });
+  };
 
-    return (
-        <>
-            <Header />
+  return (
+    <>
+      <Header />
 
-            {/* Hero/Search Panel */}
-            <section className="text-center py-5" style={{ backgroundColor: "#FFFFFF", color: "#2D2D2D" }}>
-                <Container>
-                    <h1 className="fw-bold" style={{ color: "#2796D1" }}>{t("Find Your Next Adventure")}</h1>
-                    <p className="lead">{t("Search countries, cities, and activities")}</p>
-                    <Form onSubmit={handleSearch} className="d-flex justify-content-center mt-3">
-                        <InputGroup style={{ maxWidth: "500px" }}>
-                            <Form.Control
-                                type="text"
-                                placeholder={t("Search by city or country...")}
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                style={{ borderColor: "#2796D1" }}
-                            />
-                            <Button type="submit" style={{ backgroundColor: "#2796D1", borderColor: "#2796D1", color: "#FFFFFF" }}>
-                                {t("Search")}
-                            </Button>
-                        </InputGroup>
-                    </Form>
-                </Container>
-            </section>
+      {/* Hero Section */}
+      <section
+        className="text-center d-flex align-items-center justify-content-center hero-section"
+        style={{ backgroundImage: 'url(/img/LandingImg2.jpg)' }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, width: '100%', height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.25)', zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        ></div>
 
-            {/* Popular Cities */}
-            <section className="py-5">
-                <Container>
-                    <h2 className="mb-4 fw-bold" style={{ color: "#2D2D2D" }}>{t("Popular Cities")}</h2>
-                    <Row className="g-3">
-                        {popularCities.map((city, idx) => (
-                            <Col key={idx} md={3} sm={6}>
-                                <Card
-                                    onClick={() => router.get("/home2", { search: city.name })}
-                                    className="shadow-sm hover-scale p-3 text-center border-0"
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    <Card.Title style={{ color: "#2796D1", fontWeight: "bold" }}>
-                                        {city.name}
-                                    </Card.Title>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>
-                </Container>
-            </section>
+        <Container style={{ zIndex: 2 }}>
+          <h1>{t("Find Your Next Adventure")}</h1>
+          <p>{t("Search countries, cities, and activities")}</p>
 
-            {/* Explore Continents */}
-            <section className="py-5">
-                <Container>
-                    <Button
-                        variant="outline-primary"
-                        style={{ borderColor: "#2796D1", color: "#2796D1" }}
-                        onClick={() => setShowContinents(!showContinents)}
-                    >
-                        {showContinents ? t("Hide Continents") : t("Explore The World")}
-                    </Button>
+          <Form onSubmit={handleSearch} className="d-flex justify-content-center" style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <InputGroup>
+              <Form.Control
+                type="text"
+                placeholder={t("Search by city or country...")}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Button type="submit">{t("Search")}</Button>
+            </InputGroup>
+          </Form>
+        </Container>
+      </section>
 
-                    {showContinents && (
-                        <div className="d-flex flex-wrap mt-4">
-                            {/* Continents */}
-                            <div className="me-4" style={{ minWidth: "180px" }}>
-                                {Object.keys(continents).map((cont, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="p-2 mb-2 rounded text-white fw-bold text-center"
-                                        style={{ backgroundColor: "#2796D1", cursor: "pointer" }}
-                                        onMouseEnter={() => setHoveredContinent(continents[cont])}
-                                        onMouseLeave={() => setHoveredContinent(null)}
-                                    >
-                                        {cont}
-                                    </div>
-                                ))}
-                            </div>
+      {/* Popular Cities */}
+      <section className="py-5 bg-light">
+        <Container>
+          <h2 className="mb-5 text-center popular-title">{t("Popular Cities")}</h2>
+          <Row className="g-4 justify-content-center">
+            {popularCities.map((city, idx) => (
+              <Col key={idx} xs={6} sm={4} md={3} lg={2}>
+                <div
+                  className="city-card-small"
+                  onClick={() => router.get("/home", { search: city.name })}
+                  style={{ "--accent": "#2796D1" }}
+                >
+                  <h3>{city.name}</h3>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
 
-                            {/* Countries & Cities */}
-                            <div className="flex-grow-1">
-                                {hoveredContinent &&
-                                    Object.entries(hoveredContinent).map(([countryName, cities], idx) => (
-                                        <div
-                                            key={idx}
-                                            className="p-2 m-2 rounded bg-light border shadow-sm text-dark"
-                                            onMouseEnter={() => setHoveredCountry({ name: countryName, cities })}
-                                            onMouseLeave={() => setHoveredCountry(null)}
-                                            style={{ cursor: "pointer" }}
-                                        >
-                                            <strong>{countryName}</strong>
-                                            {hoveredCountry && hoveredCountry.name === countryName && (
-                                                <div className="mt-2 d-flex flex-wrap">
-                                                    {cities.map((city, ci) => (
-                                                        <div
-                                                            key={ci}
-                                                            className="p-2 m-1 rounded border bg-white shadow-sm text-dark"
-                                                            style={{ cursor: "pointer" }}
-                                                            onClick={() => router.get("/home2", { search: city })}
-                                                        >
-                                                            {city}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                            </div>
-                        </div>
-                    )}
-                </Container>
-            </section>
+      {/* Activities Section */}
+      <section className="activities-section py-5">
+        <Container>
+          <h2 className="section-title text-center mb-5">{t("Activities")}</h2>
 
-            {/* Activities */}
-            <section className="py-5">
-                <Container>
-                    <h2 className="mb-4 fw-bold" style={{ color: "#2D2D2D" }}>{t("Activities")}</h2>
-                    <Row className="g-4">
-                        {activities.length > 0 ? activities.map((act, idx) => (
-                            <Col key={idx} md={4} sm={6}>
-                                <Card className="shadow-sm border-0 p-3">
-                                    <Card.Body>
-                                        <Card.Title style={{ color: "#2796D1" }}>{act.name}</Card.Title>
-                                        <Card.Subtitle className="mb-2 text-muted">{act.place.city}, {act.place.country}</Card.Subtitle>
-                                        <Button
-                                            variant="outline-warning"
-                                            style={{ borderColor: "#E5E592", color: "#2D2D2D" }}
-                                            onClick={() => router.get(`/activities/${act.id}`)}
-                                        >
-                                            {t("View Details")}
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        )) : <p>{t("No activities found for this location.")}</p>}
-                    </Row>
-                </Container>
-            </section>
+          <Row className="g-4 justify-content-center">
+            {activities.length > 0 ? (
+              activities.map((act, idx) => {
+                const imgUrl = `/activities/${act.imagen}`; // PUBLIC folder path
 
-            <Footer style={{ backgroundColor: "#FFFFFF" }} />
-        </>
-    );
+                return (
+                  <Col key={idx} xs={12} sm={6} md={4} lg={3} className="d-flex">
+  <Card className="activity-card flex-fill">
+    <div className="activity-img-wrapper">
+      <img
+  src={act.imagen}
+  alt={act.name}
+  className="activity-img"
+  onError={(e) => {
+    e.target.onerror = null; // prevents infinite loop
+    e.target.src = "/img/landingImg1.png";
+  }}
+/>
+      <div className="overlay-gradient"></div>
+    </div>
+
+    <Card.Body className="d-flex flex-column h-100">
+      <div className="activity-text">
+        <Card.Title className="activity-name">{act.name}</Card.Title>
+        <Card.Subtitle className="mb-3 activity-place">
+          {act.place.city}, {act.place.country}
+        </Card.Subtitle>
+      </div>
+
+      {act.price != null && (
+        <div className="activity-price-badge">${act.price.toFixed(2)}</div>
+      )}
+
+      <Button
+        className="activity-btn mt-auto"
+        onClick={() => router.get(`/activities/${act.id}`)}
+      >
+        View Details
+      </Button>
+    </Card.Body>
+  </Card>
+</Col>
+                );
+              })
+            ) : (
+              <p className="text-center">{t("No activities found for this location.")}</p>
+            )}
+          </Row>
+        </Container>
+      </section>
+
+      <Footer style={{ backgroundColor: "#FFFFFF" }} />
+    </>
+  );
 }
