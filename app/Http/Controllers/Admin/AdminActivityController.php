@@ -11,23 +11,30 @@ use Inertia\Inertia;
 class AdminActivityController extends Controller
 {
     public function index(Request $request)
-    {
-        $search = $request->query('search');
+{
+    $search = $request->query('search');
 
-        $activities = Activity::with('place')
-    ->latest()
-    ->paginate(50) // show more per page
-    ->withQueryString();
+    $activities = Activity::with('place')
+        ->when($search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('location', 'like', "%{$search}%")
+                  ->orWhereHas('place', function ($q) use ($search) {
+                      $q->where('city', 'like', "%{$search}%")
+                        ->orWhere('country', 'like', "%{$search}%");
+                  });
+        })
+        ->latest()
+        ->paginate(50)
+        ->withQueryString();
 
-
-        return Inertia::render('Admin/Activities/Index', [
-            'activities' => $activities,
-            'places' => Places::select('id','city','country')->get(),
-            'filters' => [
-                'search' => $search
-            ]
-        ]);
-    }
+    return Inertia::render('Admin/Activities/Index', [
+        'activities' => $activities,
+        'places' => Places::select('id','city','country')->get(),
+        'filters' => [
+            'search' => $search
+        ]
+    ]);
+}
 
     public function store(Request $request)
     {

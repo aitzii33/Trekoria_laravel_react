@@ -25,30 +25,33 @@ class UserHomeController extends Controller
         // Popular cities based on activities
         $popularCities = Activity::select('place_id')
             ->with('place')
+            ->where('is_active', true) // only active activities
             ->groupBy('place_id')
             ->orderByRaw('COUNT(*) DESC')
             ->take(5)
             ->get()
             ->map(function ($a) {
                 return [
-                    'name' => $a->place->city,
-                    'id' => $a->place->id,
+                    'name' => $a->place->city ?? 'Unknown',
+                    'id' => $a->place->id ?? null,
                 ];
             });
 
-        // Fetch activities with search filter
+        // Fetch only active activities with search filter
         $activities = Activity::with('place')
+            ->where('is_active', true)
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
                       ->orWhere('location', 'like', "%{$search}%")
-                      ->orWhereHas('place', function ($q) use ($search) {
-                          $q->where('city', 'like', "%{$search}%")
-                            ->orWhere('country', 'like', "%{$search}%");
+                      ->orWhereHas('place', function ($q2) use ($search) {
+                          $q2->where('city', 'like', "%{$search}%")
+                             ->orWhere('country', 'like', "%{$search}%");
                       });
+                });
             })
             ->get()
             ->map(function ($activity) {
-                // Prefix image path to public/activities
                 $activity->imagen = 'activities/' . $activity->imagen;
                 return $activity;
             });
