@@ -40,10 +40,21 @@ class ActivityController extends Controller
     {
         $activity->load(['user', 'images']);
         
-        if ($activity->track_points && !$activity->distance) 
-        {
+        if ($activity->track_points && !$activity->distance) {
             $this->calculateActivityStats($activity);
             $activity->refresh();
+        }
+
+        // Decode track_points de forma segura
+        $trackPoints = $activity->track_points ? json_decode($activity->track_points, true) : null;
+
+        // Normaliza nombres de campos para coincidir con frontend
+        if ($trackPoints && isset($trackPoints[0]['lat']) && isset($trackPoints[0]['lng'])) {
+            $trackPoints = array_map(fn($p) => [
+                'latitude' => $p['lat'],
+                'longitude' => $p['lng'],
+                'elevation' => $p['elevation'] ?? null,
+            ], $trackPoints);
         }
 
         $formattedActivity = [
@@ -57,8 +68,14 @@ class ActivityController extends Controller
             'duration' => $activity->duration,
             'avg_speed' => $activity->avg_speed,
             'elevation_gain' => $activity->elevation_gain,
-            'track_points' => $activity->track_points ? json_decode($activity->track_points, true) : null,
-            'start_point' => $activity->track_points ? json_decode($activity->track_points, true)[0] ?? null : null,
+            'track_points' => $trackPoints,
+            'start_point' => $trackPoints[0] ?? null,
+            'place' => [
+                'lat' => $activity->lat,
+                'lng' => $activity->lng,
+                'city' => $activity->city ?? null,
+                'country' => $activity->country ?? null,
+            ],
         ];
 
         return Inertia::render('ActivitiesInfo', ['activity' => $formattedActivity]);
