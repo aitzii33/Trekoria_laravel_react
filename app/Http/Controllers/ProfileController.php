@@ -20,8 +20,9 @@ class ProfileController extends Controller
 
         return Inertia::render('Profile', [
             'userdata' => [
-                'username' => $user->username,
-                'fullName' => $user->fullName ?? '',
+                'name' => $user->name,
+                'last_nameb' => $user->last_name ?? '',
+                'user_name' => $user->user_name ?? '',
                 'birthDate' => $user->birthDate ?? '',
                 'email' => $user->email,
                 'image' => $user->image ?? null, 
@@ -59,7 +60,7 @@ class ProfileController extends Controller
         }
 
         $validated = $request->validate([
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'user_name' => 'required|string|max:255|unique:users,username,' . $user->id,
             'name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
             'birthDate' => 'nullable|date',
