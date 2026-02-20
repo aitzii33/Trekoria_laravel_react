@@ -64,7 +64,8 @@ Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('
 Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify'); //->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
 
-Route::get('/pay', [PayController::class, 'form'])->name('pay');
+
+Route::get('/pay', [PayController::class, 'form'])->name('pay.index');
 Route::post('/pay/verifyAuth', [PayController::class, 'dataVerify'])->name('pay.perform');
 
 
@@ -75,7 +76,7 @@ Route::post('/activities/details', [ActivityController::class, 'verifyAuth'])->n
 //Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
 //Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
-
+/*
 Route::middleware('auth')->group(function () 
 {
     Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
@@ -84,6 +85,13 @@ Route::middleware('auth')->group(function ()
     Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
     Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 });
+*/
+
+Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'addActivity'])->name('cart.add');
+Route::post('/cart/{id}/update', [CartController::class, 'updateQuantity'])->name('cart.update');
+Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
+Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 Route::prefix('admin')->name('admin.')->group(function() 
 {

@@ -1,6 +1,5 @@
 
-
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react'
 import { useState, useRef } from 'react';
 
 import '../../css/Payment.css' 
@@ -14,6 +13,7 @@ export default function OrderPage()
     const [notification, setNotification] = useState('');
 
     const steps = ['Shipping', 'Payment', 'Review'];
+    const { total } = usePage().props;
 
     const nextStep = () => 
     {
@@ -199,21 +199,22 @@ export default function OrderPage()
                     <div id="summary-content">
                         <div className="summary-item">
                             <h6>Shipping Information</h6>
-                            <p id="summary-shipping-info">
+                            <p id="summary-shipping-info" style={{ color:'#062e69' }}>
                                 {data.full_name || 'Not entered yet'}
                             </p>
                         </div>
 
                         <div className="summary-item mt-3">
                             <h6>Payment Details</h6>
-                            <p id="summary-payment-info">
+                            <p id="summary-payment-info" style={{ color:'#062e69' }}>
                                 Card ending in **** {data.card_number.slice(-4) || '0000'}
                             </p>
                         </div>
 
                         <div className="summary-total d-flex justify-content-between">
                             <span>Total</span>
-                            <span>data.price</span> 
+                            <br></br>
+                            <span style={{ color:'#062e69' }}>{total}€</span> 
                         </div>
                     </div>
                 </div>

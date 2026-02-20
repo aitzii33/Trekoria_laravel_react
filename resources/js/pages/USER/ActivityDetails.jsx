@@ -1,7 +1,8 @@
 import { Container, Row, Col, Button, Card, Dropdown, CardBody, CardTitle } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
+import { router } from '@inertiajs/react';
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -57,7 +58,6 @@ function ActivityDetails({ activity }) {
       }
     };
 
-
     window.onload = initActivityMap;
 
   return (
@@ -111,13 +111,21 @@ function ActivityDetails({ activity }) {
 
                   {/* Instructions / Notes */}
                   <div className="details-instructions mb-4">
+                    <br></br>
                     <h5>{t("Important Instructions")}</h5>
+                    <br></br>
                     <ul>
                       <li>{t("Please review all activity details before reserving.")}</li>
                       <li>{t("Ensure you meet the requirements and check availability.")}</li>
                       <li>{t("Bring necessary equipment if required.")}</li>
                       <li>{t("Follow safety guidelines provided by the instructor.")}</li>
                     </ul>
+                  </div>
+
+                  <div>
+                    <Button className="btn btn-outline-success btn-lg w-100 mt-2" onClick={() => router.visit(route('cart.index'))} style={{ color:'white' }}>
+                      View Cart
+                    </Button>
                   </div>
                 </Card.Body>
               </Card>

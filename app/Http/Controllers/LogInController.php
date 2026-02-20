@@ -32,8 +32,7 @@ class LogInController extends Controller
             if (!Auth::user()->hasVerifiedEmail()) 
             {
                 Auth::logout();
-                return redirect('/profile');
-                //return redirect()->back()->with('status', 'You must verify your email before logging in.');
+                return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
             
             Log::info('Usuario logueado', ['email' => $credentials['email']]);
