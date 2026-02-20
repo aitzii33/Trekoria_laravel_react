@@ -152,7 +152,7 @@ function Cart()
                                     <Button className="btn btn-outline-success btn-lg w-100 mt-2" onClick={() => {
                                         const total = getTotal().toFixed(2);
                                         router.visit(route('pay.index', { total }));
-                                    }}>
+                                    }} style={{ color:'white' }}>
                                     Process to Pay
                                     </Button>
                                 </div>
