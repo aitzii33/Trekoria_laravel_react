@@ -58,10 +58,10 @@ Route::post('/register/send', [RegisterController::class, 'sendEmail'])->name('r
 Route::get('/register/confirm/{token}', [RegisterController::class, 'confirm'])->name('register.confirm');
 
 
-Route::get('/profile', [ProfileController::class, 'form'])->name('profile'); //->middleware('auth');
-Route::post('/profile/logout', [LogInController::class, 'logout'])->name('profile.logout'); //->middleware('auth');
-Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete'); //->middleware('auth');
-Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify'); //->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'form'])->name('profile')->middleware('auth');
+Route::post('/profile/logout', [LogInController::class, 'logout'])->name('profile.logout')->middleware('auth');
+Route::post('/profile/delete', [ProfileController::class, 'SoftDelete'])->name('profile.delete')->middleware('auth');
+Route::post('/profile/modify', [ProfileController::class, 'Modify'])->name('profile.modify')->middleware('auth');
 Route::post('/profile/{id}/restore', [ProfileController::class, 'restore']);
 
 
@@ -73,10 +73,10 @@ Route::get('/activities', [ActivityController::class, 'index'])->name('activitie
 Route::post('/activities/details', [ActivityController::class, 'verifyAuth'])->name('activity.details');
 
 
-//Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
-//Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+Route::get('/checkout', [OrderController::class, 'create'])->name('checkout.create');
+Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
-/*
+
 Route::middleware('auth')->group(function () 
 {
     Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
@@ -85,13 +85,6 @@ Route::middleware('auth')->group(function ()
     Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
     Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 });
-*/
-
-Route::get('/cart', [CartController::class, 'form'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'addActivity'])->name('cart.add');
-Route::post('/cart/{id}/update', [CartController::class, 'updateQuantity'])->name('cart.update');
-Route::delete('/cart/{id}', [CartController::class, 'eliminateActivity'])->name('cart.destroy');
-Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 Route::prefix('admin')->name('admin.')->group(function() 
 {
