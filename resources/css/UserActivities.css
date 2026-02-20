@@ -266,20 +266,83 @@ body {
   }
 }
 
+/* ---------- Responsive Activities & Popular Cities ---------- */
+
+/* Large tablets / below 992px */
+@media (max-width: 992px) {
+  /* Activities: 2 per row */
+  .activities-section .row.g-4 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .activities-section .row.g-4 > .col-12,
+  .activities-section .row.g-4 > .col-sm-6,
+  .activities-section .row.g-4 > .col-md-4,
+  .activities-section .row.g-4 > .col-lg-3 {
+    flex: 0 0 48%;
+    max-width: 48%;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Popular Cities: 3 per row */
+  .popular-cities-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .popular-cities-row > .col-6,
+  .popular-cities-row > .col-sm-4,
+  .popular-cities-row > .col-md-3,
+  .popular-cities-row > .col-lg-2 {
+    flex: 0 0 30%;
+    max-width: 30%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Tablets / below 768px */
 @media (max-width: 768px) {
-  .popular-title, .activities-section .section-title {
-    font-size: 1.7rem;
+  /* Activities: 2 per row */
+  .activities-section .row.g-4 > .col-12,
+  .activities-section .row.g-4 > .col-sm-6,
+  .activities-section .row.g-4 > .col-md-4,
+  .activities-section .row.g-4 > .col-lg-3 {
+    flex: 0 0 48%;
+    max-width: 48%;
   }
 
-  .activity-img-wrapper {
-    height: 160px;
+  /* Popular Cities: 3 per row */
+  .popular-cities-row > .col-6,
+  .popular-cities-row > .col-sm-4,
+  .popular-cities-row > .col-md-3,
+  .popular-cities-row > .col-lg-2 {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
+/* Mobile / below 576px */
+@media (max-width: 576px) {
+  /* Activities: full width or 1 per row */
+  .activities-section .row.g-4 > .col-12,
+  .activities-section .row.g-4 > .col-sm-6,
+  .activities-section .row.g-4 > .col-md-4,
+  .activities-section .row.g-4 > .col-lg-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-
-  .hero-section p {
-    font-size: 0.9rem;
+  /* Popular Cities: 2 per row */
+  .popular-cities-row > .col-6,
+  .popular-cities-row > .col-sm-4,
+  .popular-cities-row > .col-md-3,
+  .popular-cities-row > .col-lg-2 {
+    flex: 0 0 48%;
+    max-width: 48%;
+    margin-bottom: 1rem;
   }
 }
