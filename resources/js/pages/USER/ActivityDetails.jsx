@@ -15,6 +15,7 @@ function ActivityDetails({ activity }) {
   const { t } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState(null);
+  const [selectedPeople, setSelectedPeople] = useState(null); //
   const [userLocation, setUserLocation] = useState(null);
   const [directions, setDirections] = useState(null);
   const mapRef = useRef(null);
@@ -221,7 +222,7 @@ function ActivityDetails({ activity }) {
               />
               <Dropdown onSelect={(eventKey) => setSelectedHour(eventKey)}>
                 <Dropdown.Toggle variant="success" id="dropdown-basic" className="w-100">
-                  {selectedHour || 'Hora'}
+                  {selectedHour || 'Time'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {(activity.hours?.length ? activity.hours : ['8:00 a.m.']).map((hour, idx) => (
@@ -230,13 +231,15 @@ function ActivityDetails({ activity }) {
                 </Dropdown.Menu>
               </Dropdown>
 
-              <Dropdown>
+               <Dropdown onSelect={(eventKey) => setSelectedPeople(eventKey)}>
                 <Dropdown.Toggle variant="success" id="dropdown-people" className="w-100">
-                  {t("People")}
+                  {selectedPeople || t("People")}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {[...Array(10)].map((_, n) => (
-                    <Dropdown.Item key={n+1}>{n+1}</Dropdown.Item>
+                    <Dropdown.Item key={n + 1} eventKey={n + 1}>
+                      {n + 1}
+                    </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
