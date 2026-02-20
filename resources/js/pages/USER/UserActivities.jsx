@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { usePage, router } from "@inertiajs/react";
-import "./../../../css/UserActivities.css";
+import { useState } from "react"
+import { usePage, router } from "@inertiajs/react"
+
+import "./../../../css/UserActivities.css"
+import "react-datepicker/dist/react-datepicker.css"
 
 export default function UserActivities() {
     const { activities } = usePage().props; // passed from Laravel

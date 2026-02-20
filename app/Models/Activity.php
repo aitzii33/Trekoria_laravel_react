@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Availability;
-use App\Models\Booking;
 use App\Models\Guides;
 use App\Models\Places;
 use App\Models\TimeSchedule;
@@ -39,6 +37,11 @@ class Activity extends Model
 
     public function guides()
     {
-        return $this->hasMany(Guide::class, 'id_activity');
+        return $this->hasMany(Guides::class, 'id_activity');
+    }
+
+    public function trackPoints()
+    {
+        return $this->hasMany(TrackPoint::class);
     }
 }
