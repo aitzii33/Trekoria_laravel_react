@@ -11,13 +11,6 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user) 
-        {
-            return Inertia::render('Profile', [
-                'userdata' => null,
-            ]);
-        }
-
         return Inertia::render('Profile', [
             'userdata' => [
                 'name' => $user->name,
