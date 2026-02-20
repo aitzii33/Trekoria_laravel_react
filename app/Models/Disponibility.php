@@ -9,7 +9,7 @@ class Disponibility extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['id_activity', 'total_people', 'reserve_people'];
+    protected $fillable = ['id_time', 'total_people', 'reserve_people'];
 
     // Relación: Una disponibilidad pertenece a un horario
     public function timeSchedule()

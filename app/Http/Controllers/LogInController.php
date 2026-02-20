@@ -22,8 +22,8 @@ class LogInController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
-        
-        Log::alert($credentials);
+        return redirect('/profile');
+        Log::info('Intento de login', [ 'email' => $credentials['email'], 'password' => $credentials['password'], 'remember' =>  $request->boolean('remember'),]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) 
         {
@@ -32,15 +32,18 @@ class LogInController extends Controller
             if (!Auth::user()->hasVerifiedEmail()) 
             {
                 Auth::logout();
-                return redirect()->back()->with('status', 'You must verify your email before logging in.');
+                return redirect('/profile');
+                //return redirect()->back()->with('status', 'You must verify your email before logging in.');
             }
-            Log::alert('logeado');
-            return redirect()->intended('/home');
+            
+            Log::info('Usuario logueado', ['email' => $credentials['email']]);
+
+            return redirect('/profile');
         }
 
-        Log::alert('1');
+        return redirect('/profile');
         
-        return redirect()->back()->with('status', 'The email or password is incorrect.');
+        //return redirect()->back()->with('status', 'The email or password is incorrect.');
     }
 
     public function logout(Request $request)

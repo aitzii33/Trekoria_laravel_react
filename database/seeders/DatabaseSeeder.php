@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
         $this->call(PlaceSeeder::class);
         $this->call(ActivitiesTableSeeder::class);
         $this->call(ScheduleSeeder::class);
-        $this->call(DisponibilitySeeder::class);
+        //$this->call(DisponibilitySeeder::class);
         
         
-        $this->call(BookingSeeder::class);
+        //$this->call(BookingSeeder::class);
         $this->call(CartSeeder::class);
         
         $this->call(GuideSeeder::class);
-        $this->call(OrderSeeder::class);        
+        //$this->call(OrderSeeder::class);        
     }
 }

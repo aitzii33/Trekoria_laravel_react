@@ -16,15 +16,15 @@ class BookingSeeder extends Seeder
     public function run(): void
     {
         $users = User::all();
-        $disponibilities = Disponibility::with('activity.guides')->get();
+        $disp = Disponibility::with('activity.guides')->get();
 
-        if ($users->isEmpty() || $disponibilities->isEmpty()) 
+        if ($users->isEmpty() || $disp->isEmpty()) 
         {
             $this->command->warn('Seed Users and Disponibilities first.');
             return;
         }
 
-        foreach ($disponibilities as $availability) 
+        foreach ($disp as $availability) 
         {
 
             $remaining = $availability->total_people - $availability->reserve_people;

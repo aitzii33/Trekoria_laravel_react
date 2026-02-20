@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\PasswordUsers;
 use App\Models\User;
 use App\Models\Userdata;
 use Illuminate\Database\Seeder;
@@ -157,7 +156,6 @@ class UserSeeder extends Seeder
                 'email' => $userData['email'],
                 'password' => Hash::make('12345678'), 
             ]);
-
 
             // Crear perfil
             Userdata::create([

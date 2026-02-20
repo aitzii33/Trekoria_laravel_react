@@ -17,11 +17,12 @@ function Profile()
     const [isEditing, setIsEditing] = useState(false);
 
     const [userData, setUserData] = useState({
-        username: userdata?.username || 'devUser',
-        name: userdata?.name || '',
-        name: userdata?.name || '',
-        birthDate: userdata?.birthDate || '',
-        email: userdata?.email || '',
+        name: userdata?.name || 'Maria',
+        last_name: userdata?.last_name || 'lopez',
+        fullName: userdata?.name + userdata?.last_name || 'Maria Lopez',
+        user_name: userdata?.user_name || 'malopez',
+        birthDate: userdata?.birthDate || '12/03/1998',
+        email: userdata?.email || 'maria.lopez@example.com',
         image: userdata?.image || Userimg, 
     });
 
@@ -99,7 +100,7 @@ function Profile()
                         <div className="profile-header text-center">
                             <img src={tempData.image || Userimg} alt="Profile" className="profile-avatar mx-auto d-block"/>
                             <p className="mb-0 mb-2 mt-3 fw-bold" style={{ color: '#5A4C29' }}>
-                                {tempData.username}
+                                {tempData.user_name}
                             </p>
                             <p className="mb-0 mb-2 mt-3 text-center fw-bold" style={{ color: '#5A4C29' }}>
                                 {tempData.email}
@@ -147,7 +148,7 @@ function Profile()
                                     <div className="row g-3">
                                         <div className="col-md-6">
                                             <label className="form-label fw-bold">User name</label>
-                                            <input type="text" name="username" className="form-control" value={tempData.username} onChange={handleChange} required/>
+                                            <input type="text" name="username" className="form-control" value={tempData.user_name} onChange={handleChange} required/>
                                         </div>
                                         <div className="col-md-6">
                                             <label className="form-label fw-bold">Email</label>
