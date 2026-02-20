@@ -1,0 +1,166 @@
+/* Dashboard Container */
+.dashboard-container {
+  font-family: 'Inter', sans-serif;
+  background-color: #F5F7FA; /* soft light gray background */
+  color: #2D2D2D;
+  padding: 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Header */
+.dashboard-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2796D1; /* Trekoria Deep Blue */
+  margin-bottom: 2rem;
+}
+
+/* KPI Cards Grid */
+.kpi-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.kpi-card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Different card colors matching app */
+.kpi-card.users { background: #DBEAFE; color: #1E40AF; } /* blue gradient */
+.kpi-card.bookings { background: #D1FAE5; color: #065F46; } /* green gradient */
+.kpi-card.approved { background: #FEF3C7; color: #B45309; } /* yellow */
+.kpi-card.pending { background: #FEE2E2; color: #991B1B; } /* red */
+
+/* KPI text */
+.kpi-card .label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.kpi-card .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* Charts Section */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media(min-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chart-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2796D1;
+  margin-bottom: 1rem;
+}
+
+.chart-wrapper {
+  height: 300px;
+}
+
+/* Table Section */
+.table-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin-top: 2rem;
+  overflow-x: auto;
+}
+
+.table-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2796D1;
+  margin-bottom: 1rem;
+}
+
+.table-card table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 400px;
+}
+
+.table-card th,
+.table-card td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #E5E7EB;
+  text-align: left;
+}
+
+.table-card th {
+  background-color: #F3F4F6;
+  font-weight: 600;
+}
+
+.table-card tbody tr:hover {
+  background-color: #F9FAFB;
+}
+
+/* Status badges matching app colors */
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-approved {
+  background-color: #10B981; /* green */
+  color: #fff;
+}
+
+.status-pending {
+  background-color: #FBBF24; /* yellow */
+  color: #000;
+}
+
+/* Responsive tweaks */
+@media(max-width: 768px) {
+  .dashboard-container h1 {
+    font-size: 2rem;
+  }
+
+  .kpi-card .value {
+    font-size: 1.5rem;
+  }
+
+  .chart-wrapper {
+    height: 250px;
+  }
+}

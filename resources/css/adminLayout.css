@@ -85,3 +85,103 @@
     background-color: #f9fafb;
     overflow-y: auto;
 }
+/* Admin layout container */
+.admin-layout {
+    display: flex;
+    min-height: 100vh; /* full viewport height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;                /* fixed width */
+    background-color: #1E293B;    /* dark sidebar color */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* keep footer at bottom */
+    padding: 20px 15px;
+    position: sticky;
+    top: 0;
+    height: 100vh;               /* full viewport height */
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 20px;
+}
+
+.sidebar-menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+    color: #2796D1; /* accent color */
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    text-align: center;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.admin-name {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.logout-btn {
+    background-color: #DC2626;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background-color: #B91C1C;
+}
+
+/* Main content */
+.main-content {
+    flex: 1; /* take remaining space */
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+/* Sidebar */
+.sidebar {
+    width: 300px;                /* <-- change this value to adjust width */
+    background-color: #1E293B;   
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 15px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+/* Main content */
+.main-content {
+    flex: 1; /* fills remaining space automatically */
+    padding: 30px;
+    background-color: #f9f9f9;
+}
