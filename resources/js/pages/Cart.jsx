@@ -1,18 +1,45 @@
 import { router, usePage } from '@inertiajs/react'
+import { Container, Row, Col, Button, Card, Dropdown, CardBody, CardTitle } from "react-bootstrap"
 import { useState } from 'react'
 
 import Header from '../components/Header'
 
 import '../../css/Cart.css'
 
-import BoatImg from "../img/Boat.avif"
 
+   const activity = [
+    {
+        id: 1,
+        place_id: 1,
+        name: "Ride a Horse",
+        description: "Experience the thrill of riding a horse with expert instructors guiding a group of five. This 40-minute session covers basic riding skills and trail riding through scenic paths.",
+        location: "Sunny Meadows Ranch, Pine Trail, Springfield",
+        image: "horse_riding.jfif",
+        price: 50,
+        date: "2026-03-01",
+        is_active: true,
+        quantity: 1,
+        hours: ["10:00", "14:00"]
+    },
+    {
+        id: 6,
+        place_id: 6,
+        name: "Boat Cruise",
+        description: "Relax on a peaceful boat cruise along the river, enjoying beautiful views and fresh air. Ideal for families and couples looking to unwind.",
+        location: "Harbor Pier, Waterfront Road, Springfield",
+        image: "boat_cruise.jfif",
+        price: 45,
+        date: "2026-03-06",
+        is_active: true,
+        quantity: 1,
+        hours: ["11:00", "15:00"]
+    }
+];
 
 function Cart() 
 {
-    const { activities } = usePage().props;
     const [quantities, setQuantities] = useState(
-        activities.reduce((acc, activity) => 
+        activity.reduce((acc, activity) => 
         {
             acc[activity.id] = activity.quantity || 1;
             return acc;
@@ -21,7 +48,8 @@ function Cart()
 
     const getTotal = () => 
     {
-        return activities.reduce((sum, activity) => {
+        return activity.reduce((sum, activity) => 
+        {
             const qty = quantities[activity.id] || 1;
             return sum + (activity.price * qty);
         }, 0);
@@ -44,7 +72,7 @@ function Cart()
             <Header />
             <div className="row">
                 <div className="col-xl-8">
-                    {activities.map(activity => (
+                    {activity.map(activity => (
                         <div className="card border shadow-none mb-3" key={activity.id}>
                             <div className="card-body">
                                 <div className="d-flex align-items-start border-bottom pb-3">
@@ -121,9 +149,12 @@ function Cart()
                                     </table>
                                 </div>
                                 <div className="d-grid gap-2 mt-4">
-                                    <button className="btn btn-success btn-lg">
-                                        <i className="mdi mdi-cart me-2"/> Proceed to Checkout
-                                    </button>
+                                    <Button className="btn btn-outline-success btn-lg w-100 mt-2" onClick={() => {
+                                        const total = getTotal().toFixed(2);
+                                        router.visit(route('pay.index', { total }));
+                                    }}>
+                                    Process to Pay
+                                    </Button>
                                 </div>
                             </div>
                         </div>

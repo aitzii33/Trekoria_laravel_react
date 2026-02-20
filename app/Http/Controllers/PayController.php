@@ -9,10 +9,16 @@ use Inertia\Inertia;
 
 class PayController extends Controller
 {
-    public function form()
+    public function form(Request $request)
     {
-        return Inertia::render('Payment');
-    } 
+        // Obtener el total del carrito desde la URL
+        $total = $request->query('total', 0);
+
+        // Pasar el total a la vista
+        return Inertia::render('Payment', [
+            'total' => $total,
+        ]);
+    }
 
     public function dataVerify(Request $request)
     {
@@ -145,9 +151,9 @@ class PayController extends Controller
         return $fechaExp >= (new DateTime('first day of this month'));
     }
 
-
+/*
     public function __construct()
 	{
 	    $this->middleware('auth');
-	}
+	}*/
 }
