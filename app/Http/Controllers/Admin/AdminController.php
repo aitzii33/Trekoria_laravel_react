@@ -126,10 +126,9 @@ public function deleteCustomer($id)
         return redirect()->route('admin.bookings');
 
     }
+
     public function analytics()
     {
         return Inertia::render('Admin/Analytics');
     }
-
-
 }

@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     public function form()
     {
@@ -20,20 +20,22 @@ class CartController extends Controller
         ]);
     }
 
-    public function addActivity(Request $request)
+    public function addactivity(Request $request)
     {
         $request->validate([
-            'activity_id' => 'required|exists:activities,id'
+            'activity_id' => 'required|exists:activities,id',
+            'quantity' => 'sometimes|integer|min:1|max:10',
+            'date' => 'sometimes|date',
+            'hour' => 'sometimes|string',
         ]);
 
         $activity = Activity::findOrFail($request->activity_id);
-
         $activities = session('activities', []);
 
         $index = collect($activities)->search(fn($item) => $item['id'] == $activity->id);
 
         if ($index !== false) {
-            $activities[$index]['quantity']++;
+            $activities[$index]['quantity'] += $request->quantity ?? 1;
         } else {
             $activities[] = [
                 'id' => $activity->id,
@@ -41,7 +43,9 @@ class CartController extends Controller
                 'price' => $activity->price,
                 'image' => $activity->image,
                 'hours' => $activity->hours ?? [],
-                'quantity' => 1
+                'quantity' => $request->quantity ?? 1,
+                'date' => $request->date ?? null,
+                'hour' => $request->hour ?? null,
             ];
         }
 

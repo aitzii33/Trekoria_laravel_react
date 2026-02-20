@@ -28,8 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivitiesTableSeeder::class);
         $this->call(ScheduleSeeder::class);
         //$this->call(DisponibilitySeeder::class);
-        
-        
         //$this->call(BookingSeeder::class);
         $this->call(CartSeeder::class);
         

@@ -11,7 +11,7 @@ import "../../css/DatePicker.css"
 import "react-datepicker/dist/react-datepicker.css"
 
 function ActivitiesInfo({ activity = null }) 
-{
+{/*
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedHour, setSelectedHour] = useState(null);
     const [mapKey, setMapKey] = useState(0); 
@@ -132,7 +132,7 @@ function ActivitiesInfo({ activity = null })
             <script async src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=geometry&callback=initActivityMap"></script>
             <Footer />
         </Container>
-    );
+    );*/
 }
 
 export default ActivitiesInfo;
