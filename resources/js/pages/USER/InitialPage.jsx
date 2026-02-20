@@ -87,7 +87,15 @@ export default function InitialPage({ popularCities, activities, search }) {
                   <Col key={idx} xs={12} sm={6} md={4} lg={3} className="d-flex">
   <Card className="activity-card flex-fill">
     <div className="activity-img-wrapper">
-      <img src={act.imagen} alt={act.name} className="activity-img" />
+      <img
+  src={act.imagen}
+  alt={act.name}
+  className="activity-img"
+  onError={(e) => {
+    e.target.onerror = null; // prevents infinite loop
+    e.target.src = "/img/landingImg1.png";
+  }}
+/>
       <div className="overlay-gradient"></div>
     </div>
 
