@@ -45,10 +45,8 @@ class ActivityController extends Controller
             $activity->refresh();
         }
 
-        // Decode track_points de forma segura
         $trackPoints = $activity->track_points ? json_decode($activity->track_points, true) : null;
 
-        // Normaliza nombres de campos para coincidir con frontend
         if ($trackPoints && isset($trackPoints[0]['lat']) && isset($trackPoints[0]['lng'])) {
             $trackPoints = array_map(fn($p) => [
                 'latitude' => $p['lat'],

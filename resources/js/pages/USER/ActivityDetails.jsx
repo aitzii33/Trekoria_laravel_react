@@ -272,8 +272,8 @@ function ActivityDetails({ activity }) {
         <Container>
           <Row className="justify-content-center">
             <Col xs={12} md={10}>
-              <gmpx-api-loader key="YOUR_API_KEY_HERE" solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
-              <gmpx-store-locator map-id="DEMO_MAP_ID" style={{ width: '100%', height: '500px' }}></gmpx-store-locator>
+              <gmpx-api-loader key="YOUR_API_KEY_HERE" solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader> {/* here we have to put a key that give us google */}
+              <gmpx-store-locator map-id="DEMO_MAP_ID" style={{ width: '100%', height: '500px' }}></gmpx-store-locator>{/* here it will be the map id we have create */}
             </Col>
           </Row>
         </Container>
