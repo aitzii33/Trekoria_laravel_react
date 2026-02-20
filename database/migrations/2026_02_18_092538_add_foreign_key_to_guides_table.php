@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('guides', function (Blueprint $table) {
-          /*  // Add foreign key
+            // Add foreign key
             $table->foreign('id_activity')
                   ->references('id')
                   ->on('activities')
-                  ->cascadeOnDelete();*/
+                  ->cascadeOnDelete();
         });
     }
 
