@@ -9,7 +9,7 @@ import Footer from "../../components/Footer";
 
 import "../../../css/SeeDetails.css";
 import "react-datepicker/dist/react-datepicker.css";
-import _defaultimage from "../../img/DefaultUserImage.png";  
+import _defaultimage from "../../img/DefaultUserImage.png";
 
 function ActivityDetails({ activity }) {
   const { t } = useTranslation();
@@ -265,7 +265,19 @@ function ActivityDetails({ activity }) {
         </Col>
       </Row>
 
-      <script async src={`https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=geometry,directions`}></script>
+      {/* Store Locator Section
+        What it miss to show that create an account on the google cloud
+      */}
+      <section className="store-locator py-5">
+        <Container>
+          <Row className="justify-content-center">
+            <Col xs={12} md={10}>
+              <gmpx-api-loader key="YOUR_API_KEY_HERE" solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
+              <gmpx-store-locator map-id="DEMO_MAP_ID" style={{ width: '100%', height: '500px' }}></gmpx-store-locator>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
       <Footer />
     </>

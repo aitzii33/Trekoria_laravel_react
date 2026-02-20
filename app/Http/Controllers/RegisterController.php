@@ -42,7 +42,7 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new RegisterConfirmation($user));
 
-        return back()->with('status', 'Email sent! Confirm to activate.'); 
+        return redirect()->back()->with('status', 'Email sent! Confirm to activate.'); 
     }
 
 

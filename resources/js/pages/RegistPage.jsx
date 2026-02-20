@@ -20,12 +20,19 @@ function RegisterPage() {
     password_confirmation: ''
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    post(route('register.sendEmail'), {
-      onSuccess: () => setShowConfirmModal(true)
-    });
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  post(route('register.sendEmail'), {
+    onSuccess: () => {
+      setShowConfirmModal(true);
+    },
+    onError: (error) => {
+      console.error('Registration error:', error);  // Verifica el error aquí
+    }
+  });
+};
+  
+
 
   return (
     <div className="register-container d-flex justify-content-center align-items-center min-vh-100">
