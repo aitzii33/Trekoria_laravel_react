@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('guides', function (Blueprint $table) {
-            $table->date('date')->nullable()->after('price'); // add the date column
+           // $table->date('date')->nullable()->after('price'); // add the date column
         });
     }
 

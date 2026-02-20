@@ -32,7 +32,6 @@ class DisponibilitySeeder extends Seeder
                 'reserve_people' => $reservePeople,
             ]);
         }
-
         $this->command->info('Disponibility seeded successfully!');
     }
 }

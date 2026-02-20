@@ -128,6 +128,6 @@ public function deleteCustomer($id)
 
     public function analytics()
     {
-        return Inertia::render('Analystic');
+        return Inertia::render('admin.analystic');
     }
 }
